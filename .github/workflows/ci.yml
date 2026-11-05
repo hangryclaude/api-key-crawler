@@ -71,8 +71,21 @@ jobs:
           titus version 2>&1 | tail -n 1
           gitleaks version
 
+      # The strings betterleaks tests its rules with are made-up secrets inside test lines, which the
+      # repository may not hold (invariant 2), so internal/pattern/rules reads them from a cache that
+      # is built here from the commit rules/SOURCES.lock pins. Standard library only, no Bun.
+      - name: rule examples (betterleaks, pinned)
+        run: |
+          set -euo pipefail
+          commit=$(awk -F'\t' '$1=="betterleaks" {print $5}' rules/SOURCES.lock)
+          test "${#commit}" -eq 40
+          git clone --quiet https://github.com/betterleaks/betterleaks "$RUNNER_TEMP/betterleaks"
+          git -C "$RUNNER_TEMP/betterleaks" checkout --quiet "$commit"
+          go run ./scripts/rulegen/examples -src "$RUNNER_TEMP/betterleaks" -out "$RUNNER_TEMP/rulecorpus" -commit "$commit"
+          echo "KEYGUARD_RULECORPUS=$RUNNER_TEMP/rulecorpus" >> "$GITHUB_ENV"
+
       # A missing engine fails its test here instead of skipping it, so a runner that lost one
-      # cannot pass without running it (internal/testkit).
+      # cannot pass without running it (internal/testkit). The same goes for the rule examples.
       - name: go test
         env:
           KEYGUARD_TEST_REQUIRE_ENGINES: "1"
