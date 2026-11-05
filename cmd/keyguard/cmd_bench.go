@@ -39,6 +39,23 @@ func (c *cli) cmdBench(args []string) int {
 	p := c.paths()
 	cfg := c.config(p)
 
+	// By default the bench scores what actually runs in the sweeps, so its pipeline row is the
+	// number that matters; "all" adds every engine keyguard has, for deciding what to add.
+	names := splitList(*engs)
+	switch {
+	case len(names) == 1 && names[0] == "all":
+		names = engines.Names
+	case len(names) == 0:
+		names = cfg.Tier(install.TierDeep)
+	}
+	names, wantNative := withoutNative(names)
+	if wantNative {
+		if len(names) == 0 {
+			return c.nativeOnly(*asJSON)
+		}
+		fmt.Fprintln(c.err, nativeNotBuilt)
+	}
+
 	tmp, err := os.MkdirTemp("", "keyguard-bench-")
 	if err != nil {
 		return c.failf("%s", safeErr(err))
@@ -66,15 +83,6 @@ func (c *cli) cmdBench(args []string) int {
 	}
 	fmt.Fprintf(c.err, "corpus: %d commits, %d plants, built in %s\n", corp.Truth.Stats.Commits, corp.Truth.Stats.Positives, secs(time.Since(started).Seconds()))
 
-	// By default the bench scores what actually runs in the sweeps, so its pipeline row is the
-	// number that matters; "all" adds every engine keyguard has, for deciding what to add.
-	names := splitList(*engs)
-	switch {
-	case len(names) == 1 && names[0] == "all":
-		names = engines.Names
-	case len(names) == 0:
-		names = cfg.Tier(install.TierDeep)
-	}
 	var engList []core.Engine
 	for _, n := range names {
 		e, err := engines.New(n, cfg.EnginePaths()[n], kr, cfg.EngineOptions(p)...)
@@ -82,6 +90,9 @@ func (c *cli) cmdBench(args []string) int {
 			return c.failf("%s", safeErr(err))
 		}
 		engList = append(engList, e)
+	}
+	if wantNative {
+		engList = append(engList, notBuilt{}) // a skipped row in the table, scored by nothing
 	}
 
 	var entries []known.Entry
