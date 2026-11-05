@@ -1,0 +1,282 @@
+{
+  "format": 1,
+  "about": "Public open-source code used to time scanners (docs/NATIVE-BASELINE.md). Each source is a release of a public project; 'commit' is that release's commit.",
+  "sources": [
+    {
+      "name": "goroot-src",
+      "kind": "goroot",
+      "project": "https://github.com/golang/go",
+      "ref": "go1.26.5",
+      "tag": "go1.26.5",
+      "subdir": "src",
+      "licence": "BSD-3-Clause",
+      "commit": "c19862e5f8415b4f24b189d065ed739517c548ba",
+      "files": 11410,
+      "bytes": 127043481,
+      "sha256": "286be088bf4cc286500a4831f0b4a3fe74071173e60dc05fd6fc8c8cc3909fc1"
+    },
+    {
+      "name": "k8s-api",
+      "kind": "gomod",
+      "module": "k8s.io/api",
+      "version": "v0.36.3",
+      "project": "https://github.com/kubernetes/api",
+      "licence": "Apache-2.0",
+      "commit": "3fde3c43c3cf3447606b9c2ac2c6257095444387",
+      "files": 2819,
+      "bytes": 26479381,
+      "sha256": "b9f216a31ef2ff89f4abcdbb5cd29b7721a4dc56c093d778bf51c2c07826296a"
+    },
+    {
+      "name": "k8s-client-go",
+      "kind": "gomod",
+      "module": "k8s.io/client-go",
+      "version": "v0.36.3",
+      "project": "https://github.com/kubernetes/client-go",
+      "licence": "Apache-2.0",
+      "commit": "44a8af2fee834a8fc3523360e029cf7ea7104622",
+      "files": 2395,
+      "bytes": 16234724,
+      "sha256": "6361ddf570908949946cdd5fc99dc7456d1401525e6fdfaf023a65e399d8c57a"
+    },
+    {
+      "name": "k8s-kube-openapi",
+      "kind": "gomod",
+      "module": "k8s.io/kube-openapi",
+      "version": "v0.0.0-20260317180543-43fb72c5454a",
+      "project": "https://github.com/kubernetes/kube-openapi",
+      "licence": "Apache-2.0",
+      "commit": "43fb72c5454a03ed83388cf20c070499ee359af8",
+      "files": 368,
+      "bytes": 16094210,
+      "sha256": "44f0c74b975645fb24dda6d0ea28c5d35ef4988d66136fecf09e2a4463e18c5b"
+    },
+    {
+      "name": "x-tools",
+      "kind": "gomod",
+      "module": "golang.org/x/tools",
+      "version": "v0.50.0",
+      "project": "https://go.googlesource.com/tools",
+      "licence": "BSD-3-Clause",
+      "commit": "265dd1a6ecf0ee85548c7a8d1787d25fc5675e06",
+      "files": 1615,
+      "bytes": 7617897,
+      "sha256": "7bcf937925a793fe6042df962adac69a1d9480e6a6f86e3da91641270056568b"
+    },
+    {
+      "name": "npm",
+      "kind": "npm-global",
+      "package": "npm",
+      "version": "11.19.1",
+      "project": "https://github.com/npm/cli",
+      "tag": "v11.19.1",
+      "licence": "Artistic-2.0",
+      "commit": "3acf9a784798094a5feb43c2e1898429dd667cb6",
+      "files": 1980,
+      "bytes": 13712819,
+      "sha256": "3da67fe351411f21c58583dbd508535484afa0730679fe5128e758481b31d488"
+    },
+    {
+      "name": "pnpm",
+      "kind": "npm-global",
+      "package": "pnpm",
+      "version": "11.25.0",
+      "project": "https://github.com/pnpm/pnpm",
+      "tag": "v11.25.0",
+      "licence": "MIT",
+      "commit": "6d90c71efdffbc909b499490b64c66badc720327",
+      "files": 455,
+      "bytes": 20297324,
+      "sha256": "8909a629a7712b548777173336b534722f5f35100a5f8b5b34d01a2a138d69fe"
+    },
+    {
+      "name": "playwright",
+      "kind": "npm-global",
+      "package": "playwright",
+      "version": "1.64.1",
+      "project": "https://github.com/microsoft/playwright",
+      "tag": "v1.64.1",
+      "licence": "Apache-2.0",
+      "commit": "cfe490d941f992655948eee8fd4fd94e1c4234bf",
+      "files": 175,
+      "bytes": 18690124,
+      "sha256": "46aedc6c9dd903d854a019b0541289fb4a8607c428f9b745c58f40d878edce54"
+    },
+    {
+      "name": "js-beautify",
+      "kind": "npm-global",
+      "package": "js-beautify",
+      "version": "2.0.3",
+      "project": "https://github.com/beautifier/js-beautify",
+      "tag": "v2.0.3",
+      "licence": "MIT",
+      "commit": "20ff725dbe9fe28fbf779c3ef38efdd827cea995",
+      "files": 446,
+      "bytes": 8012979,
+      "sha256": "e204ba6ff53d2c51be58c10364142c3526a8a3dd7010e21b0c2dca7a9f4f550f"
+    },
+    {
+      "name": "puppeteer-node-modules",
+      "kind": "npm-local",
+      "project": "https://github.com/puppeteer/puppeteer",
+      "root_package": "puppeteer-core",
+      "root_version": "25.5.0",
+      "tag": "puppeteer-core-v25.5.0",
+      "licence": "Apache-2.0 for puppeteer-core; each dependency under its own licence (see packages)",
+      "commit": "f8d63c73c3d7c21a8b0f421411e7df8386195436",
+      "packages": [
+        {
+          "name": "@puppeteer/browsers",
+          "version": "3.1.0",
+          "repository": "https://github.com/puppeteer/puppeteer/tree/main/packages/browsers",
+          "licence": "Apache-2.0"
+        },
+        {
+          "name": "ansi-regex",
+          "version": "6.2.2",
+          "repository": "chalk/ansi-regex",
+          "licence": "MIT"
+        },
+        {
+          "name": "ansi-styles",
+          "version": "6.2.3",
+          "repository": "chalk/ansi-styles",
+          "licence": "MIT"
+        },
+        {
+          "name": "chromium-bidi",
+          "version": "17.0.2",
+          "repository": "https://github.com/GoogleChromeLabs/chromium-bidi.git",
+          "licence": "Apache-2.0"
+        },
+        {
+          "name": "cliui",
+          "version": "9.0.1",
+          "repository": "yargs/cliui",
+          "licence": "ISC"
+        },
+        {
+          "name": "devtools-protocol",
+          "version": "0.0.1653615",
+          "repository": "https://github.com/ChromeDevTools/devtools-protocol",
+          "licence": "BSD-3-Clause"
+        },
+        {
+          "name": "emoji-regex",
+          "version": "10.6.0",
+          "repository": "https://github.com/mathiasbynens/emoji-regex.git",
+          "licence": "MIT"
+        },
+        {
+          "name": "escalade",
+          "version": "3.2.0",
+          "repository": "lukeed/escalade",
+          "licence": "MIT"
+        },
+        {
+          "name": "get-caller-file",
+          "version": "2.0.5",
+          "repository": "git+https://github.com/stefanpenner/get-caller-file.git",
+          "licence": "ISC"
+        },
+        {
+          "name": "get-east-asian-width",
+          "version": "1.6.0",
+          "repository": "sindresorhus/get-east-asian-width",
+          "licence": "MIT"
+        },
+        {
+          "name": "mitt",
+          "version": "3.0.1",
+          "repository": "developit/mitt",
+          "licence": "MIT"
+        },
+        {
+          "name": "modern-tar",
+          "version": "0.7.7",
+          "repository": "git+https://github.com/ayuhito/modern-tar.git",
+          "licence": "MIT"
+        },
+        {
+          "name": "puppeteer-core",
+          "version": "25.5.0",
+          "repository": "https://github.com/puppeteer/puppeteer/tree/main/packages/puppeteer-core",
+          "licence": "Apache-2.0"
+        },
+        {
+          "name": "string-width",
+          "version": "8.2.2",
+          "repository": "sindresorhus/string-width",
+          "licence": "MIT"
+        },
+        {
+          "name": "strip-ansi",
+          "version": "7.2.0",
+          "repository": "chalk/strip-ansi",
+          "licence": "MIT"
+        },
+        {
+          "name": "typed-query-selector",
+          "version": "2.12.2",
+          "repository": "g-plane/typed-query-selector",
+          "licence": "MIT"
+        },
+        {
+          "name": "webdriver-bidi-protocol",
+          "version": "0.4.2",
+          "repository": "git+https://github.com/GoogleChromeLabs/webdriver-bidi-protocol.git",
+          "licence": "Apache-2.0"
+        },
+        {
+          "name": "wrap-ansi",
+          "version": "9.0.2",
+          "repository": "chalk/wrap-ansi",
+          "licence": "MIT"
+        },
+        {
+          "name": "ws",
+          "version": "8.21.2",
+          "repository": "git+https://github.com/websockets/ws.git",
+          "licence": "MIT"
+        },
+        {
+          "name": "y18n",
+          "version": "5.0.8",
+          "repository": "yargs/y18n",
+          "licence": "ISC"
+        },
+        {
+          "name": "yargs",
+          "version": "18.1.0",
+          "repository": "https://github.com/yargs/yargs.git",
+          "licence": "MIT"
+        },
+        {
+          "name": "yargs-parser",
+          "version": "22.0.0",
+          "repository": "https://github.com/yargs/yargs-parser.git",
+          "licence": "ISC"
+        },
+        {
+          "name": "zod",
+          "version": "3.25.76",
+          "repository": "git+https://github.com/colinhacks/zod.git",
+          "licence": "MIT"
+        }
+      ],
+      "files": 2221,
+      "bytes": 24140401,
+      "sha256": "2623d82e6fdc58043d1c43dbf2639f9ceab1cdc6c4ad98b294b03727a17e98e8"
+    }
+  ],
+  "totals": {
+    "files": 23884,
+    "bytes": 278323340,
+    "sha256": "05b19d9cd237b7a04b00d6389f62945210ed1b2b155a2f0fa0ef5d584752095f"
+  },
+  "research_run": {
+    "files": 23886,
+    "bytes": 278323600,
+    "difference": "The corpus the research timings ran on held two small files more than this rebuild (local tool cache files that belong to no public release) and a hidden npm lockfile 42 bytes longer. They change no timing; the rebuild leaves them out because they are not public code."
+  }
+}
