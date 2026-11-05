@@ -26,6 +26,7 @@ import (
 	"sort"
 	"strings"
 
+	"keyguard/internal/pattern/lin"
 	"keyguard/internal/pattern/rules"
 	"keyguard/internal/pattern/rules/fidelity"
 )
@@ -327,6 +328,7 @@ func generate(root string) (*output, error) {
 	}
 
 	sort.Slice(table, func(i, j int) bool { return table[i].ID < table[j].ID })
+	classify(table)
 	if bad := rules.Lint(table); len(bad) > 0 {
 		return nil, fmt.Errorf("the table fails its lint:\n  %s", strings.Join(bad, "\n  "))
 	}
@@ -346,6 +348,25 @@ func generate(root string) (*output, error) {
 		return nil, err
 	}
 	return &output{source: src, table: table, global: globalFilter, commits: commits, upstream: upstream}, nil
+}
+
+// classify sets each rule's kind: Shape or Assign when the linear matcher takes its regex, else Regex.
+// The matcher is the arbiter, so the table cannot name a rule linear that the engine would then
+// have to refuse.
+func classify(table []rules.Rule) {
+	for i := range table {
+		r := &table[i]
+		r.Kind = rules.Regex
+		if r.Re == "" {
+			continue
+		}
+		if p, err := lin.Compile(r.Re); err == nil {
+			r.Kind = rules.Shape
+			if p.Assignment() {
+				r.Kind = rules.Assign
+			}
+		}
+	}
 }
 
 // compileAll fails on a regex Go's regexp cannot compile: a rule that cannot run must not be written.

@@ -9,18 +9,35 @@ package rules
 
 //go:generate go run ../rulegen -repo ../../..
 
-// Kind is how the engine runs a rule. Every rule starts as Regex, which is RE2 over a window around
-// a keyword hit and is exactly what its upstream regex does. Later milestones reclassify a rule
-// whose regex is a plain shape into a linear matcher, and keep the regex as the oracle.
+// Kind is how the engine runs a rule. A rule is Regex, which is Go's regexp over a window around a
+// keyword hit and is exactly what its upstream regex does, unless the generator found its regex
+// plain enough for a linear matcher (package lin): Shape or Assign. The regex stays in the table as
+// the specification and the oracle of the differential fuzz; the matcher is held to it on 100,000
+// inputs per rule. The generator sets the kind from lin.Compile, and a test says the table agrees.
 type Kind uint8
 
 const (
-	Regex  Kind = iota // RE2 on a window
-	Shape              // literal prefix, class run, terminator
-	Assign             // keyword, separator grammar, value class
-	Block              // PEM, to its end marker
-	Pair               // an id rule and a secret rule within N lines
+	Regex  Kind = iota // Go's regexp over a window
+	Shape              // linear matcher: literals, classes and runs of a class, a few alternatives
+	Assign             // linear matcher: a name, a separator grammar and a value, as the semi-generic rules write it
+	Block              // PEM, to its end marker (not built yet)
+	Pair               // an id rule and a secret rule within N lines (not built yet)
 )
+
+// String is the name the generated table writes.
+func (k Kind) String() string {
+	switch k {
+	case Shape:
+		return "Shape"
+	case Assign:
+		return "Assign"
+	case Block:
+		return "Block"
+	case Pair:
+		return "Pair"
+	}
+	return "Regex"
+}
 
 // Floor is an entropy gate. A zero Min is no gate. Strict means a value must exceed Min; otherwise
 // it must reach it: betterleaks writes the first as "entropy <= Min discards" and the second as

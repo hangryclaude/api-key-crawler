@@ -116,6 +116,9 @@ func emit(table []rules.Rule, global rules.Filter, commits map[string]string) ([
 		if r.Desc != "" {
 			field("Desc", quote(r.Desc))
 		}
+		if r.Kind != rules.Regex {
+			field("Kind", r.Kind.String())
+		}
 		if len(r.Keywords) > 0 {
 			field("Keywords", strs(r.Keywords))
 		}
