@@ -77,10 +77,10 @@ jobs:
       - name: rule examples (betterleaks, pinned)
         run: |
           set -euo pipefail
-          commit=$(awk -F'\t' '$1=="betterleaks" {print $5}' rules/SOURCES.lock)
-          test "${#commit}" -eq 40
-          git clone --quiet https://github.com/betterleaks/betterleaks "$RUNNER_TEMP/betterleaks"
-          git -C "$RUNNER_TEMP/betterleaks" checkout --quiet "$commit"
+          field() { awk -F'\t' -v c="$1" '$1=="betterleaks" {print $c}' rules/SOURCES.lock; }
+          url=$(field 3); ref=$(field 4); commit=$(field 5)
+          git -c advice.detachedHead=false clone --quiet --depth 1 --branch "$ref" "$url" "$RUNNER_TEMP/betterleaks"
+          test "$(git -C "$RUNNER_TEMP/betterleaks" rev-parse HEAD)" = "$commit"
           go run ./scripts/rulegen/examples -src "$RUNNER_TEMP/betterleaks" -out "$RUNNER_TEMP/rulecorpus" -commit "$commit"
           echo "KEYGUARD_RULECORPUS=$RUNNER_TEMP/rulecorpus" >> "$GITHUB_ENV"
 

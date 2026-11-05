@@ -68,6 +68,7 @@ documentation keys, and the examples are keys inside test lines.
 | `TestLintRefusesTruffleHogAndUnknownLicences` | the lint refuses TruffleHog as a lineage, AGPL, and any licence or lineage not on the list |
 | `TestBuildNeedsNothingFromTheNetwork` | `go build ./...` works with the proxy off, no `require` line and an empty `go.sum`; every package built is the standard library or this module |
 | `internal/testkit` `TestTheRepoPasses*` | neither betterleaks nor trufflehog finds a key-shaped literal in `rules_gen.go` or `rules/src` |
+| `internal/engines` `TestSourceHoldsNoSecretShapes` | all four engines, trufflehog with its dictionary filter off, find nothing in `rules/`, except that trufflehog may take two rule ids of 20 to 22 characters for GitLab tokens; the test skips a trufflehog finding on a line of `rules/src` that is nothing but an `"id"` entry |
 
 The tests that need the example cache skip without it, and fail when `KEYGUARD_TEST_REQUIRE_ENGINES=1`.
 
