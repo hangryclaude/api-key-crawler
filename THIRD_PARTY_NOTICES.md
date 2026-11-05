@@ -29,6 +29,12 @@ Modified for keyguard:
 
 Not taken: betterleaks's word list and its token-efficiency data. keyguard's own scorers replace them.
 
+Behaviour studied, code not taken: the scanner in `internal/pattern` is written for keyguard. Where a
+result depends on how betterleaks decides (how a secret group is cut from a match, which line a finding
+is on, which finding silences another, how near a composite rule's parts must be), the scanner does what
+betterleaks does, found by reading its source and checked by `internal/pattern/diff_test.go` against the
+program itself. No betterleaks code is copied.
+
 The generated Go file says it is modified for keyguard.
 
 ### Licence
