@@ -44,6 +44,9 @@ type Prog struct {
 	scan   scanner
 	pool   sync.Pool
 	assign bool
+
+	custom        bool // SetBudget was called
+	base, perByte int
 }
 
 // Compile parses expr the way regexp.Compile does and builds the matcher, or says why it cannot.
@@ -92,16 +95,30 @@ func (p *Prog) Stride() int { return 2 * (p.ncap + 1) }
 // (see isAssign).
 func (p *Prog) Assignment() bool { return p.assign }
 
-// budget is how many steps FindAll may take over n bytes before it hands the job back. A step is
-// one node of the pattern visited, so a run of the budget is a few hundred microseconds a kilobyte
-// at worst; ordinary text takes about one step a byte.
-func budget(n int) int { return 8192 + 64*n }
+// The default budget is how many steps FindAll may take over n bytes before it hands the job back:
+// base + perByte*n. A step is one node of the pattern visited, so the budget is a few hundred
+// microseconds a kilobyte at worst; ordinary text takes about one step a byte.
+const (
+	defaultBase    = 8192
+	defaultPerByte = 64
+)
+
+// SetBudget changes the budget of this program to base + perByte*n steps over n bytes. A test uses it
+// to make walks give up, to see that the caller's answer is the same without them. It must not be
+// called while FindAll runs.
+func (p *Prog) SetBudget(base, perByte int) {
+	p.base, p.perByte, p.custom = base, perByte, true
+}
 
 // FindAll appends to dst what regexp's FindAllSubmatchIndex(b, -1) returns for the same pattern and
 // input, flattened: Stride integers for each match. It reports false, with dst unchanged, when the
 // walk used up its budget, and then the caller must ask regexp.
 func (p *Prog) FindAll(b []byte, dst []int) ([]int, bool) {
-	return p.findAll(b, dst, budget(len(b)))
+	base, perByte := defaultBase, defaultPerByte
+	if p.custom {
+		base, perByte = p.base, p.perByte
+	}
+	return p.findAll(b, dst, base+perByte*len(b))
 }
 
 // Steps is how much work FindAll does over b, in the units its budget is counted in. It is for tests

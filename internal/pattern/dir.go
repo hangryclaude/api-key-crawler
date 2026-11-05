@@ -35,6 +35,7 @@ type Stats struct {
 	Unreadable int
 	Tiled      int // files over 16 MiB, scanned in tiles
 	Cuts       int // windows cut at the token cap
+	Fallbacks  int // windows the linear matcher gave up on, which regexp then searched
 	Findings   int
 }
 
@@ -47,6 +48,7 @@ func (a *Stats) add(b Stats) {
 	a.Unreadable += b.Unreadable
 	a.Tiled += b.Tiled
 	a.Cuts += b.Cuts
+	a.Fallbacks += b.Fallbacks
 	a.Findings += b.Findings
 }
 
@@ -291,6 +293,7 @@ func (s *Scanner) scanFile(w *work, abs, rel string, size int64, buf []byte, st 
 			emit(fd, buf[:n])
 		}
 		st.Cuts += w.cuts
+		st.Fallbacks += w.fallbacks
 		return buf
 	}
 
@@ -325,6 +328,7 @@ func (s *Scanner) scanFile(w *work, abs, rel string, size int64, buf []byte, st 
 			emit(fd, buf[:need])
 		}
 		st.Cuts += w.cuts
+		st.Fallbacks += w.fallbacks
 	}
 	return buf
 }

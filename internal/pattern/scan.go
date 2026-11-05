@@ -25,7 +25,9 @@ import (
 	"slices"
 	"strings"
 	"sync"
+	"time"
 
+	"keyguard/internal/pattern/lin"
 	"keyguard/internal/pattern/rules"
 )
 
@@ -33,6 +35,9 @@ import (
 type Options struct {
 	Paths   PathPolicy
 	Threads int // ScanDir workers; 0 means 2
+	// Regexp makes every rule run on Go's regexp, whatever its kind. It is the oracle that a test holds
+	// the linear matchers to on whole scans, and the way back if a matcher is ever wrong.
+	Regexp bool
 }
 
 // Finding is one secret. Offsets index the data the scan was given (plus Base, for a buffer that is
@@ -73,6 +78,9 @@ type Scanner struct {
 	// wholeFile makes every rule run over the whole buffer when its keyword occurs, which is what the
 	// reference does. Only tests set it: it is the exact answer the windows are held to.
 	wholeFile bool
+
+	// prof is the profile loop's timer, set by a test and nil in production.
+	prof *ruleProf
 
 	pool sync.Pool
 }
@@ -117,12 +125,21 @@ func (s *Scanner) ensure() {
 // ruleRT is a rule made runnable.
 type ruleRT struct {
 	once   sync.Once
-	re     *regexp.Regexp
+	lin    *lin.Prog // the linear matcher, for a rule of kind Shape or Assign
+	reOnce sync.Once
+	re     *regexp.Regexp // compiled when the rule is a Regex, or the matcher gave up
 	pathRe *regexp.Regexp
 	flt    *filter
 	anchor anchor
 	nsub   int
 	needs  []needRT
+}
+
+// regex is the rule's regexp, compiled on first use. A rule that the linear matcher runs never needs
+// it, unless a walk runs out of budget on hostile input.
+func (rt *ruleRT) regex(r *rules.Rule) *regexp.Regexp {
+	rt.reOnce.Do(func() { rt.re = regexp.MustCompile(r.Re) })
+	return rt.re
 }
 
 type needRT struct {
@@ -137,17 +154,25 @@ func (rt *ruleRT) init(s *Scanner, ri int32) {
 	rt.once.Do(func() {
 		r := &s.table[ri]
 		if r.Re != "" {
-			rt.re = regexp.MustCompile(r.Re)
-			rt.nsub = rt.re.NumSubexp()
+			ast, err := syntax.Parse(r.Re, syntax.Perl)
+			if err != nil {
+				panic(err)
+			}
+			if (r.Kind == rules.Shape || r.Kind == rules.Assign) && !s.opt.Regexp {
+				// The generator named the rule linear because lin.Compile took it, so this does not fail;
+				// if the table was edited by hand and it does, the rule runs as a regexp.
+				if p, err := lin.Build(ast); err == nil {
+					rt.lin, rt.nsub = p, p.NumSubexp()
+				}
+			}
+			if rt.lin == nil {
+				rt.nsub = rt.regex(r).NumSubexp()
+			}
 			kws := make([]string, 0, len(r.Keywords))
 			for _, k := range r.Keywords {
 				if k != "" {
 					kws = append(kws, strings.ToLower(k))
 				}
-			}
-			ast, err := syntax.Parse(r.Re, syntax.Perl)
-			if err != nil {
-				panic(err)
 			}
 			rt.anchor = planAnchor(ast, kws)
 		}
@@ -207,6 +232,9 @@ type work struct {
 	nl      []int32 // offsets of the newlines of the buffer, which is never bigger than a tile
 	nlOK    bool
 	cuts    int
+	// fallbacks counts the windows the linear matcher handed back to the regexp.
+	fallbacks int
+	flat      []int // the matches of the window being searched
 }
 
 func (s *Scanner) newWork() *work {
@@ -231,7 +259,7 @@ func (w *work) reset() {
 	w.touched = w.touched[:0]
 	w.raws, w.att = w.raws[:0], w.att[:0]
 	clear(w.comp)
-	w.nl, w.nlOK, w.cuts = w.nl[:0], false, 0
+	w.nl, w.nlOK, w.cuts, w.fallbacks = w.nl[:0], false, 0, 0
 }
 
 // lineIndex finds the newlines of the buffer, once, when the first finding needs a line number.
@@ -371,6 +399,46 @@ func (w *work) hit(ri int32, hs, he int) {
 	w.state[ri], w.wlo[ri], w.whi[ri] = stOpen, lo, hi
 }
 
+// find is what FindAllSubmatchIndex of the rule's regexp returns for win, flattened: stride integers
+// for each match. The linear matcher answers when it can; when its walk runs out of budget, which
+// takes hostile input, the regexp answers, so the result is the same either way.
+func (w *work) find(rt *ruleRT, r *rules.Rule, ri int32, win []byte) (found []int, stride int) {
+	if rt.lin != nil {
+		stride = rt.lin.Stride()
+		var t0 time.Time
+		if w.s.prof != nil {
+			t0 = time.Now()
+		}
+		var ok bool
+		found, ok = rt.lin.FindAll(win, w.flat[:0])
+		if w.s.prof != nil {
+			w.s.prof.add(ri, &w.s.prof.lin, time.Since(t0), len(win))
+		}
+		if ok {
+			w.flat = found[:0]
+			return found, stride
+		}
+		w.fallbacks++
+		if w.s.prof != nil {
+			w.s.prof.fallbacks[ri].Add(1)
+		}
+	}
+	stride = 2 * (rt.nsub + 1)
+	var t0 time.Time
+	if w.s.prof != nil {
+		t0 = time.Now()
+	}
+	found = w.flat[:0]
+	for _, m := range rt.regex(r).FindAllSubmatchIndex(win, -1) {
+		found = append(found, m...)
+	}
+	w.flat = found[:0]
+	if w.s.prof != nil {
+		w.s.prof.add(ri, &w.s.prof.regex, time.Since(t0), len(win))
+	}
+	return found, stride
+}
+
 // search runs rule ri's regex over data[lo:hi] and appends what survives the rule's filter and the
 // global one. A match that starts inside the last match taken is skipped, as it would not exist in
 // a scan of the whole buffer.
@@ -380,7 +448,9 @@ func (w *work) search(ri int32, lo, hi int, out *[]raw) {
 	rt := &s.rt[ri]
 	rt.init(s, ri)
 	win := w.data[lo:hi]
-	for _, m := range rt.re.FindAllSubmatchIndex(win, -1) {
+	found, stride := w.find(rt, r, ri, win)
+	for off := 0; off+stride <= len(found); off += stride {
+		m := found[off : off+stride]
 		ms, me := lo+m[0], lo+m[1]
 		if ms < w.lastEnd[ri] {
 			continue
