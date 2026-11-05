@@ -114,8 +114,8 @@ func (c *filter) drops(secret []byte, entropy float64) bool {
 	return false
 }
 
-// floorsApply says whether any part of the filter needs the secret's entropy, so a rule with no
-// floor never pays for it.
+// needsEntropy says whether the filter has a floor, so that a rule without one is not made to
+// compute the entropy of every candidate before the cheaper checks have had their say.
 func (c *filter) needsEntropy() bool { return c.f.Entropy.Min != 0 }
 
 // shannon is the entropy the reference engine's floors are written in: bits per character,

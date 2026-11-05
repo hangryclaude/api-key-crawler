@@ -12,7 +12,13 @@ import (
 // naiveHits is the definition the automaton must equal: every occurrence of every pattern in the
 // ASCII-lower-cased buffer, overlapping ones included.
 func naiveHits(buf []byte, pats []string) []acHit {
-	low := strings.ToLower(string(buf))
+	// ASCII only: the prefilter folds A-Z and nothing else, and strings.ToLower would rewrite bytes
+	// that are not valid UTF-8 and move every offset after them.
+	lowb := make([]byte, len(buf))
+	for i, c := range buf {
+		lowb[i] = foldByte(c)
+	}
+	low := string(lowb)
 	var out []acHit
 	for pi, p := range pats {
 		for from := 0; from+len(p) <= len(low); {

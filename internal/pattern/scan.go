@@ -70,6 +70,10 @@ type Scanner struct {
 	pre        *prefilter
 	pathOnly   []int32 // rules about a path alone
 
+	// wholeFile makes every rule run over the whole buffer when its keyword occurs, which is what the
+	// reference does. Only tests set it: it is the exact answer the windows are held to.
+	wholeFile bool
+
 	pool sync.Pool
 }
 
@@ -164,7 +168,7 @@ func (rt *ruleRT) init(s *Scanner, ri int32) {
 // raw is a finding before the composite and specificity steps.
 type raw struct {
 	rule        int32
-	ms, me      int // the match: its start, and its end after the trailing line breaks are trimmed
+	ms, me      int // the match: its start, and its end with the trailing line breaks trimmed off
 	ss, se      int // the secret
 	line        int // of ms
 	endLine     int // of me
@@ -200,7 +204,7 @@ type work struct {
 	raws    []raw
 	att     []attached
 	comp    map[int32][]raw
-	nl      []int
+	nl      []int32 // offsets of the newlines of the buffer, which is never bigger than a tile
 	nlOK    bool
 	cuts    int
 }
@@ -238,7 +242,7 @@ func (w *work) lineIndex() {
 		if j < 0 {
 			break
 		}
-		w.nl = append(w.nl, p+j)
+		w.nl = append(w.nl, int32(p+j))
 		p += j + 1
 	}
 	w.nlOK = true
@@ -249,7 +253,7 @@ func (w *work) lineOf(off int) int {
 	if !w.nlOK {
 		w.lineIndex()
 	}
-	n, _ := slices.BinarySearch(w.nl, off)
+	n, _ := slices.BinarySearch(w.nl, int32(off))
 	return w.baseLine + 1 + n
 }
 
@@ -265,7 +269,7 @@ func (w *work) lineStart(line int) int {
 	if i > len(w.nl) {
 		return len(w.data)
 	}
-	return w.nl[i-1] + 1
+	return int(w.nl[i-1]) + 1
 }
 
 // scanBuf finds the secrets in one buffer and returns them with offsets into it. Only findings whose
@@ -348,7 +352,7 @@ func (w *work) hit(ri int32, hs, he int) {
 			w.state[ri] = stSkippd
 			return
 		}
-		if !w.s.rt[ri].anchor.ok {
+		if !w.s.rt[ri].anchor.ok || w.s.wholeFile {
 			w.state[ri] = stGated
 			return
 		}
@@ -423,12 +427,14 @@ func (w *work) search(ri int32, lo, hi int, out *[]raw) {
 		if e == 0 {
 			e = shannon(secret)
 		}
-		meTrim := ms + (b - a)
-		line, endLine := w.lineOf(ms), w.lineOf(meTrim)
+		// The reference measures where the match ends from the start it kept, so a match that began with a
+		// line break ends a break early; the lines and columns used to place a component follow it.
+		meRef := ms + (b - a)
+		line, endLine := w.lineOf(ms), w.lineOf(meRef)
 		ls := w.lineStart(line)
 		*out = append(*out, raw{
-			rule: ri, ms: ms, me: meTrim, ss: ss, se: se, line: line, endLine: endLine, entropy: e,
-			startColumn: ms - ls + 1, endColumn: meTrim - w.lineStart(endLine),
+			rule: ri, ms: ms, me: b, ss: ss, se: se, line: line, endLine: endLine, entropy: e,
+			startColumn: ms - ls + 1, endColumn: meRef - w.lineStart(endLine),
 		})
 	}
 }
@@ -449,7 +455,7 @@ func (w *work) composites() {
 				continue
 			}
 			found := false
-			for _, c := range w.componentFindings(n.rule) {
+			for _, c := range w.componentsNear(n, p) {
 				if w.near(p, c, n.win) {
 					found = true
 					break
@@ -465,7 +471,7 @@ func (w *work) composites() {
 		}
 		kept = append(kept, p)
 		for _, n := range rt.needs {
-			for _, c := range w.componentFindings(n.rule) {
+			for _, c := range w.componentsNear(n, p) {
 				if w.near(p, c, n.win) {
 					w.att = append(w.att, attached{primary: p.rule, c: c})
 				}
@@ -479,6 +485,30 @@ func (w *work) composites() {
 type attached struct {
 	primary int32
 	c       raw
+}
+
+// componentsNear are the findings of the component rule of need n that can be near the finding p. When
+// the need is within some lines, that is the lines around p with two to spare, so that a part is not
+// searched for in a megabyte for the sake of a finding that wants it within five lines; when it is
+// within no stated distance it is the whole buffer, which is cached.
+func (w *work) componentsNear(n needRT, p raw) []raw {
+	if !n.win.box {
+		return w.componentFindings(n.rule)
+	}
+	if w.pathSkips(n.rule) {
+		return nil
+	}
+	lo := w.lineStart(max(1, p.line-n.win.linesBefore-2))
+	hi := len(w.data)
+	if next := w.lineStart(p.endLine + n.win.linesAfter + 3); next < len(w.data) {
+		hi = next - 1
+	}
+	var out []raw
+	saved := w.lastEnd[n.rule]
+	w.lastEnd[n.rule] = 0
+	w.search(n.rule, max(0, lo-1), min(len(w.data), hi+1), &out)
+	w.lastEnd[n.rule] = saved
+	return out
 }
 
 // componentFindings are the findings of a rule that exists to be part of another, over the buffer.
@@ -625,9 +655,10 @@ func (w *work) report(ownLo, ownHi int) []Finding {
 			if suppressed {
 				continue
 			}
+			ls := bytes.LastIndexByte(w.data[max(0, f.ss-200):f.ss], '\n') + 1 + max(0, f.ss-200)
 			out = append(out, Finding{
 				Rule: r, Path: w.path, Line: f.line, MatchStart: f.ms, MatchEnd: f.me,
-				Start: f.ss, End: f.se, Entropy: f.entropy,
+				Start: f.ss, End: f.se, Entropy: f.entropy, Tags: tagsFor(r, secret, w.data[ls:f.ss]),
 			})
 		}
 		b0 = b1
