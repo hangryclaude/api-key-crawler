@@ -217,7 +217,7 @@ func readGolden(t *testing.T) *fidelity.Golden {
 // for, once, and it was written at the commit the table is pinned to.
 func TestTheGoldenAccountsForTheTable(t *testing.T) {
 	g := readGolden(t)
-	if want := "betterleaks@" + pinnedCommit(t); g.Source != want {
+	if want := "betterleaks@" + pinnedCommit(t)[:12]; g.Source != want {
 		t.Errorf("the golden is for %s, the table is pinned at %s", g.Source, want)
 	}
 	seen := map[string]bool{}
@@ -259,14 +259,14 @@ func TestTheTableLintsClean(t *testing.T) {
 			rewritten++
 		}
 	}
-	if rewritten != 3 {
-		t.Errorf("%d rules have a split regex, extract.mjs splits 3", rewritten)
+	if rewritten != 5 {
+		t.Errorf("%d rules have a rewritten regex, extract.mjs rewrites 5 (3 long token prefixes, 2 key-like classes)", rewritten)
 	}
 }
 
 // The lint is the wall against copying what must not be copied.
 func TestLintRefusesTruffleHogAndUnknownLicences(t *testing.T) {
-	const commit = "0123456789abcdef0123456789abcdef01234567"
+	commit := strings.Repeat("ab", 20)
 	ok := func(id string) rules.Rule {
 		return rules.Rule{ID: id, Re: "x", Src: rules.Src{Lineage: "betterleaks", UpstreamID: id, Commit: commit, Licence: "MIT", Rewrite: "none"}}
 	}

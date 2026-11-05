@@ -1,5 +1,5 @@
 {
- "source": "betterleaks@81aff7a638638aae3a659845d089043e1d8fe9ac",
+ "source": "betterleaks@81aff7a63863",
  "examples": 8398,
  "rules": {
   "1password-secret-key": {

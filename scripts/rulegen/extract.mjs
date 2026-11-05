@@ -212,14 +212,48 @@ function splitLiterals(re) {
   return out;
 }
 
+// compressClasses writes a plain character class of 16 or more distinct letters and digits as
+// ranges: the class is the same set, and a scanner no longer sees a 32-character alphabet that
+// looks like a key (the bech32 alphabet of age's keys is the one that did).
+function toRanges(chars) {
+  const cs = [...chars].sort();
+  let out = "";
+  for (let k = 0; k < cs.length; ) {
+    let m = k;
+    while (m + 1 < cs.length && cs[m + 1].charCodeAt(0) === cs[m].charCodeAt(0) + 1) m++;
+    out += m - k >= 2 ? cs[k] + "-" + cs[m] : cs.slice(k, m + 1).join("");
+    k = m + 1;
+  }
+  return out;
+}
+
+function compressClasses(re) {
+  let out = "";
+  for (let i = 0; i < re.length; i++) {
+    const c = re[i];
+    if (c === "\\") { out += c + (re[++i] ?? ""); continue; }
+    if (c !== "[") { out += c; continue; }
+    let j = i + 1;
+    if (re[j] === "^") j++;
+    if (re[j] === "]") j++; // a ] right after the opening is a member
+    for (; j < re.length && re[j] !== "]"; j++) if (re[j] === "\\") j++;
+    const body = re.slice(i + 1, j);
+    out += /^[A-Za-z0-9]{16,}$/.test(body) && new Set(body).size === body.length ? "[" + toRanges(body) + "]" : re.slice(i, j + 1);
+    i = j;
+  }
+  return out;
+}
+
+const rewrite = (re) => compressClasses(splitLiterals(re));
+
 const keep = (v) => v !== undefined && v !== null && v !== "" && v !== false && !(Array.isArray(v) && v.length === 0) && v !== 0;
 function shape(r) {
   const o = { id: r.id };
   const put = (k, v) => { if (keep(v)) o[k] = v; };
   put("description", r.description);
   put("confidence", r.confidence);
-  put("regex", r.regex && splitLiterals(r.regex));
-  put("split", r.regex && splitLiterals(r.regex) !== r.regex); // the regex differs from upstream's by empty groups only
+  put("regex", r.regex && rewrite(r.regex));
+  put("split", r.regex && rewrite(r.regex) !== r.regex); // the regex differs from upstream's in text only: empty groups, a class written as ranges
   put("path", r.path);
   put("keywords", r.keywords);
   put("secretGroup", r.secretGroup);

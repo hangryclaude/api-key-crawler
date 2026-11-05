@@ -52,7 +52,8 @@ The repository may hold none (invariant 2), and the data would otherwise: upstre
 documentation keys, and the examples are keys inside test lines.
 
 - A documentation key in a filter becomes its SHA-256 (`DropSHA256`).
-- A rule whose regex is itself a long fixed token prefix is split by an empty group `(?:)`. Three rules.
+- Five rules have a regex written differently from upstream's, with the same meaning (`Rewrite: "split"`): in three, a long fixed
+  token prefix is split by an empty group `(?:)`; in two, a character class that spells out an alphabet is written as ranges.
 - The examples stay in the cache. The golden holds hashes of hashes and counts.
 
 ## The checks (`go test ./internal/pattern/...`)
@@ -70,9 +71,8 @@ documentation keys, and the examples are keys inside test lines.
 
 The tests that need the example cache skip without it, and fail when `KEYGUARD_TEST_REQUIRE_ENGINES=1`.
 
-Rules with no upstream examples: five of betterleaks's (`dropbox-long-lived-api-token`, `dropbox-short-lived-api-token`,
-`gitlab-pat-routable-versioned`, `slack-session-cookie`, `slack-session-token`; upstream returns them untested)
-and the 12 of ours. `jwt-base64` has false positives only: its true positives are built in a loop the extractor
+Rules with no upstream examples: five of betterleaks's (two Dropbox, two Slack and one GitLab rule, which upstream returns
+untested) and the 12 of ours. `jwt-base64` has false positives only: its true positives are built in a loop the extractor
 does not evaluate.
 
 ## The licence wall

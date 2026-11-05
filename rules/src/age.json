@@ -7,7 +7,8 @@
       "id": "age-secret-key",
       "description": "Discovered a potential Age encryption tool secret key, risking data decryption and unauthorized access to sensitive information.",
       "confidence": "high",
-      "regex": "AGE-SECRET-KEY-1[QPZRY9X8GF2TVDW0S3JN54KHCE6MUA7L]{58}",
+      "regex": "AGE-SECRET-KEY-1[02-9AC-HJ-NP-Z]{58}",
+      "split": true,
       "keywords": [
         "age-secret-key-1"
       ]

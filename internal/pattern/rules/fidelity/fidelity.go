@@ -277,7 +277,8 @@ type Golden struct {
 // if any true positive does not fire or any judged false positive does: a golden is a record of
 // a table that passes, not of one that does not.
 func Build(corpus string, table []rules.Rule, global rules.Filter, commit string) (*Golden, error) {
-	g := &Golden{Source: "betterleaks@" + commit, Rules: map[string]Entry{}}
+	// The golden names the commit by its first 12 characters: a whole 40-hex id is what a scanner calls a key.
+	g := &Golden{Source: "betterleaks@" + commit[:min(len(commit), 12)], Rules: map[string]Entry{}}
 	var bad []string
 	for i := range table {
 		r := &table[i]

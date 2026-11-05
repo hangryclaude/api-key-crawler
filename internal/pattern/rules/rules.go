@@ -61,8 +61,8 @@ type Need struct {
 // Src is a rule's provenance. Lineage names the family (betterleaks, titus, own, ...), UpstreamID the
 // id the rule has there, Commit the pinned commit it was read at, Licence the licence it was
 // published under. Rewrite says how the regex differs from upstream's: "none" for as is, "split" for
-// empty groups inserted into a key-like literal (the expression matches what it matched), and
-// later T1, T2 or T3 for the rewrites of the plan.
+// a change of text only (empty groups inside a key-like literal, a class written as ranges: the
+// expression matches what it matched), and later T1, T2 or T3 for the rewrites of the plan.
 type Src struct {
 	Lineage    string
 	UpstreamID string

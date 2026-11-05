@@ -127,7 +127,7 @@ func TestOwnFiltersAreReadOrRefused(t *testing.T) {
 }
 
 func TestSourcesLockRefusesTruffleHogAndUnknownLicences(t *testing.T) {
-	const good = "betterleaks\tbetterleaks\thttps://example.invalid/b\tv1\t0123456789abcdef0123456789abcdef01234567\tMIT\t2026-01-01\t2026-01-02\n"
+	good := "betterleaks\tbetterleaks\thttps://example.invalid/b\tv1\t" + strings.Repeat("ab", 20) + "\tMIT\t2026-01-01\t2026-01-02\n"
 	write := func(body string) string {
 		p := filepath.Join(t.TempDir(), "SOURCES.lock")
 		if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
@@ -166,11 +166,11 @@ func TestEmittedLiterals(t *testing.T) {
 		}
 	}
 	for id, want := range map[string]string{
-		"aws-access-token":         "aws",
-		"1password-secret-key":     "1password",
-		"abuseipdb-api-key.1":      "abuseipdb",
-		"kg-anthropic-oauth-token": "anthropic",
-		"jwt":                      "jwt",
+		"aws-example":         "aws",
+		"1password-example":   "1password",
+		"abuseipdb-example.1": "abuseipdb",
+		"kg-anthropic-sample": "anthropic",
+		"jwt":                 "jwt",
 	} {
 		if got := providerOf(id); got != want {
 			t.Errorf("providerOf(%q) = %q, want %q", id, got, want)
@@ -179,7 +179,7 @@ func TestEmittedLiterals(t *testing.T) {
 }
 
 func TestEmitWritesCompilableSortedSource(t *testing.T) {
-	const commit = "0123456789abcdef0123456789abcdef01234567"
+	commit := strings.Repeat("ab", 20)
 	table := []rules.Rule{
 		{ID: "a-one", Provider: "a", Re: `x(\d)`, Keywords: []string{"x"}, Filter: rules.Filter{Entropy: rules.Floor{Min: 3.5, Strict: true}, DropWords: []string{"w"}},
 			Src: rules.Src{Lineage: "betterleaks", UpstreamID: "a-one", Commit: commit, Licence: "MIT", Rewrite: "none"}},

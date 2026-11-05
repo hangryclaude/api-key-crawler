@@ -22,8 +22,9 @@ Modified for keyguard:
   plain fields, and counts the rest as not carried;
 - a documentation key inside an allow list is replaced by its SHA-256 digest, so that the repository
   holds no key-shaped literal;
-- in three regular expressions a long fixed token prefix is split by an empty group `(?:)`, which
-  changes what the expression matches by nothing;
+- in three regular expressions a long fixed token prefix is split by an empty group `(?:)`, and in
+  two a character class that spells out an alphabet is written as ranges; neither changes what the
+  expression matches;
 - the live-validation recipes are not carried, only whether a rule has one.
 
 Not taken: betterleaks's word list and its token-efficiency data. keyguard's own scorers replace them.

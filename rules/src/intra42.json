@@ -7,7 +7,8 @@
       "id": "intra42-client-secret",
       "description": "Found a Intra42 client secret, which could lead to unauthorized access to the 42School API and sensitive data.",
       "confidence": "high",
-      "regex": "\\b(s-s4t2(?:ud|af)-(?i)[abcdef0123456789]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "regex": "\\b(s-s4t2(?:ud|af)-(?i)[0-9a-f]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "split": true,
       "keywords": [
         "intra",
         "s-s4t2ud-",
