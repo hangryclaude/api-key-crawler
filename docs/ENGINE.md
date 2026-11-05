@@ -260,6 +260,10 @@ Where the regex time goes (a throwaway timer around every regex run, 6 workers; 
 | ovh-application-secret | 0.4 | 2.1% | gated |
 | curl-auth-user, jwt | 0.3 each | 1.8%, 1.7% | gated |
 
+Start-up, for the hooks (S3 asks for 3 ms): the first scan in a fresh process costs 2.4 to 4.2 ms of CPU on this loaded
+Mac. The prefilter is 1.0 to 1.8 ms of it, the global filter 0.2, and a rule's regex is compiled when it first wakes
+(0.3 to 1.5 ms for `generic-api-key`). Every later scan of a small buffer is 24 to 34 µs.
+
 The two rules with no keyword are 37% of it, the gated rules about another 37%, `generic-api-key` 19%.
 That is the list M3 starts from: shapes for the two `kg-` rules, a better anchor or a matcher for the gated
 ones with common keywords, and the assignment matcher for `generic-api-key`.

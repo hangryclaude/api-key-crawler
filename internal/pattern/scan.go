@@ -624,8 +624,11 @@ func (w *work) report(ownLo, ownHi int) []Finding {
 		}
 		return int(a.rule) - int(b.rule)
 	})
-	byLine := map[int][]attached{}
+	var byLine map[int][]attached // components attached to kept composite findings, by line; mostly none
 	for _, a := range w.att {
+		if byLine == nil {
+			byLine = map[int][]attached{}
+		}
 		byLine[a.c.line] = append(byLine[a.c.line], a)
 	}
 	var out []Finding
