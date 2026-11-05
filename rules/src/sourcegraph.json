@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/sourcegraph.go",
+  "rules": [
+    {
+      "id": "sourcegraph-access-token",
+      "description": "Sourcegraph is a code search and navigation engine.",
+      "confidence": "high",
+      "regex": "(?i)\\b(sgp_(?:[a-fA-F0-9]{16}|local)_[a-fA-F0-9]{40}|sgp_[a-fA-F0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sgp_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

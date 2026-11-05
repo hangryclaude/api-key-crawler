@@ -1,0 +1,39 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/langchain.go",
+  "rules": [
+    {
+      "id": "langchain-langsmith-personal-access-token",
+      "description": "LangSmith personal access token.",
+      "confidence": "high",
+      "regex": "\\b(lsv2_pt_[0-9a-fA-F]{32}_[0-9a-fA-F]{10})",
+      "keywords": [
+        "lsv2_pt_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "langchain-langsmith-service-key",
+      "description": "LangSmith service API key.",
+      "confidence": "high",
+      "regex": "\\b(lsv2_sk_[0-9a-fA-F]{32}_[0-9a-fA-F]{10})",
+      "keywords": [
+        "lsv2_sk_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

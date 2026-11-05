@@ -1,0 +1,44 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/canva.go",
+  "rules": [
+    {
+      "id": "canva-client-id",
+      "description": "Detected a Canva Connect API client ID, used as a component of the canva-client-secret composite rule.",
+      "confidence": "high",
+      "regex": "(?i)\\b(?:canva|CANVA_CLIENT_ID)(?:.|[\\n\\r]){0,32}?(?:client[_\\s-]*id|app[_\\s-]*id)(?:.|[\\n\\r]){0,16}?\\b(OC-[A-Za-z0-9_-]{8,16})\\b",
+      "keywords": [
+        "canva"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 2.5,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "canva-client-secret",
+      "description": "Detected a Canva Connect API client secret, which may allow unauthorized OAuth client authentication when paired with a client ID.",
+      "confidence": "high",
+      "regex": "\\b(cnvca[a-zA-Z0-9_-]{51})\\b",
+      "keywords": [
+        "cnvca"
+      ],
+      "components": [
+        {
+          "id": "canva-client-id"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

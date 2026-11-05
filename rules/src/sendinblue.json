@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/sendinblue.go",
+  "rules": [
+    {
+      "id": "sendinblue-api-token",
+      "description": "Identified a Brevo (formerly Sendinblue) API token, which may compromise email marketing services and subscriber data privacy.",
+      "confidence": "high",
+      "regex": "\\b(xkeysib-[a-fA-F0-9]{64}-[a-zA-Z0-9]{16})\\b",
+      "keywords": [
+        "xkeysib-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.2,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/intercom.go",
+  "rules": [
+    {
+      "id": "intercom-api-key",
+      "description": "Identified an Intercom API Token, which could compromise customer communication channels and data privacy.",
+      "confidence": "medium",
+      "regex": "(?i)(?:intercom)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{60})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "intercom"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

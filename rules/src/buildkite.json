@@ -1,0 +1,44 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/buildkite.go",
+  "rules": [
+    {
+      "id": "buildkite-service-token",
+      "description": "Detected a Buildkite agent, package, or portal token, which may expose CI/CD workloads or packages.",
+      "confidence": "high",
+      "regex": "\\b(bkaa_[A-Za-z0-9_-]{75}|bkaj_[A-Za-z0-9_-]{333}|bkar_[A-Za-z0-9_-]{73}|bkct_[A-Za-z0-9_-]{73}|bkpt_[A-Za-z0-9_-]{199}|bkpat_[A-Za-z0-9_-]{54}|bkps_[A-Za-z0-9_-]{64})(?:$|[^A-Za-z0-9_-])",
+      "keywords": [
+        "bkaa_",
+        "bkaj_",
+        "bkar_",
+        "bkct_",
+        "bkpt_",
+        "bkpat_",
+        "bkps_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "buildkite-user-access-token",
+      "description": "Detected a Buildkite user access token, which may expose pipelines, builds, and organization data.",
+      "confidence": "high",
+      "regex": "\\b(bkua_(?:[a-z0-9]{40}|[a-z0-9]{53}))\\b",
+      "keywords": [
+        "bkua_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

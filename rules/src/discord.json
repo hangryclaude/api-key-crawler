@@ -1,0 +1,54 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/discord.go",
+  "rules": [
+    {
+      "id": "discord-api-token",
+      "description": "Detected a Discord API key, potentially compromising communication channels and user data privacy on Discord.",
+      "confidence": "medium",
+      "regex": "(?i)(?:discord)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "discord"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "discord-client-id",
+      "description": "Identified a Discord client ID, which may lead to unauthorized integrations and data exposure in Discord applications.",
+      "confidence": "medium",
+      "regex": "(?i)(?:discord)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9]{18})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "discord"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2.75,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "discord-client-secret",
+      "description": "Discovered a potential Discord client secret, risking compromised Discord bot integrations and data leaks.",
+      "confidence": "medium",
+      "regex": "(?i)(?:discord)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "discord"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/vultr.go",
+  "rules": [
+    {
+      "id": "vultr-api-key.1",
+      "description": "Vultr API key, which may allow management of cloud account resources.",
+      "confidence": "medium",
+      "regex": "(?i)(?:vultr)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{36})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "vultr"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

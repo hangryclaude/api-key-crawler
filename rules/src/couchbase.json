@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/couchbase.go",
+  "rules": [
+    {
+      "id": "couchbase-capella-api-key",
+      "description": "Detected a Couchbase Capella API key secret, which may allow unauthorized access to Couchbase Capella management APIs.",
+      "confidence": "high",
+      "regex": "(?i)\\b(?:couchbase|capella)(?:.|[\\n\\r]){0,32}?(?:api(?:.|[\\n\\r]){0,12}?(?:key|secret)|key(?:.|[\\n\\r]){0,12}?secret)(?:.|[\\n\\r]){0,32}?\\b([A-Za-z0-9+/]{60,120}={0,2})\\b",
+      "keywords": [
+        "couchbase",
+        "capella"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

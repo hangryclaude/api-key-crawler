@@ -1,0 +1,39 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/huggingface.go",
+  "rules": [
+    {
+      "id": "huggingface-access-token",
+      "description": "Discovered a Hugging Face Access token, which could lead to unauthorized access to AI models and sensitive data.",
+      "confidence": "high",
+      "regex": "\\b(hf_(?i:[a-z]{34}))(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "hf_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "huggingface-organization-api-token",
+      "description": "Uncovered a Hugging Face Organization API token, potentially compromising AI organization accounts and associated data.",
+      "confidence": "high",
+      "regex": "\\b(api_org_(?i:[a-z]{34}))(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "api_org_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/lark.go",
+  "rules": [
+    {
+      "id": "lark-app-id",
+      "description": "Lark application ID, used as a component of the Lark application-secret rule.",
+      "confidence": "high",
+      "regex": "\\b(cli_[A-Za-z0-9]{16})",
+      "keywords": [
+        "cli_"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "lark-app-secret",
+      "description": "Lark application secret.",
+      "confidence": "high",
+      "regex": "(?i)(?:lark|larksuite)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "lark"
+      ],
+      "components": [
+        {
+          "id": "lark-app-id"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

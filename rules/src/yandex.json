@@ -1,0 +1,34 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/yandex.go",
+  "rules": [
+    {
+      "id": "yandex-access-token",
+      "description": "Found a Yandex Access Token, posing a risk to Yandex service integrations and user data privacy.",
+      "confidence": "high",
+      "regex": "(?i)(?:yandex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(t1\\.[A-Z0-9a-z_-]+[=]{0,2}\\.[A-Z0-9a-z_-]{86}[=]{0,2})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "yandex"
+      ]
+    },
+    {
+      "id": "yandex-api-key",
+      "description": "Discovered a Yandex API Key, which could lead to unauthorized access to Yandex services and data manipulation.",
+      "confidence": "high",
+      "regex": "(?i)(?:yandex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(AQVN[A-Za-z0-9_\\-]{35,38})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "yandex"
+      ]
+    },
+    {
+      "id": "yandex-aws-access-token",
+      "description": "Uncovered a Yandex AWS Access Token, potentially compromising cloud resource access and data security on Yandex Cloud.",
+      "confidence": "high",
+      "regex": "(?i)(?:yandex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(YC[a-zA-Z0-9_\\-]{38})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "yandex"
+      ]
+    }
+  ]
+}

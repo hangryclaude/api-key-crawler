@@ -1,0 +1,25 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/privateai.go",
+  "rules": [
+    {
+      "id": "privateai-api-token",
+      "description": "Identified a PrivateAI Token, posing a risk of unauthorized access to AI services and data manipulation.",
+      "confidence": "medium",
+      "regex": "(?i:(?:private[_-]?ai)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "privateai",
+        "private_ai",
+        "private-ai"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/typeform.go",
+  "rules": [
+    {
+      "id": "typeform-api-token",
+      "description": "Uncovered a Typeform API token, which could lead to unauthorized survey management and data collection.",
+      "confidence": "high",
+      "regex": "(?i)(?:typeform)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(tfp_[a-z0-9\\-_\\.=]{59})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "tfp_"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/mem0.go",
+  "rules": [
+    {
+      "id": "mem0-api-key.1",
+      "description": "Mem0 API key, which may allow access to stored application memories.",
+      "confidence": "high",
+      "regex": "(?i:(?:mem0)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(m0-[A-Za-z0-9]{24,44})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "mem0"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

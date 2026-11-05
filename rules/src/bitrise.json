@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/bitrise.go",
+  "rules": [
+    {
+      "id": "bitrise-access-token",
+      "description": "Detected a Bitrise personal or workspace access token, which may expose CI/CD applications and builds.",
+      "confidence": "high",
+      "regex": "(?i:(?:bitrise(?:[ _-]*(?:personal|workspace))?(?:[ _-]*(?:access|api))?[ _-]*token)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9_-]{60,120})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "bitrise"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

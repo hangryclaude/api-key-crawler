@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/paddle.go",
+  "rules": [
+    {
+      "id": "paddle-live-api-key",
+      "description": "Paddle live API key.",
+      "confidence": "high",
+      "regex": "\\b(pdl_live_apikey_[a-z0-9]{26}_[A-Za-z0-9]{22}_[A-Za-z0-9]{3})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pdl_live_apikey_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

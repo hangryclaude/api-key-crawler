@@ -1,0 +1,55 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/devcycle.go",
+  "rules": [
+    {
+      "id": "devcycle-client-sdk-key",
+      "description": "DevCycle client SDK key.",
+      "confidence": "high",
+      "regex": "\\b(dvc_client_[A-Za-z0-9]{8,32})",
+      "keywords": [
+        "dvc_client_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "devcycle-mobile-sdk-key",
+      "description": "DevCycle mobile SDK key.",
+      "confidence": "high",
+      "regex": "\\b(dvc_mobile_[A-Za-z0-9]{8,32})",
+      "keywords": [
+        "dvc_mobile_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "devcycle-server-sdk-key",
+      "description": "DevCycle server SDK key.",
+      "confidence": "high",
+      "regex": "\\b(dvc_server_[A-Za-z0-9]{8,32})",
+      "keywords": [
+        "dvc_server_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/ionic.go",
+  "rules": [
+    {
+      "id": "ionic-personal-access-token",
+      "description": "Ionic personal access token.",
+      "confidence": "high",
+      "regex": "\\b(ion_[A-Za-z0-9]{42})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "ionic"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

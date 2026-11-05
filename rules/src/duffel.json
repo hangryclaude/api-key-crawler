@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/duffel.go",
+  "rules": [
+    {
+      "id": "duffel-api-token",
+      "description": "Uncovered a Duffel API token, which may compromise travel platform integrations and sensitive customer data.",
+      "confidence": "high",
+      "regex": "duffel_(?:test|live)_(?i)[a-z0-9_\\-=]{43}",
+      "keywords": [
+        "duffel_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

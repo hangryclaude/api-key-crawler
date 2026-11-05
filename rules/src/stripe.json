@@ -1,0 +1,31 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/stripe.go",
+  "rules": [
+    {
+      "id": "stripe-access-token",
+      "description": "Found a Stripe Access Token, posing a risk to payment processing services and sensitive financial data.",
+      "confidence": "high",
+      "regex": "\\b((?:sk|rk)_(?:test|live|prod)_[a-zA-Z0-9]{10,99})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sk_test",
+        "sk_live",
+        "sk_prod",
+        "rk_test",
+        "rk_live",
+        "rk_prod"
+      ],
+      "filter": {
+        "dropRegex": [
+          "^sk_live_a2V5Xz"
+        ],
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

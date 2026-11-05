@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/lichess.go",
+  "rules": [
+    {
+      "id": "lichess-personal-access-token",
+      "description": "Lichess personal access token.",
+      "confidence": "high",
+      "regex": "\\b(lip_[A-Za-z0-9_]{16,60})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "lip_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

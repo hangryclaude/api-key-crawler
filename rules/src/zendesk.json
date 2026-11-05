@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/zendesk.go",
+  "rules": [
+    {
+      "id": "zendesk-secret-key",
+      "description": "Detected a Zendesk Secret Key, risking unauthorized access to customer support services and sensitive ticketing data.",
+      "confidence": "high",
+      "regex": "(?i)(?:zendesk)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "zendesk"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/tailscale.go",
+  "rules": [
+    {
+      "id": "tailscale-api-key.1",
+      "description": "Tailscale API access token.",
+      "confidence": "high",
+      "regex": "\\b(tskey-api-[A-Za-z0-9_-]{20,36})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "tskey-api-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

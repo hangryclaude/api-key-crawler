@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/privatekey.go",
+  "rules": [
+    {
+      "id": "pkcs12-file",
+      "description": "Found a PKCS #12 file, which commonly contain bundled private keys.",
+      "confidence": "high",
+      "path": "(?i)(?:^|\\/)[^\\/]+\\.p(?:12|fx)$"
+    },
+    {
+      "id": "private-key",
+      "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "confidence": "high",
+      "regex": "(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\\s\\S-]{64,}?KEY(?: BLOCK)?-----",
+      "keywords": [
+        "-----begin"
+      ]
+    }
+  ]
+}

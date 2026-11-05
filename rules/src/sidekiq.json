@@ -1,0 +1,27 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/sidekiq.go",
+  "rules": [
+    {
+      "id": "sidekiq-secret",
+      "description": "Discovered a Sidekiq Secret, which could lead to compromised background job processing and application data breaches.",
+      "confidence": "high",
+      "regex": "(?i)(?:BUNDLE_ENTERPRISE__CONTRIBSYS__COM|BUNDLE_GEMS__CONTRIBSYS__COM)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{8}:[a-f0-9]{8})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "bundle_enterprise__contribsys__com",
+        "bundle_gems__contribsys__com"
+      ]
+    },
+    {
+      "id": "sidekiq-sensitive-url",
+      "description": "Uncovered a Sidekiq Sensitive URL, potentially exposing internal job queues and sensitive operation details.",
+      "confidence": "high",
+      "regex": "(?i)\\bhttps?://([a-f0-9]{8}:[a-f0-9]{8})@(?:gems.contribsys.com|enterprise.contribsys.com)(?:[\\/|\\#|\\?|:]|$)",
+      "keywords": [
+        "gems.contribsys.com",
+        "enterprise.contribsys.com"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/apify.go",
+  "rules": [
+    {
+      "id": "apify-api-token",
+      "description": "Detected an Apify API token, which may expose actors, tasks, and stored data.",
+      "confidence": "high",
+      "regex": "\\b(apify_api_[A-Za-z0-9]{34,38})\\b",
+      "keywords": [
+        "apify_api_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

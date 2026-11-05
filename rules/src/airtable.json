@@ -1,0 +1,57 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/airtable.go",
+  "rules": [
+    {
+      "id": "airtable-api-key",
+      "description": "Uncovered a possible Airtable API Key, potentially compromising database access and leading to data leakage or alteration.",
+      "confidence": "high",
+      "regex": "(?i)(?:airtable)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{17})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "airtable"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "airtable-oauth-token",
+      "description": "Detected an Airtable OAuth token, which may allow unauthorized access to Airtable resources granted to an OAuth integration.",
+      "confidence": "high",
+      "regex": "(?i)(?:airtable)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Z0-9]+\\.v1\\.[A-Z0-9_-]+\\.[a-f0-9]+)(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "airtable"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    },
+    {
+      "id": "airtable-personnal-access-token",
+      "description": "Uncovered a possible Airtable Personal AccessToken, potentially compromising database access and leading to data leakage or alteration.",
+      "confidence": "high",
+      "regex": "\\b(pat[[:alnum:]]{14}\\.[a-f0-9]{64})\\b",
+      "keywords": [
+        "airtable"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

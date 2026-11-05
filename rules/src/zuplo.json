@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/zuplo.go",
+  "rules": [
+    {
+      "id": "zuplo-consumer-api-key.1",
+      "description": "Zuplo consumer API key.",
+      "confidence": "high",
+      "regex": "\\b(zpka_[a-z0-9]{32}_[0-9a-f]{8})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "zpka_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

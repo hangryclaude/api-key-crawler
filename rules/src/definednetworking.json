@@ -1,0 +1,16 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/definednetworking.go",
+  "rules": [
+    {
+      "id": "defined-networking-api-token",
+      "description": "Identified a Defined Networking API token, which could lead to unauthorized network operations and data breaches.",
+      "confidence": "high",
+      "regex": "(?i)(?:dnkey)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(dnkey-[a-z0-9=_\\-]{26}-[a-z0-9=_\\-]{52})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "dnkey"
+      ]
+    }
+  ]
+}

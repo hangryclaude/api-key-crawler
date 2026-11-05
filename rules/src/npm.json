@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/npm.go",
+  "rules": [
+    {
+      "id": "npm-access-token",
+      "description": "Uncovered an npm access token, potentially compromising package management and code repository access.",
+      "confidence": "high",
+      "regex": "(?i)\\b(npm_[a-z0-9]{36})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "npm_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

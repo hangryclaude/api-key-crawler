@@ -1,0 +1,17 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/cloudsmith.go",
+  "rules": [
+    {
+      "id": "cloudsmith-api-key",
+      "description": "Detected a Cloudsmith API key, which may expose package repositories and artifact management operations to unauthorized access.",
+      "confidence": "high",
+      "regex": "\\b(csa_[a-f0-9]{30}[A-Za-z0-9]{6})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "csa_"
+      ],
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/mailersend.go",
+  "rules": [
+    {
+      "id": "mailersend-api-token",
+      "description": "MailerSend API token.",
+      "confidence": "high",
+      "regex": "\\b(mlsn\\.[A-Za-z0-9]{30,100})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "mlsn."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/shopify.go",
+  "rules": [
+    {
+      "id": "shopify-access-token",
+      "description": "Uncovered a Shopify access token, which could lead to unauthorized e-commerce platform access and data breaches.",
+      "confidence": "high",
+      "regex": "shpat_[a-fA-F0-9]{32}",
+      "keywords": [
+        "shpat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "shopify-custom-access-token",
+      "description": "Detected a Shopify custom access token, potentially compromising custom app integrations and e-commerce data security.",
+      "confidence": "high",
+      "regex": "shpca_[a-fA-F0-9]{32}",
+      "keywords": [
+        "shpca_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "shopify-private-app-access-token",
+      "description": "Identified a Shopify private app access token, risking unauthorized access to private app data and store operations.",
+      "confidence": "high",
+      "regex": "shppa_[a-fA-F0-9]{32}",
+      "keywords": [
+        "shppa_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "shopify-shared-secret",
+      "description": "Found a Shopify shared secret, posing a risk to application authentication and e-commerce platform security.",
+      "confidence": "high",
+      "regex": "shpss_[a-fA-F0-9]{32}",
+      "keywords": [
+        "shpss_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/databricks.go",
+  "rules": [
+    {
+      "id": "databricks-api-token",
+      "description": "Uncovered a Databricks API token, which may compromise big data analytics platforms and sensitive data processing.",
+      "confidence": "high",
+      "regex": "\\b(dapi[a-f0-9]{32}(?:-\\d)?)(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "dapi"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

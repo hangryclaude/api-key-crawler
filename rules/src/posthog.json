@@ -1,0 +1,38 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/posthog.go",
+  "rules": [
+    {
+      "id": "posthog-personal-api-key",
+      "description": "Detected a PostHog Personal API Key, which may expose administrative access to PostHog analytics projects.",
+      "confidence": "high",
+      "regex": "(?i)\\b(phx_[a-zA-Z0-9_\\-]{41,49})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "phx_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "posthog-project-api-key",
+      "description": "Detected a PostHog Project API Key, a public write-only token used to send events to a PostHog project.",
+      "confidence": "high",
+      "regex": "(?i)\\b(phc_[a-zA-Z0-9_\\-]{41,44})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "phc_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

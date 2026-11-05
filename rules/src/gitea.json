@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/gitea.go",
+  "rules": [
+    {
+      "id": "gitea-access-token",
+      "description": "Detected a Gitea Access Token, which may expose self-hosted Git repositories and associated code to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)(?:gitea[_.-]?(?:token|key|secret|access))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "gitea"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

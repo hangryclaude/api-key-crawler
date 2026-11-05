@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/square.go",
+  "rules": [
+    {
+      "id": "square-access-token",
+      "description": "Detected a Square Access Token, risking unauthorized payment processing and financial transaction exposure.",
+      "confidence": "high",
+      "regex": "\\b((?:EAAA|sq0atp-)[\\w-]{22,60})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sq0atp-",
+        "eaaa"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

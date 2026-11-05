@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/etsy.go",
+  "rules": [
+    {
+      "id": "etsy-open-api-key",
+      "description": "Found an Etsy Open API key, potentially compromising Etsy app access and shop integrations.",
+      "confidence": "high",
+      "regex": "(?i)(?:etsy|x-api-key)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{24}:[a-z0-9]{10,64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "etsy",
+        "x-api-key"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

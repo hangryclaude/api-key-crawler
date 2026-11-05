@@ -1,0 +1,65 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/artifactory.go",
+  "rules": [
+    {
+      "id": "artifactory-api-key",
+      "description": "Detected an Artifactory api key, posing a risk unauthorized access to the central repository.",
+      "confidence": "high",
+      "regex": "\\bAKCp[A-Za-z0-9]{68,70}\\b",
+      "keywords": [
+        "akcp"
+      ],
+      "components": [
+        {
+          "id": "artifactory-jfrog-url"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "artifactory-jfrog-url",
+      "description": "Detected a JFrog Artifactory host, used as a component of Artifactory token validation.",
+      "confidence": "high",
+      "regex": "(?i)(?:^|[^a-z0-9-])([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.jfrog\\.io)(?:$|[^a-z0-9-])",
+      "keywords": [
+        "jfrog.io"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 2.5,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "artifactory-reference-token",
+      "description": "Detected an Artifactory reference token, posing a risk of impersonation and unauthorized access to the central repository.",
+      "confidence": "high",
+      "regex": "\\bcmVmd[A-Za-z0-9]{59}\\b",
+      "keywords": [
+        "cmvmd"
+      ],
+      "components": [
+        {
+          "id": "artifactory-jfrog-url"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

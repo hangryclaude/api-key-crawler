@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/twilio.go",
+  "rules": [
+    {
+      "id": "twilio-api-key",
+      "description": "Found a Twilio API Key, posing a risk to communication services and sensitive customer interaction data.",
+      "confidence": "high",
+      "regex": "SK[0-9a-fA-F]{32}",
+      "keywords": [
+        "twilio"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

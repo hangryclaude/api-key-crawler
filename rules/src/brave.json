@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/brave.go",
+  "rules": [
+    {
+      "id": "brave-search-api-key",
+      "description": "Detected a Brave Search API key, which may allow unauthorized use of Brave Search API quota.",
+      "confidence": "high",
+      "regex": "\\b(BSA[A-Za-z0-9_-]{24,40})\\b",
+      "keywords": [
+        "bsa"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.2,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/pulumi.go",
+  "rules": [
+    {
+      "id": "pulumi-api-token",
+      "description": "Found a Pulumi API token, posing a risk to infrastructure as code services and cloud resource management.",
+      "confidence": "high",
+      "regex": "\\b(pul-[a-f0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pul-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/togetherai.go",
+  "rules": [
+    {
+      "id": "togetherai-api-key",
+      "description": "Detected a Together.ai API Key, which may expose access to open-source AI models and inference services.",
+      "confidence": "high",
+      "regex": "(?i)\\b(tgp_v1_[A-Za-z0-9_-]{43})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "tgp_v1_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

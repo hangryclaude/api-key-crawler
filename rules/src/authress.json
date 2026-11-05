@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/authress.go",
+  "rules": [
+    {
+      "id": "authress-service-client-access-key",
+      "description": "Uncovered a possible Authress Service Client Access Key, which may compromise access control services and sensitive data.",
+      "confidence": "high",
+      "regex": "(?i)\\b((?:sc|ext|scauth|authress)_[a-z0-9]{5,30}\\.[a-z0-9]{4,6}\\.acc[_-][a-z0-9-]{10,32}\\.[a-z0-9+/_=-]{30,120})\\b",
+      "keywords": [
+        ".acc_",
+        ".acc-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/ngrok.go",
+  "rules": [
+    {
+      "id": "ngrok-api-key.1",
+      "description": "ngrok API key or agent authtoken, which may allow tunnel access or account administration.",
+      "confidence": "high",
+      "regex": "(?i:(?:ngrok[_. -]*(?:(?:api|agent)[_. -]*)?(?:secret|key|token|authtoken))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(2[A-Za-z0-9]{26}_[0-9][A-Za-z0-9]{20})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "ngrok"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

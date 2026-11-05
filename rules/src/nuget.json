@@ -1,0 +1,30 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/nuget.go",
+  "rules": [
+    {
+      "id": "nuget-config-password",
+      "description": "Identified a password within a Nuget config file, potentially compromising package management access.",
+      "confidence": "high",
+      "regex": "(?i)<add key=\\\"(?:(?:ClearText)?Password)\\\"\\s*value=\\\"(.{8,})\\\"\\s*/>",
+      "path": "(?i)nuget\\.config$",
+      "keywords": [
+        "<add key="
+      ],
+      "filter": {
+        "entropy": {
+          "min": 1,
+          "strict": true
+        },
+        "dropWords": [
+          "33f!!lloppa"
+        ],
+        "dropRegex": [
+          "hal\\+9ooo_da!sY",
+          "^\\%\\S.*\\%$"
+        ]
+      }
+    }
+  ]
+}

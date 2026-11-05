@@ -1,0 +1,41 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/hashicorp_vault.go",
+  "rules": [
+    {
+      "id": "vault-batch-token",
+      "description": "Detected a Vault Batch Token, risking unauthorized access to secret management services and sensitive data.",
+      "confidence": "high",
+      "regex": "\\b(hvb\\.[\\w-]{138,300})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "hvb."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "vault-service-token",
+      "description": "Identified a Vault Service Token, potentially compromising infrastructure security and access to sensitive credentials.",
+      "confidence": "high",
+      "regex": "\\b((?:hvs\\.[\\w-]{90,120}|s\\.(?i:[a-z0-9]{24})))(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "hvs.",
+        "vault"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        },
+        "dropRegex": [
+          "s\\.[A-Za-z]{24}"
+        ]
+      }
+    }
+  ]
+}

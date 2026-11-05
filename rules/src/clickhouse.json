@@ -1,0 +1,44 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/clickhouse.go",
+  "rules": [
+    {
+      "id": "clickhouse-cloud-api-secret-key",
+      "description": "Identified a pattern that may indicate clickhouse cloud API secret key, risking unauthorized clickhouse cloud api access and data breaches on ClickHouse Cloud platforms.",
+      "confidence": "high",
+      "regex": "\\b(4b1d[A-Za-z0-9]{38})\\b",
+      "keywords": [
+        "4b1d"
+      ],
+      "components": [
+        {
+          "id": "clickhouse-cloud-key-id"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "clickhouse-cloud-key-id",
+      "description": "Detected a ClickHouse Cloud key ID, used as a component of the clickhouse-cloud-api-secret-key composite rule.",
+      "confidence": "high",
+      "regex": "(?i)\\bclickhouse(?:.|[\\n\\r]){0,16}?(?:ID|USER)(?:.|[\\n\\r]){0,16}?([a-z0-9]{20})",
+      "keywords": [
+        "clickhouse"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

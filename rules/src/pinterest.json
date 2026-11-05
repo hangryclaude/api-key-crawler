@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/pinterest.go",
+  "rules": [
+    {
+      "id": "pinterest-access-token",
+      "description": "Pinterest access token.",
+      "confidence": "high",
+      "regex": "\\b(pina_[A-Za-z0-9_-]{20,200})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pina_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

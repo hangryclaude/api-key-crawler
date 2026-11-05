@@ -1,0 +1,75 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/planetscale.go",
+  "rules": [
+    {
+      "id": "planetscale-api-token",
+      "description": "Identified a PlanetScale API token, potentially compromising database management and operations.",
+      "confidence": "high",
+      "regex": "\\b(pscale_tkn_(?i)[\\w=\\.-]{32,64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pscale_tkn_"
+      ],
+      "components": [
+        {
+          "id": "planetscale-id"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "planetscale-id",
+      "description": "Found a PlanetScale service token ID.",
+      "confidence": "high",
+      "regex": "(?i)(?:pscale|planetscale)(?:.|[\\n\\r]){0,16}?(?:USER|ID|NAME)(?:.|[\\n\\r]){0,16}?([a-z0-9]{12})",
+      "keywords": [
+        "pscale",
+        "planetscale"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "planetscale-oauth-token",
+      "description": "Found a PlanetScale OAuth token, posing a risk to database access control and sensitive data integrity.",
+      "confidence": "high",
+      "regex": "\\b(pscale_oauth_[\\w=\\.-]{32,64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pscale_oauth_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "planetscale-password",
+      "description": "Discovered a PlanetScale password, which could lead to unauthorized database operations and data breaches.",
+      "confidence": "high",
+      "regex": "(?i)\\b(pscale_pw_(?i)[\\w=\\.-]{32,64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pscale_pw_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

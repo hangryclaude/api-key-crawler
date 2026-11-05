@@ -1,0 +1,43 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/wakatime.go",
+  "rules": [
+    {
+      "id": "wakatime-api-key.1",
+      "description": "WakaTime API key version 1 (UUID format).",
+      "confidence": "high",
+      "regex": "(?i:(?:waka[_. -]?time(?:[_. -]*(?:api))?[_. -]*(?:secret|key|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "wakatime",
+        "waka_time",
+        "waka-time",
+        "waka time",
+        "waka.time"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "wakatime-api-key.2",
+      "description": "WakaTime API key version 2 (waka_ format).",
+      "confidence": "high",
+      "regex": "(?i)\\b(waka_[a-z0-9]{36,64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "waka_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

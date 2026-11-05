@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/minimax.go",
+  "rules": [
+    {
+      "id": "minimax-api-key",
+      "description": "Detected a MiniMax API key, which may expose AI model, speech, image, video, or file services to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)\\b(sk-api-[A-Za-z0-9_-]{119})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sk-api-",
+        "minimax"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

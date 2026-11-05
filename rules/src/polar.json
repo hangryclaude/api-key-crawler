@@ -1,0 +1,55 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/polar.go",
+  "rules": [
+    {
+      "id": "polar-oauth-access-token",
+      "description": "Polar OAuth access token.",
+      "confidence": "high",
+      "regex": "\\b(polar_at_[A-Za-z0-9_-]{20,100})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "polar_at_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "polar-organization-access-token",
+      "description": "Polar organization access token.",
+      "confidence": "high",
+      "regex": "\\b(polar_oat_[A-Za-z0-9_-]{20,100})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "polar_oat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "polar-personal-access-token",
+      "description": "Polar personal access token.",
+      "confidence": "high",
+      "regex": "\\b(polar_pat_[A-Za-z0-9_-]{20,100})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "polar_pat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/ibm.go",
+  "rules": [
+    {
+      "id": "ibm-cloud-user-api-key",
+      "description": "Detected an IBM Cloud user API key, which may expose IBM Cloud account resources.",
+      "confidence": "high",
+      "regex": "(?i)(?:ibm(?:cloud)?|bx)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9_-]{42,44})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "ibm"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

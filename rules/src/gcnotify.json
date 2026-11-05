@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/gcnotify.go",
+  "rules": [
+    {
+      "id": "canadian-digital-service-notify-api-key",
+      "description": "Detected a GC Notify API key, which may allow unauthorized notification access.",
+      "confidence": "high",
+      "regex": "(?i:\\b(ApiKey-v1\\s+gcntfy-[a-z0-9_]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\\b)",
+      "keywords": [
+        "gcntfy-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

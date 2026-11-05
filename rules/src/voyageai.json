@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/voyageai.go",
+  "rules": [
+    {
+      "id": "voyageai-api-key",
+      "description": "Detected a Voyage AI API key, which may expose embedding and retrieval model access to unauthorized parties.",
+      "confidence": "medium",
+      "regex": "(?i:(?:voyage)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}((?:pa|al)-[A-Za-z0-9_-]{43})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "voyage"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

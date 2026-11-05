@@ -1,0 +1,17 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/mailchimp.go",
+  "rules": [
+    {
+      "id": "mailchimp-api-key",
+      "description": "Identified a Mailchimp API key, potentially compromising email marketing campaigns and subscriber data.",
+      "confidence": "high",
+      "regex": "(?i)(?:MailchimpSDK.initialize|mailchimp)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32}-us\\d\\d)(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "mailchimp"
+      ],
+      "validates": true
+    }
+  ]
+}

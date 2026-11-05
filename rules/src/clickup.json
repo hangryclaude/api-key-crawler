@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/clickup.go",
+  "rules": [
+    {
+      "id": "clickup-personal-api-token",
+      "description": "Detected a ClickUp personal API token, which may allow unauthorized access to ClickUp workspaces and user data.",
+      "confidence": "high",
+      "regex": "(?i)(?:clickup)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(pk_[0-9]{8,9}_[a-z0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "clickup"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

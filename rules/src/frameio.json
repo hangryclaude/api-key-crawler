@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/frameio.go",
+  "rules": [
+    {
+      "id": "frameio-api-token",
+      "description": "Found a Frame.io API token, potentially compromising video collaboration and project management.",
+      "confidence": "high",
+      "regex": "fio-u-(?i)[a-z0-9\\-_=]{64}",
+      "keywords": [
+        "fio-u-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

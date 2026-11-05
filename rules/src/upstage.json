@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/upstage.go",
+  "rules": [
+    {
+      "id": "upstage-api-key",
+      "description": "Detected an Upstage AI API key, which may expose Solar language models and document AI services to unauthorized access.",
+      "confidence": "medium",
+      "regex": "(?i)(?:upstage)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9]{40,50})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "upstage"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

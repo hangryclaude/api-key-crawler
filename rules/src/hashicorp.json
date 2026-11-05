@@ -1,0 +1,39 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/hashicorp.go",
+  "rules": [
+    {
+      "id": "hashicorp-tf-api-token",
+      "description": "Uncovered a HashiCorp Terraform user/org API token, which may lead to unauthorized infrastructure management and security breaches.",
+      "confidence": "high",
+      "regex": "(?i)[a-z0-9]{14}\\.(?-i:atlasv1)\\.[a-z0-9\\-_=]{60,70}",
+      "keywords": [
+        "atlasv1"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "hashicorp-tf-password",
+      "description": "Identified a HashiCorp Terraform password field, risking unauthorized infrastructure configuration and security breaches.",
+      "confidence": "medium",
+      "regex": "(?i)(?:administrator_login_password|password)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(\"[a-z0-9=_\\-]{8,20}\")(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "path": "(?i)\\.(?:tf|hcl)$",
+      "keywords": [
+        "administrator_login_password",
+        "password"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

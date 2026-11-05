@@ -1,0 +1,45 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/browserstack.go",
+  "rules": [
+    {
+      "id": "browserstack-access-key.1",
+      "description": "BrowserStack access key, which may allow access to automated browser and device testing when paired with its username.",
+      "confidence": "high",
+      "regex": "(?i:(?:browserstack[_.-]?(?:access[_.-]?)?(?:key|secret|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9]{20})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "browserstack"
+      ],
+      "components": [
+        {
+          "id": "browserstack-username.1",
+          "within": "5L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "browserstack-username.1",
+      "description": "BrowserStack username, used as a component of the BrowserStack access-key composite rule.",
+      "confidence": "medium",
+      "regex": "(?i:(?:browserstack[_.-]?(?:username|user))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9][A-Za-z0-9._-]{2,39})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "browserstack"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

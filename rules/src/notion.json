@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/notion.go",
+  "rules": [
+    {
+      "id": "notion-api-token",
+      "description": "Notion API token",
+      "confidence": "high",
+      "regex": "\\b(ntn_[0-9]{11}[A-Za-z0-9]{32}[A-Za-z0-9]{3})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "ntn_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/readme.go",
+  "rules": [
+    {
+      "id": "readme-api-token",
+      "description": "Detected a Readme API token, risking unauthorized documentation management and content exposure.",
+      "confidence": "high",
+      "regex": "\\b(rdme_[a-z0-9]{70})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "rdme_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

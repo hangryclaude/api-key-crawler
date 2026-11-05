@@ -1,0 +1,84 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/polymarket.go",
+  "rules": [
+    {
+      "id": "polymarket-address",
+      "description": "Found a Polymarket wallet address, used as a component of authenticated Polymarket API requests.",
+      "confidence": "medium",
+      "regex": "(?i:(?:poly.{0,20}address)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(0x[a-fA-F0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "poly"
+      ],
+      "skipReport": true
+    },
+    {
+      "id": "polymarket-api-key",
+      "description": "Identified a Polymarket API key, potentially compromising access to the Polymarket trading platform.",
+      "confidence": "high",
+      "regex": "(?i:(?:poly.{0,20}key)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "poly"
+      ],
+      "components": [
+        {
+          "id": "polymarket-api-secret",
+          "within": "20L"
+        },
+        {
+          "id": "polymarket-passphrase",
+          "within": "20L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "polymarket-api-secret",
+      "description": "Discovered a Polymarket API secret, which could be used to sign authenticated requests to the Polymarket L2 API.",
+      "confidence": "medium",
+      "regex": "(?i:(?:poly.{0,20}secret)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-zA-Z0-9+/]{40,}={0,2})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "poly"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "polymarket-passphrase",
+      "description": "Found a Polymarket API passphrase, used as a component of authenticated Polymarket API requests.",
+      "confidence": "medium",
+      "regex": "(?i:(?:poly.{0,20}passphrase)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-zA-Z0-9_]{8,128})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "poly"
+      ],
+      "skipReport": true
+    },
+    {
+      "id": "polymarket-private-key",
+      "description": "Discovered a Polymarket private key, which could allow unauthorized trading and fund transfers.",
+      "confidence": "medium",
+      "regex": "(?i:(?:poly.{0,20}private.{0,20}key)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(0x[a-fA-F0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "poly"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

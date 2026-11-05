@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/doppler.go",
+  "rules": [
+    {
+      "id": "doppler-api-token",
+      "description": "Discovered a Doppler API token, posing a risk to environment and secrets management security.",
+      "confidence": "high",
+      "regex": "dp\\.pt\\.(?i)[a-z0-9]{43}",
+      "keywords": [
+        "dp.pt."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/xai.go",
+  "rules": [
+    {
+      "id": "xai-api-key",
+      "description": "Detected an xAI (Grok) API Key, which may expose Grok AI model access to unauthorized parties.",
+      "confidence": "high",
+      "regex": "(?i)\\b(xai-[A-Za-z0-9_-]{70,120})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "xai-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

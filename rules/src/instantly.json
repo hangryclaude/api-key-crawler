@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/instantly.go",
+  "rules": [
+    {
+      "id": "instantly-api-key.1",
+      "description": "Instantly API key, which may allow access to campaigns, accounts, leads, and analytics.",
+      "confidence": "medium",
+      "regex": "(?i:(?:instantly)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9+/]{66}==)(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "instantly"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

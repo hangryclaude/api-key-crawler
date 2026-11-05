@@ -1,0 +1,55 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/bitbucket.go",
+  "rules": [
+    {
+      "id": "bitbucket-client-id",
+      "description": "Discovered a potential Bitbucket Client ID, risking unauthorized repository access and potential codebase exposure.",
+      "confidence": "high",
+      "regex": "(?i)(?:bitbucket)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "bitbucket"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "bitbucket-client-secret",
+      "description": "Discovered a potential Bitbucket Client Secret, posing a risk of compromised code repositories and unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)(?:bitbucket)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "bitbucket"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "bitbucket-data-center-token",
+      "description": "Discovered a Bitbucket Data Center HTTP access token, risking unauthorized repository and project access.",
+      "confidence": "high",
+      "regex": "\\b(BBDC-[A-Za-z0-9+/=]{32,})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "bbdc"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

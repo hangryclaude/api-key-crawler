@@ -1,0 +1,53 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/grafana.go",
+  "rules": [
+    {
+      "id": "grafana-api-key",
+      "description": "Identified a Grafana API key, which could compromise monitoring dashboards and sensitive data analytics.",
+      "confidence": "high",
+      "regex": "\\b(eyJrIjoi[A-Za-z0-9+/]{40,380}={0,2})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "eyjrijoi"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "grafana-cloud-api-token",
+      "description": "Found a Grafana cloud API token, risking unauthorized access to cloud-based monitoring services and data exposure.",
+      "confidence": "high",
+      "regex": "\\b(glc_[A-Za-z0-9+/]{40,150}={0,2})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "glc_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "grafana-service-account-token",
+      "description": "Discovered a Grafana service account token, posing a risk of compromised monitoring services and data integrity.",
+      "confidence": "high",
+      "regex": "\\b(glsa_[A-Za-z0-9]{32}_[A-Fa-f0-9]{8})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "glsa_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

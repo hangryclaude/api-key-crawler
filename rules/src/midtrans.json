@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/midtrans.go",
+  "rules": [
+    {
+      "id": "midtrans-production-server-client-key",
+      "description": "Midtrans production server or client key.",
+      "confidence": "high",
+      "regex": "(?i)(?:midtrans|mid[_-]?)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(Mid-(?:server|client)-[A-Za-z0-9_]{10,20})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "mid-server-",
+        "mid-client-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2.8,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

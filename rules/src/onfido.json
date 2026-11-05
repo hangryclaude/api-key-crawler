@@ -1,0 +1,55 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/onfido.go",
+  "rules": [
+    {
+      "id": "onfido-live-api-token-ca",
+      "description": "Onfido live API token.",
+      "confidence": "high",
+      "regex": "\\b(api_live_ca\\.[A-Za-z0-9_-]{20,80})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "api_live_ca."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "onfido-live-api-token-eu",
+      "description": "Onfido live API token.",
+      "confidence": "high",
+      "regex": "\\b(api_live\\.[A-Za-z0-9_-]{20,80})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "api_live."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "onfido-live-api-token-us",
+      "description": "Onfido live API token.",
+      "confidence": "high",
+      "regex": "\\b(api_live_us\\.[A-Za-z0-9_-]{20,80})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "api_live_us."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

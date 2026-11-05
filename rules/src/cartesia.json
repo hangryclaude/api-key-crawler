@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/cartesia.go",
+  "rules": [
+    {
+      "id": "cartesia-api-key.1",
+      "description": "Cartesia API key, which grants server-side access to Cartesia voice APIs.",
+      "confidence": "high",
+      "regex": "\\b(sk_car_[A-Za-z0-9_]{20})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sk_car_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

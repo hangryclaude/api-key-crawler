@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/onesignal.go",
+  "rules": [
+    {
+      "id": "onesignal-rich-authentication-token",
+      "description": "OneSignal rich authentication token.",
+      "confidence": "high",
+      "regex": "\\b(os_v2_(?:app|org)_[a-z2-7]{103})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "os_v2_app_",
+        "os_v2_org_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

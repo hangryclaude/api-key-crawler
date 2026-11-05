@@ -1,0 +1,94 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/github.go",
+  "rules": [
+    {
+      "id": "github-app-token",
+      "description": "Identified a GitHub App Token, which may compromise GitHub application integrations and source code security.",
+      "confidence": "high",
+      "regex": "(?:ghu|ghs)_[0-9a-zA-Z]{36}",
+      "keywords": [
+        "ghu_",
+        "ghs_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        },
+        "dropPath": [
+          "(?:^|/)@octokit/auth-token/README\\.md$"
+        ]
+      },
+      "validates": true
+    },
+    {
+      "id": "github-fine-grained-pat",
+      "description": "Found a GitHub Fine-Grained Personal Access Token, risking unauthorized repository access and code manipulation.",
+      "confidence": "high",
+      "regex": "github_pat_\\w{82}",
+      "keywords": [
+        "github_pat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "github-oauth",
+      "description": "Discovered a GitHub OAuth Access Token, posing a risk of compromised GitHub account integrations and data leaks.",
+      "confidence": "high",
+      "regex": "gho_[0-9a-zA-Z]{36}",
+      "keywords": [
+        "gho_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "github-pat",
+      "description": "Uncovered a GitHub Personal Access Token, potentially leading to unauthorized repository access and sensitive content exposure.",
+      "confidence": "high",
+      "regex": "ghp_[0-9a-zA-Z]{36}",
+      "keywords": [
+        "ghp_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        },
+        "dropPath": [
+          "(?:^|/)@octokit/auth-token/README\\.md$"
+        ]
+      },
+      "validates": true
+    },
+    {
+      "id": "github-refresh-token",
+      "description": "Detected a GitHub Refresh Token, which could allow prolonged unauthorized access to GitHub services.",
+      "confidence": "high",
+      "regex": "ghr_[0-9a-zA-Z]{36}",
+      "keywords": [
+        "ghr_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

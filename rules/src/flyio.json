@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/flyio.go",
+  "rules": [
+    {
+      "id": "flyio-access-token",
+      "description": "Uncovered a Fly.io API key",
+      "confidence": "high",
+      "regex": "\\b(FlyV1\\s[A-Za-z0-9=_\\-,/+]{100,})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "flyv1"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

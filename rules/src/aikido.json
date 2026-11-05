@@ -1,0 +1,58 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/aikido.go",
+  "rules": [
+    {
+      "id": "aikido-ci-token",
+      "description": "Detected an Aikido CI token, which may allow unauthorized CI scan integration activity in Aikido.",
+      "confidence": "high",
+      "regex": "\\b(AIK_CI_[A-Za-z0-9]{20,44})\\b",
+      "keywords": [
+        "aik_ci_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "aikido-client-id",
+      "description": "Detected an Aikido client ID, used as a component of the aikido-client-secret composite rule.",
+      "confidence": "high",
+      "regex": "\\b(AIK_CLIENT_[A-Za-z0-9]{24})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "aik_client_"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "aikido-client-secret",
+      "description": "Detected an Aikido client secret, which may allow unauthorized access to Aikido APIs when paired with a client ID.",
+      "confidence": "high",
+      "regex": "\\b(AIK_SECRET_[A-Za-z0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "aik_secret_"
+      ],
+      "components": [
+        {
+          "id": "aikido-client-id"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

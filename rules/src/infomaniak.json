@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/infomaniak.go",
+  "rules": [
+    {
+      "id": "infomaniak-api-token",
+      "description": "Detected an Infomaniak API token, which may expose hosting, mail, and cloud services to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)(?:infomaniak)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9_\\-]{60,100})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "infomaniak"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

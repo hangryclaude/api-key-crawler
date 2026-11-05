@@ -1,0 +1,18 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/teams.go",
+  "rules": [
+    {
+      "id": "microsoft-teams-webhook",
+      "description": "Uncovered a Microsoft Teams Webhook, which could lead to unauthorized access to team collaboration tools and data leaks.",
+      "confidence": "high",
+      "regex": "https://[a-z0-9]+\\.webhook\\.office\\.com/webhookb2/[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}@[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}/IncomingWebhook/[a-z0-9]{32}/[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
+      "keywords": [
+        "webhook.office.com",
+        "webhookb2",
+        "incomingwebhook"
+      ]
+    }
+  ]
+}

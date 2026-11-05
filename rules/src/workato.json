@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/workato.go",
+  "rules": [
+    {
+      "id": "workato-developer-api-token.1",
+      "description": "Workato Developer API token.",
+      "confidence": "high",
+      "regex": "\\b(wrka(?:[a-z]{2})?-eyJ[A-Za-z0-9_-]{8,}\\.[A-Za-z0-9_-]{16,}\\.[A-Za-z0-9_-]{64,})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "wrka"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

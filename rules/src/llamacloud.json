@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/llamacloud.go",
+  "rules": [
+    {
+      "id": "llama-cloud-api-key.1",
+      "description": "LlamaCloud API key, which may allow access to managed parsing, ingestion, and retrieval projects.",
+      "confidence": "high",
+      "regex": "\\b(llx-[A-Za-z0-9]{44,52})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "llx-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/maxmind.go",
+  "rules": [
+    {
+      "id": "maxmind-license-key",
+      "description": "Discovered a potential MaxMind license key.",
+      "confidence": "high",
+      "regex": "\\b([A-Za-z0-9]{6}_[A-Za-z0-9]{29}_mmk)(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "_mmk"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

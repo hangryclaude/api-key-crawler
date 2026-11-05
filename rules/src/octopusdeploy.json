@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/octopusdeploy.go",
+  "rules": [
+    {
+      "id": "octopus-deploy-api-key",
+      "description": "Discovered a potential Octopus Deploy API key, risking application deployments and operational security.",
+      "confidence": "medium",
+      "regex": "\\b(API-[A-Z0-9]{26})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "api-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

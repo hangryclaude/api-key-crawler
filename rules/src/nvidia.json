@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/nvidia.go",
+  "rules": [
+    {
+      "id": "nvidia-api-key",
+      "description": "Detected an NVIDIA NIM API Key, which may expose AI inference and GPU cloud services to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)\\b(nvapi-[A-Z0-9_-]{60,70})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "nvapi-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

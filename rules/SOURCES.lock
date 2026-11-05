@@ -1,0 +1,10 @@
+# Where the rule data in rules/src and internal/pattern/rules comes from, pinned.
+# One line per source, fields separated by a tab:
+#   name	lineage	repo	ref	commit	licence	committed	pinned
+# lineage names the family of rules a source belongs to. The generator refuses any lineage outside the
+# list in internal/pattern/rules/provenance.go and any licence outside {MIT, Apache-2.0, own, CC-BY-4.0}.
+# TruffleHog is AGPL-3.0 and is never a source: nothing of it is read, copied or adapted.
+# committed is the commit's date; pinned is the day it was pinned here.
+# scripts/rulegen/extract.mjs refuses a checkout that is not at this commit.
+betterleaks	betterleaks	https://github.com/betterleaks/betterleaks	v1.9.0	81aff7a638638aae3a659845d089043e1d8fe9ac	MIT	2026-09-29	2026-11-04
+keyguard	own	-	-	-	own	-	2026-11-04

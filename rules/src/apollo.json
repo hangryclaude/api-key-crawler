@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/apollo.go",
+  "rules": [
+    {
+      "id": "apollo-api-key.1",
+      "description": "Apollo.io API key, which may allow access to sales intelligence and engagement data.",
+      "confidence": "medium",
+      "regex": "(?i:(?:apollo)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9_-]{22})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "apollo"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

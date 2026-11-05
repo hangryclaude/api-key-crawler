@@ -1,0 +1,46 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/razorpay.go",
+  "rules": [
+    {
+      "id": "razorpay-key-id.1",
+      "description": "Razorpay key ID, used as a component of the Razorpay key-secret composite rule.",
+      "confidence": "high",
+      "regex": "\\b(rzp_(?:live|test)_[A-Za-z0-9]{14})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "rzp_live_",
+        "rzp_test_"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "razorpay-key-secret.1",
+      "description": "Razorpay key secret, which may authorize payment APIs when paired with its key ID.",
+      "confidence": "high",
+      "regex": "(?i:(?:razorpay[_.-]?(?:(?:api|key)[_.-]?)?(?:secret|private|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9]{24})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "razorpay"
+      ],
+      "components": [
+        {
+          "id": "razorpay-key-id.1",
+          "within": "5L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

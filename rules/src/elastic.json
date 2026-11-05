@@ -1,0 +1,17 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/elastic.go",
+  "rules": [
+    {
+      "id": "elastic-cloud-api-key",
+      "description": "Identified an Elastic Cloud Serverless API key, which may expose Elasticsearch and Kibana resources to unauthorized access.",
+      "confidence": "high",
+      "regex": "\\b(essu_[A-Za-z0-9_\\-]{60,200}={0,2})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "essu_"
+      ],
+      "validates": true
+    }
+  ]
+}

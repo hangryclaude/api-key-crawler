@@ -1,0 +1,37 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/dockerhub.go",
+  "rules": [
+    {
+      "id": "dockerhub-organization-access-token",
+      "description": "Detected a Docker Hub organization access token, which may expose organization repositories.",
+      "confidence": "high",
+      "regex": "\\b(dckr_oat_[A-Za-z0-9_-]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "dckr_oat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "dockerhub-personal-access-token",
+      "description": "Detected a Docker Hub personal access token, which may expose Docker Hub account access.",
+      "confidence": "high",
+      "regex": "\\b(dckr_pat_[A-Za-z0-9_-]{27})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "dckr_pat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

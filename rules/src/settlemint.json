@@ -1,0 +1,52 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/settlemint.go",
+  "rules": [
+    {
+      "id": "settlemint-application-access-token",
+      "description": "Found a Settlemint Application Access Token.",
+      "confidence": "high",
+      "regex": "\\b(sm_aat_[a-zA-Z0-9]{16})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sm_aat"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "settlemint-personal-access-token",
+      "description": "Found a Settlemint Personal Access Token.",
+      "confidence": "high",
+      "regex": "\\b(sm_pat_[a-zA-Z0-9]{16})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sm_pat"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "settlemint-service-access-token",
+      "description": "Found a Settlemint Service Access Token.",
+      "confidence": "high",
+      "regex": "\\b(sm_sat_[a-zA-Z0-9]{16})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sm_sat"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

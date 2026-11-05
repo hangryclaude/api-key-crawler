@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/deepseek.go",
+  "rules": [
+    {
+      "id": "deepseek-api-key",
+      "description": "Detected a DeepSeek API Key, which may expose AI model access and associated usage to unauthorized parties.",
+      "confidence": "high",
+      "regex": "(?i)(?:deepseek)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(sk-[a-f0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "deepseek"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

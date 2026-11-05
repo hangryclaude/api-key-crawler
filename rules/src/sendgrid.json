@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/sendgrid.go",
+  "rules": [
+    {
+      "id": "sendgrid-api-token",
+      "description": "Detected a SendGrid API token, posing a risk of unauthorized email service operations and data exposure.",
+      "confidence": "high",
+      "regex": "\\b(SG\\.(?i)[a-z0-9=_\\-\\.]{66})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sg."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

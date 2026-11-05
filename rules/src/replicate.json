@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/replicate.go",
+  "rules": [
+    {
+      "id": "replicate-api-token",
+      "description": "Detected a Replicate API Token, which may expose AI model hosting and inference services to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)\\b(r8_[A-Za-z0-9]{37})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "r8_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

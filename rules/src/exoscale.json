@@ -1,0 +1,33 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/exoscale.go",
+  "rules": [
+    {
+      "id": "exoscale-api-key",
+      "description": "Identified an Exoscale API key paired with a secret, which together grant programmatic access to Exoscale cloud resources.",
+      "confidence": "high",
+      "regex": "\\b(EXO[a-zA-Z0-9]{24,30})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "exo"
+      ],
+      "components": [
+        {
+          "id": "exoscale-api-secret",
+          "within": "5L"
+        }
+      ],
+      "validates": true
+    },
+    {
+      "id": "exoscale-api-secret",
+      "description": "Identified an Exoscale API secret, used as a component of the exoscale-api-key composite rule.",
+      "confidence": "high",
+      "regex": "(?i)(?:exoscale)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9_\\-]{40,60})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "exoscale"
+      ],
+      "skipReport": true
+    }
+  ]
+}

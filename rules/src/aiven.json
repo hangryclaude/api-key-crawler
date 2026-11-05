@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/aiven.go",
+  "rules": [
+    {
+      "id": "aiven-auth-token",
+      "description": "Detected an Aiven authentication token, which may expose Aiven projects and services.",
+      "confidence": "high",
+      "regex": "(?i:aiven)[\\s\\S]{0,32}?\\b([A-Za-z0-9/+=]{372})(?:[^A-Za-z0-9/+=]|$)",
+      "keywords": [
+        "aiven"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

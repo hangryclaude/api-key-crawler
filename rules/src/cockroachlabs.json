@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/cockroachlabs.go",
+  "rules": [
+    {
+      "id": "cockroachlabs-cloud-api-key",
+      "description": "Detected a CockroachDB Cloud service account API key, which may allow unauthorized access to CockroachDB Cloud resources.",
+      "confidence": "high",
+      "regex": "\\b(CCDB1_[A-Za-z0-9]{22}_[A-Za-z0-9]{40})\\b",
+      "keywords": [
+        "ccdb1_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

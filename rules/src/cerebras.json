@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/cerebras.go",
+  "rules": [
+    {
+      "id": "cerebras-api-key",
+      "description": "Identified a Cerebras AI API Key, which may expose AI inference services to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)\\b(csk-[a-z0-9]{48})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "csk-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

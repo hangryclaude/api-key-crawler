@@ -1,0 +1,26 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/proof.go",
+  "rules": [
+    {
+      "id": "proof-full-access-api-key",
+      "description": "Proof production full-access API key.",
+      "confidence": "high",
+      "regex": "\\b(prf_(?:cli_)?[A-Za-z0-9_-]{20,80})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "prf_"
+      ],
+      "filter": {
+        "dropRegex": [
+          "^prf_(?:cli_)?test_"
+        ],
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

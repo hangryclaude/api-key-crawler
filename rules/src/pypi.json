@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/pypi.go",
+  "rules": [
+    {
+      "id": "pypi-upload-token",
+      "description": "Discovered a PyPI upload token, potentially compromising Python package distribution and repository integrity.",
+      "confidence": "high",
+      "regex": "pypi-AgEIcHlwaS5vcmc[\\w-]{50,1000}",
+      "keywords": [
+        "pypi-ageichlwas5vcmc"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/auth0.go",
+  "rules": [
+    {
+      "id": "auth0-client-id.1",
+      "description": "Auth0 client ID, used as a component of the Auth0 client-secret composite rule.",
+      "confidence": "medium",
+      "regex": "(?i:(?:auth0[_.-]?(?:client[_.-]?)?(?:id|identifier))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9_-]{32,60})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "auth0"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "auth0-client-secret.1",
+      "description": "Auth0 client secret, which may allow an application to impersonate its OAuth client.",
+      "confidence": "high",
+      "regex": "(?i:(?:auth0[_.-]?(?:client[_.-]?)?(?:secret|private|key|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9_-]{64,128})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "auth0"
+      ],
+      "components": [
+        {
+          "id": "auth0-client-id.1",
+          "within": "10L"
+        },
+        {
+          "id": "auth0-domain.1",
+          "within": "10L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "auth0-domain.1",
+      "description": "Auth0 tenant domain, used as a component of the Auth0 client-secret composite rule.",
+      "confidence": "high",
+      "regex": "(?i)\\b((?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+auth0\\.com)(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "auth0.com"
+      ],
+      "skipReport": true
+    }
+  ]
+}

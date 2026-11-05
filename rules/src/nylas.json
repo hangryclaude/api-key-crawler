@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/nylas.go",
+  "rules": [
+    {
+      "id": "nylas-api-key.1",
+      "description": "Nylas API key, which may allow application-level access to connected email, calendar, and contact data.",
+      "confidence": "high",
+      "regex": "\\b(nyk_[A-Za-z0-9]{67})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "nyk_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

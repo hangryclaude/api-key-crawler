@@ -1,0 +1,37 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/endorlabs.go",
+  "rules": [
+    {
+      "id": "endorlabs-api-key",
+      "description": "Detected an Endor Labs API Key, which may compromise supply chain security scanning and software composition analysis.",
+      "confidence": "high",
+      "regex": "(?i)(?:endor(?:labs)?|key)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(endr\\+[A-Za-z0-9-]{16})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "endr+"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "endorlabs-api-secret",
+      "description": "Detected an Endor Labs API Secret, which together with an API key grants full access to Endor Labs supply chain security services.",
+      "confidence": "high",
+      "regex": "(?i)(?:endor(?:labs)?|secret)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(endr\\+[A-Za-z0-9-]{16})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "endr+"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

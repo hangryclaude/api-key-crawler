@@ -1,0 +1,61 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/miro.go",
+  "rules": [
+    {
+      "id": "miro-access-token",
+      "description": "Detected a Miro OAuth access token, which may allow unauthorized access to Miro users, teams, boards, and content.",
+      "confidence": "high",
+      "regex": "\\b(eyJtaXJv[A-Za-z0-9-]{10,64}_[A-Za-z0-9_-]{20,64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "miro"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "miro-client-id",
+      "description": "Detected a Miro OAuth client ID, used as a component of the miro-client-secret composite rule.",
+      "confidence": "medium",
+      "regex": "(?i)(?:miro[_. -]*client[_. -]*id)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9]{15,21})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "miro"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 2.5,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "miro-client-secret",
+      "description": "Detected a Miro OAuth client secret, which may allow unauthorized OAuth client authentication when paired with a client ID.",
+      "confidence": "high",
+      "regex": "(?i)(?:miro)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "miro"
+      ],
+      "components": [
+        {
+          "id": "miro-client-id",
+          "within": "5L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

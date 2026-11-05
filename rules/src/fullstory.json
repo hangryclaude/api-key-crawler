@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/fullstory.go",
+  "rules": [
+    {
+      "id": "fullstory-api-key",
+      "description": "FullStory API key.",
+      "confidence": "medium",
+      "regex": "(?i)(?:(?:fullstory|fs_api|fullstory_api))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}((?:na1|eu1)\\.[A-Za-z0-9]{20,})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "fullstory",
+        "fs_api"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

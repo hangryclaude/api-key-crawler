@@ -1,0 +1,34 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/unkey.go",
+  "rules": [
+    {
+      "id": "unkey-root-key.1",
+      "description": "Unkey administrative root key.",
+      "confidence": "high",
+      "regex": "\\b(unkey_[A-Za-z0-9]{20,32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "unkey_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "require": [
+          [
+            "[0-9]"
+          ],
+          [
+            "[A-Z]"
+          ],
+          [
+            "[a-z]"
+          ]
+        ]
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/scalingo.go",
+  "rules": [
+    {
+      "id": "scalingo-api-token",
+      "description": "Found a Scalingo API token, posing a risk to cloud platform services and application deployment security.",
+      "confidence": "high",
+      "regex": "\\b(tk-us-[\\w-]{48})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "tk-us-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

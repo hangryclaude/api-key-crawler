@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/openshift.go",
+  "rules": [
+    {
+      "id": "openshift-user-token",
+      "description": "Found an OpenShift user token, potentially compromising an OpenShift/Kubernetes cluster.",
+      "confidence": "high",
+      "regex": "\\b(sha256~[\\w-]{43})(?:[^\\w-]|\\z)",
+      "keywords": [
+        "sha256~"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

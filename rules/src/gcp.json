@@ -1,0 +1,82 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/gcp.go",
+  "rules": [
+    {
+      "id": "gcp-api-key",
+      "description": "Uncovered a GCP API key, which could lead to unauthorized access to Google Cloud services and data breaches.",
+      "confidence": "high",
+      "regex": "\\b(AIza[\\w-]{35})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "aiza"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        },
+        "dropSha256": [
+          "f56e323494a6ffc2064e7a955908957d84f0755e5f975dabd64328d0359a8f7c",
+          "2037abcaffb2b77785da716cf7ccff4ff4d00c4ea930db0167b7d71f50af7eb4",
+          "3f370c9dd8225c63b5c77de1f785edc9712958f18bb612d5fa2e0ae33aeca682",
+          "e4a5542bb7fd7b67e943c71ad29c34b5972c9840597e7eda53e666f44d5da0b9",
+          "a19f89ab3555eac10c40741f6df79ecf0935998f15569f8db9d67bce0181fff6",
+          "0b476bdf9acf2123d547b5ae76f1e59884d8ec9553ee0c47e9f31fd4768f3f3c",
+          "eb540d2b6ee2a0a47c5779bc8a0141784c6b753840d4c6f4e2428a6e86e9e0b1",
+          "37f8f09bdf12c2f2eae4ead7273a62ddb0c23459cbf902892f282b57f7ed6619",
+          "8731261cb72d86267a32a532ebd3df429e2144e5e4ced7e13568bc9e6c8fb1b1",
+          "49f777db995e8260da7ca9ffdf0c08d66f0453e97ec967018baf2cdfe3b582d0",
+          "27a9a42931dff7eb2f8434e20a9bce976ea364e7bee49187f19d5cfeca9c7045",
+          "dc0fcf046c61640cbd1e8b999ada3262d722c2ca4bf42dceac999020ffdbb614",
+          "4c98242dcadc8b29005c6b4aad526552d5ea1842149154c0694adeec75847583",
+          "ea9bb1082cf95663f5faca23b8b15ef2aa0fce0a5c6df9c32dcb85b2e0a4513d",
+          "3a8b61d0f636b007840c0d40ba12bcf48465dc054cdc1a68704a33521d84b665",
+          "a6c814bc555ae62c7bd8b58ec07bf559c7ed3a009976a1e0acc9cef0d4473b41"
+        ]
+      },
+      "validates": true
+    },
+    {
+      "id": "gcp-application-default-credentials",
+      "description": "Google (GCP) Application Default Credentials",
+      "confidence": "high",
+      "regex": "\\{[^{]+(?:(?:\"client_secret\"\\s*:\\s*\"[^\"]+\"[^}]+\"refresh_token\"\\s*:\\s*\"[^\"]+\")|(?:\"refresh_token\"\\s*:\\s*\"[^\"]+\"[^}]+\"client_secret\"\\s*:\\s*\"[^\"]+\"))[^}]+\\}",
+      "keywords": [
+        ".apps.googleusercontent.com"
+      ],
+      "validates": true
+    },
+    {
+      "id": "gcp-gemini-api",
+      "description": "Detected a Google Gemini API key, which may expose Gemini model access and usage to unauthorized parties.",
+      "confidence": "high",
+      "regex": "\\b(AQ\\.Ab8RN6[A-Za-z0-9_-]{44})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "aq.ab8rn6"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gcp-service-account",
+      "description": "Google (GCP) Service-account",
+      "confidence": "high",
+      "regex": "\\{[^{]+(?:(?:\"private_key\"\\s*:\\s*\"-----BEGIN (?:RSA )?PRIVATE KEY-----[^}]+auth_provid(?:)er_x509_cert(?:)_url)|(?:auth_provide(?:)r_x509_cert_(?:)url[^}]+\"private_key\"\\s*:\\s*\"-----BEGIN (?:RSA )?PRIVATE KEY-----))[^}]+\\}",
+      "keywords": [
+        "provider_x509"
+      ],
+      "filter": {
+        "dropWords": [
+          "image-pulling@authenticated-image-pulling.iam.gserviceaccount.com"
+        ]
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/postman.go",
+  "rules": [
+    {
+      "id": "postman-api-token",
+      "description": "Uncovered a Postman API token, potentially compromising API testing and development workflows.",
+      "confidence": "high",
+      "regex": "\\b(PMAK-(?i)[a-f0-9]{24}\\-[a-f0-9]{34})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pmak-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

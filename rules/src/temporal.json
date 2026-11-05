@@ -1,0 +1,28 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/temporal.go",
+  "rules": [
+    {
+      "id": "temporal-cloud-api-key.1",
+      "description": "Temporal Cloud API key.",
+      "confidence": "high",
+      "regex": "\\b(eyJ[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9_-]*Y2NvdW50X2lk[A-Za-z0-9_-]*InRlbXBvcmFsLmlv[A-Za-z0-9_-]*(?:ICJrZXlfaWQiOi|a2V5X2lk|rZXlfaWQi)[A-Za-z0-9_-]{20,}\\.[A-Za-z0-9_-]{20,})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "inrlbxbvcmfslmlv"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.2,
+          "strict": false
+        },
+        "require": [
+          [
+            "^(?:[^0-9]*[0-9]){3}"
+          ]
+        ]
+      },
+      "validates": true
+    }
+  ]
+}

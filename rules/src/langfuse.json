@@ -1,0 +1,45 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/langfuse.go",
+  "rules": [
+    {
+      "id": "langfuse-public-key.1",
+      "description": "Langfuse public key, used as a component of the Langfuse secret-key composite rule.",
+      "confidence": "high",
+      "regex": "\\b(pk-lf-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pk-lf-"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "langfuse-secret-key.1",
+      "description": "Langfuse secret key, which authenticates project API access when paired with its public key.",
+      "confidence": "high",
+      "regex": "\\b(sk-lf-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sk-lf-"
+      ],
+      "components": [
+        {
+          "id": "langfuse-public-key.1",
+          "within": "5L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

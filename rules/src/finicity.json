@@ -1,0 +1,39 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/finicity.go",
+  "rules": [
+    {
+      "id": "finicity-api-token",
+      "description": "Detected a Finicity API token, potentially risking financial data access and unauthorized financial operations.",
+      "confidence": "high",
+      "regex": "(?i)(?:finicity)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "finicity"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "finicity-client-secret",
+      "description": "Identified a Finicity Client Secret, which could lead to compromised financial service integrations and data breaches.",
+      "confidence": "high",
+      "regex": "(?i)(?:finicity)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{20})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "finicity"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

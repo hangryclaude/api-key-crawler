@@ -1,0 +1,41 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/circleci.go",
+  "rules": [
+    {
+      "id": "circleci-personal-token",
+      "description": "CircleCI personal access token.",
+      "confidence": "high",
+      "regex": "\\b(CCIPAT_[a-zA-Z0-9]{22}_[a-z0-9]{40})",
+      "keywords": [
+        "ccipat_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    },
+    {
+      "id": "circleci-project-token",
+      "description": "CircleCI project token.",
+      "confidence": "high",
+      "regex": "(?i)(?:circleci)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "circleci"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      },
+      "validates": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/datastax.go",
+  "rules": [
+    {
+      "id": "datastax-astra-application-token",
+      "description": "DataStax Astra application token.",
+      "confidence": "high",
+      "regex": "\\b(AstraCS:[A-Za-z0-9]{20,})",
+      "keywords": [
+        "astracs:"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

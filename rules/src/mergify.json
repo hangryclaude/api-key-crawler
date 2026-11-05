@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/mergify.go",
+  "rules": [
+    {
+      "id": "mergify-application-key",
+      "description": "Mergify application API key.",
+      "confidence": "high",
+      "regex": "\\b(mergify_application_key_[A-Za-z0-9_-]{40,200})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "mergify_application_key_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.2,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

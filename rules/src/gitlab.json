@@ -1,0 +1,272 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/gitlab.go",
+  "rules": [
+    {
+      "id": "gitlab-cicd-job-token",
+      "description": "Identified a GitLab CI/CD Job Token, potential access to projects and some APIs on behalf of a user while the CI job is running.",
+      "confidence": "high",
+      "regex": "glcbt-[0-9a-zA-Z]{1,5}_[0-9a-zA-Z_-]{20}",
+      "keywords": [
+        "glcbt-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-deploy-token",
+      "description": "Identified a GitLab Deploy Token, risking access to repositories, packages and containers with write access.",
+      "confidence": "high",
+      "regex": "gldt-[0-9a-zA-Z_\\-]{20}",
+      "keywords": [
+        "gldt-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-feature-flag-client-token",
+      "description": "Identified a GitLab feature flag client token, risks exposing user lists and features flags used by an application.",
+      "confidence": "high",
+      "regex": "glffct-[0-9a-zA-Z_\\-]{20}",
+      "keywords": [
+        "glffct-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-feed-token",
+      "description": "Identified a GitLab feed token, risking exposure of user data.",
+      "confidence": "high",
+      "regex": "glft-[0-9a-zA-Z_\\-]{20}",
+      "keywords": [
+        "glft-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-incoming-mail-address-token",
+      "description": "Identified a GitLab incoming mail token embedded in an email address, risking manipulation of data sent by mail.",
+      "confidence": "high",
+      "regex": "incoming\\+(?:[A-Za-z0-9._-]+-)?\\d+-([A-Za-z0-9_-]+)-(?:issue(?:-\\d+)?|merge-request)@",
+      "keywords": [
+        "incoming+"
+      ],
+      "specificity": 50,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-incoming-mail-token",
+      "description": "Identified a GitLab incoming mail token, risking manipulation of data sent by mail.",
+      "confidence": "high",
+      "regex": "glimt-[0-9a-zA-Z_\\-]{25}",
+      "keywords": [
+        "glimt-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-kubernetes-agent-token",
+      "description": "Identified a GitLab Kubernetes Agent token, risking access to repos and registry of projects connected via agent.",
+      "confidence": "high",
+      "regex": "glagent-[0-9a-zA-Z_\\-]{50}",
+      "keywords": [
+        "glagent-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-oauth-app-secret",
+      "description": "Identified a GitLab OIDC Application Secret, risking access to apps using GitLab as authentication provider.",
+      "confidence": "high",
+      "regex": "gloas-[0-9a-zA-Z_\\-]{64}",
+      "keywords": [
+        "gloas-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-pat",
+      "description": "Identified a GitLab Personal Access Token, risking unauthorized access to GitLab repositories and codebase exposure.",
+      "confidence": "high",
+      "regex": "glpat-[\\w-]{20}",
+      "keywords": [
+        "glpat-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-pat-routable",
+      "description": "Identified a GitLab Personal Access Token (routable), risking unauthorized access to GitLab repositories and codebase exposure.",
+      "confidence": "high",
+      "regex": "\\bglpat-[0-9a-zA-Z_-]{27,300}\\.[0-9a-z]{2}[0-9a-z]{7}\\b",
+      "keywords": [
+        "glpat-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-pat-routable-versioned",
+      "description": "Identified a GitLab Personal Access Token (routable, versioned), risking unauthorized access to GitLab repositories and codebase exposure.",
+      "confidence": "high",
+      "regex": "\\bglpat-[0-9a-zA-Z_-]{27,300}\\.[0-9a-z]{2}\\.[0-9a-z]{9}\\b",
+      "keywords": [
+        "glpat-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-ptt",
+      "description": "Found a GitLab Pipeline Trigger Token, potentially compromising continuous integration workflows and project security.",
+      "confidence": "high",
+      "regex": "glptt-[0-9a-f]{40}",
+      "keywords": [
+        "glptt-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-rrt",
+      "description": "Discovered a GitLab Runner Registration Token, posing a risk to CI/CD pipeline integrity and unauthorized access.",
+      "confidence": "high",
+      "regex": "GR1348941[\\w-]{20}",
+      "keywords": [
+        "gr1348941"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-runner-authentication-token",
+      "description": "Discovered a GitLab Runner Authentication Token, posing a risk to CI/CD pipeline integrity and unauthorized access.",
+      "confidence": "high",
+      "regex": "glrt-[0-9a-zA-Z_\\-]{20}",
+      "keywords": [
+        "glrt-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-runner-authentication-token-routable",
+      "description": "Discovered a GitLab Runner Authentication Token (Routable), posing a risk to CI/CD pipeline integrity and unauthorized access.",
+      "confidence": "high",
+      "regex": "\\bglrt-t\\d_[0-9a-zA-Z_\\-]{27,300}\\.[0-9a-z]{2}[0-9a-z]{7}\\b",
+      "keywords": [
+        "glrt-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "gitlab-scim-token",
+      "description": "Discovered a GitLab SCIM Token, posing a risk to unauthorized access for a organization or instance.",
+      "confidence": "high",
+      "regex": "glsoat-[0-9a-zA-Z_\\-]{20}",
+      "keywords": [
+        "glsoat-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "gitlab-session-cookie",
+      "description": "Discovered a GitLab Session Cookie, posing a risk to unauthorized access to a user account.",
+      "confidence": "high",
+      "regex": "_gitlab_session=[0-9a-z]{32}",
+      "keywords": [
+        "_gitlab_session="
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/zoho.go",
+  "rules": [
+    {
+      "id": "zoho-client-id.1",
+      "description": "Zoho OAuth client ID, used as a component of the zoho-client-secret.1 composite rule.",
+      "confidence": "medium",
+      "regex": "(?i)(?:zoho)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(1000\\.[a-z0-9]{30})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "zoho"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "zoho-client-secret.1",
+      "description": "Zoho OAuth client secret, which may allow OAuth client authentication when paired with the associated client ID.",
+      "confidence": "high",
+      "regex": "(?i)(?:zoho)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{42})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "zoho"
+      ],
+      "components": [
+        {
+          "id": "zoho-client-id.1",
+          "within": "5L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "zoho-oauth-token.1",
+      "description": "Zoho OAuth access or refresh token, which may allow access to Zoho APIs or minting of new access tokens.",
+      "confidence": "high",
+      "regex": "(?i)(?:zoho)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(1000\\.[a-f0-9]{32}\\.[a-f0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "zoho"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "zoho-zapi-key.1",
+      "description": "Zoho ZAPI key, which may authorize CRM functions, extensions, webhooks, or other Zoho APIs.",
+      "confidence": "high",
+      "regex": "(?i)(?:zoho)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}((?:1001\\.[a-f0-9]{32}\\.[a-f0-9]{32}(?:-d)?|1003\\.[a-f0-9]{32,64}))(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "zoho"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

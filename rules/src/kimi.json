@@ -1,0 +1,24 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/kimi.go",
+  "rules": [
+    {
+      "id": "kimi-api-key",
+      "description": "Detected a Kimi API key, which may expose Moonshot AI model access and usage to unauthorized parties.",
+      "confidence": "high",
+      "regex": "(?i)(?:kimi|moonshot)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(sk-[A-Za-z0-9_-]{48})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "kimi",
+        "moonshot"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

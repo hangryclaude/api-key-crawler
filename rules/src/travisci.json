@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/travisci.go",
+  "rules": [
+    {
+      "id": "travisci-access-token",
+      "description": "Identified a Travis CI Access Token, potentially compromising continuous integration services and codebase security.",
+      "confidence": "medium",
+      "regex": "(?i)(?:travis)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{22})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "travis"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

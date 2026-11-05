@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/shippo.go",
+  "rules": [
+    {
+      "id": "shippo-api-token",
+      "description": "Discovered a Shippo API token, potentially compromising shipping services and customer order data.",
+      "confidence": "high",
+      "regex": "\\b(shippo_(?:live|test)_[a-fA-F0-9]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "shippo_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

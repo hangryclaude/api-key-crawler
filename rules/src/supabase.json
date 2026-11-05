@@ -1,0 +1,65 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/supabase.go",
+  "rules": [
+    {
+      "id": "supabase-management-token",
+      "description": "Detected a Supabase Management Token, which may allow unauthorized access to Supabase organizations and projects.",
+      "confidence": "high",
+      "regex": "\\b(sbp_[a-z0-9_-]{40})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sbp_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        },
+        "require": [
+          [
+            "^sbp_[a-z0-9_-]*[0-9][a-z0-9_-]*[0-9][a-z0-9_-]*$"
+          ]
+        ]
+      },
+      "validates": true
+    },
+    {
+      "id": "supabase-project-api-key",
+      "description": "Detected a Supabase Project API Key, which may expose project data through Supabase APIs when paired with a project URL.",
+      "confidence": "high",
+      "regex": "\\b(sb_secret_[A-Za-z0-9_-]{31})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sb_secret_"
+      ],
+      "components": [
+        {
+          "id": "supabase-project-url"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "supabase-project-url",
+      "description": "Detected a Supabase project URL, used as a component of the supabase-project-api-key composite rule.",
+      "confidence": "high",
+      "regex": "\\b(https://[a-z0-9]{16,32}\\.supabase\\.co)\\b",
+      "keywords": [
+        "supabase.co"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

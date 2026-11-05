@@ -1,0 +1,170 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/slack.go",
+  "rules": [
+    {
+      "id": "slack-app-token",
+      "description": "Detected a Slack App-level token, risking unauthorized access to Slack applications and workspace data.",
+      "confidence": "high",
+      "regex": "(?i)xapp-\\d-[A-Z0-9]+-\\d+-[a-z0-9]+",
+      "keywords": [
+        "xapp"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-bot-token",
+      "description": "Identified a Slack Bot token, which may compromise bot integrations and communication channel security.",
+      "confidence": "high",
+      "regex": "xoxb-[0-9]{10,13}-[0-9]{10,13}[a-zA-Z0-9-]*",
+      "keywords": [
+        "xoxb"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-config-access-token",
+      "description": "Found a Slack Configuration access token, posing a risk to workspace configuration and sensitive data access.",
+      "confidence": "high",
+      "regex": "(?i)xoxe.xox[bp]-\\d-[A-Z0-9]{163,166}",
+      "keywords": [
+        "xoxe.xoxb-",
+        "xoxe.xoxp-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-config-refresh-token",
+      "description": "Discovered a Slack Configuration refresh token, potentially allowing prolonged unauthorized access to configuration settings.",
+      "confidence": "high",
+      "regex": "(?i)xoxe-\\d-[A-Z0-9]{146}",
+      "keywords": [
+        "xoxe-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-legacy-bot-token",
+      "description": "Uncovered a Slack Legacy bot token, which could lead to compromised legacy bot operations and data exposure.",
+      "confidence": "high",
+      "regex": "xoxb-[0-9]{8,14}-[a-zA-Z0-9]{18,26}",
+      "keywords": [
+        "xoxb"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-legacy-token",
+      "description": "Detected a Slack Legacy token, risking unauthorized access to older Slack integrations and user data.",
+      "confidence": "high",
+      "regex": "xox[os]-\\d+-\\d+-\\d+-[a-fA-F\\d]+",
+      "keywords": [
+        "xoxo",
+        "xoxs"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-legacy-workspace-token",
+      "description": "Identified a Slack Legacy Workspace token, potentially compromising access to workspace data and legacy features.",
+      "confidence": "high",
+      "regex": "xox[ar]-(?:\\d-)?[0-9a-zA-Z]{8,48}",
+      "keywords": [
+        "xoxa",
+        "xoxr"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-session-cookie",
+      "description": "Detected a Slack session cookie (xoxd-), which authenticates browser and desktop sessions across all of a user's workspaces.",
+      "confidence": "high",
+      "regex": "(xoxd-[\\w\\/\\\\+-]{100,}={0,2})(?:[^\\w\\/+=-]|\\z)",
+      "keywords": [
+        "xoxd-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-session-token",
+      "description": "Detected a Slack client session token (xoxc-), which provides full user-level API access when paired with a session cookie.",
+      "confidence": "high",
+      "regex": "xoxc-\\d{9,15}-\\d{9,15}-\\d{9,15}-[a-f0-9]{64}\\b",
+      "keywords": [
+        "xoxc-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-user-token",
+      "description": "Found a Slack User token, posing a risk of unauthorized user impersonation and data access within Slack workspaces.",
+      "confidence": "high",
+      "regex": "xox[pe](?:-[0-9]{10,13}){3}-[a-zA-Z0-9-]{28,34}",
+      "keywords": [
+        "xoxp-",
+        "xoxe-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "slack-webhook-url",
+      "description": "Discovered a Slack Webhook, which could lead to unauthorized message posting and data leakage in Slack channels.",
+      "confidence": "high",
+      "regex": "(?:https?://)?hooks.slack.com/(?:services|workflows|triggers)/[A-Za-z0-9+/]{43,56}",
+      "keywords": [
+        "hooks.slack.com"
+      ]
+    }
+  ]
+}

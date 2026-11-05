@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/perplexity.go",
+  "rules": [
+    {
+      "id": "perplexity-api-key",
+      "description": "Detected a Perplexity API key, which could lead to unauthorized access to Perplexity AI services and data exposure.",
+      "confidence": "high",
+      "regex": "\\b(pplx-[a-zA-Z0-9]{48})(?:[\\x60'\"\\s;]|\\\\[nr]|$|\\b)",
+      "keywords": [
+        "pplx-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

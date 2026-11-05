@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/render.go",
+  "rules": [
+    {
+      "id": "render-api-key",
+      "description": "Detected a Render API key, which may expose hosted services and account resources to unauthorized access.",
+      "confidence": "high",
+      "regex": "\\b(rnd_[A-Za-z0-9]{28})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "rnd_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

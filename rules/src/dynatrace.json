@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/dynatrace.go",
+  "rules": [
+    {
+      "id": "dynatrace-api-token",
+      "description": "Detected a Dynatrace API token, potentially risking application performance monitoring and data exposure.",
+      "confidence": "high",
+      "regex": "dt0c01\\.(?i)[a-z0-9]{24}\\.[a-z0-9]{64}",
+      "keywords": [
+        "dt0c01."
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

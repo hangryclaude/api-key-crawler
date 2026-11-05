@@ -1,0 +1,37 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/easypost.go",
+  "rules": [
+    {
+      "id": "easypost-api-token",
+      "description": "Identified an EasyPost API token, which could lead to unauthorized postal and shipment service access and data exposure.",
+      "confidence": "high",
+      "regex": "\\bEZAK(?i)[a-z0-9]{54}\\b",
+      "keywords": [
+        "ezak"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "easypost-test-api-token",
+      "description": "Detected an EasyPost test API token, risking exposure of test environments and potentially sensitive shipment data.",
+      "confidence": "high",
+      "regex": "\\bEZTK(?i)[a-z0-9]{54}\\b",
+      "keywords": [
+        "eztk"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

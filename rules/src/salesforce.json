@@ -1,0 +1,39 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/salesforce.go",
+  "rules": [
+    {
+      "id": "salesforce-access-token.1",
+      "description": "Salesforce access token.",
+      "confidence": "high",
+      "regex": "\\b(00[A-Za-z0-9]{13}![A-Za-z0-9._-]{80,260})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "salesforce.com"
+      ],
+      "components": [
+        {
+          "id": "salesforce-instance-url.1",
+          "within": "30L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        }
+      },
+      "validates": true
+    },
+    {
+      "id": "salesforce-instance-url.1",
+      "description": "Salesforce instance host, used as a component of the Salesforce access-token rule.",
+      "confidence": "high",
+      "regex": "(?i)(?:^|[^a-z0-9.-])(?:https?://)?((?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?){0,4}\\.my\\.salesforce\\.com|[a-z]{2,8}[0-9]{1,4}\\.salesforce\\.com))(?:[^a-z0-9.-]|$)",
+      "keywords": [
+        "salesforce.com"
+      ],
+      "skipReport": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/xendit.go",
+  "rules": [
+    {
+      "id": "xendit-production-api-key.1",
+      "description": "Xendit production API key, which may allow access to payment and balance APIs.",
+      "confidence": "high",
+      "regex": "\\b(xnd_production_[A-Za-z0-9]{56,72})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "xnd_production_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

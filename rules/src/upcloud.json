@@ -1,0 +1,17 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/upcloud.go",
+  "rules": [
+    {
+      "id": "upcloud-api-token",
+      "description": "Identified an UpCloud API token, which may expose cloud infrastructure resources to unauthorized access.",
+      "confidence": "high",
+      "regex": "\\b(ucat_[0-9A-Za-z]{24,32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "ucat_"
+      ],
+      "validates": true
+    }
+  ]
+}

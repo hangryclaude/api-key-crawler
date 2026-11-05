@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/prefect.go",
+  "rules": [
+    {
+      "id": "prefect-api-token",
+      "description": "Detected a Prefect API token, risking unauthorized access to workflow management and automation services.",
+      "confidence": "high",
+      "regex": "\\b(pnu_[a-zA-Z0-9]{36})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "pnu_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

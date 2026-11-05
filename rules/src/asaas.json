@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/asaas.go",
+  "rules": [
+    {
+      "id": "asaas-api-token",
+      "description": "Detected an Asaas API token, which may expose payment and customer data.",
+      "confidence": "high",
+      "regex": "(?:^|[^A-Za-z0-9_-])(\\$aact_(?:prod|hmlg)_[A-Za-z0-9_-]{20,100})(?:[^A-Za-z0-9_-]|$)",
+      "keywords": [
+        "$aact_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

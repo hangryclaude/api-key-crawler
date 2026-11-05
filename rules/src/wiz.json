@@ -1,0 +1,45 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/wiz.go",
+  "rules": [
+    {
+      "id": "wiz-client-id.1",
+      "description": "Wiz OAuth client ID, used as a component of the Wiz client-secret composite rule.",
+      "confidence": "medium",
+      "regex": "(?i:(?:wiz)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9]{53,56})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "wiz"
+      ],
+      "skipReport": true,
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "wiz-client-secret.1",
+      "description": "Wiz OAuth client secret, which may allow access to the Wiz API when paired with its client ID.",
+      "confidence": "high",
+      "regex": "(?i:(?:wiz)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([A-Za-z0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "wiz"
+      ],
+      "components": [
+        {
+          "id": "wiz-client-id.1",
+          "within": "5L"
+        }
+      ],
+      "filter": {
+        "entropy": {
+          "min": 4,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

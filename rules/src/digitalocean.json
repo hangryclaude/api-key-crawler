@@ -1,0 +1,46 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/digitalocean.go",
+  "rules": [
+    {
+      "id": "digitalocean-access-token",
+      "description": "Found a DigitalOcean OAuth Access Token, risking unauthorized cloud resource access and data compromise.",
+      "confidence": "high",
+      "regex": "\\b(doo_v1_[a-f0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "doo_v1_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "digitalocean-pat",
+      "description": "Discovered a DigitalOcean Personal Access Token, posing a threat to cloud infrastructure security and data privacy.",
+      "confidence": "high",
+      "regex": "\\b(dop_v1_[a-f0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "dop_v1_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "digitalocean-refresh-token",
+      "description": "Uncovered a DigitalOcean OAuth Refresh Token, which could allow prolonged unauthorized access and resource manipulation.",
+      "confidence": "high",
+      "regex": "(?i)\\b(dor_v1_[a-f0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "dor_v1_"
+      ]
+    }
+  ]
+}

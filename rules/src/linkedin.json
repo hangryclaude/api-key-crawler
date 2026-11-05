@@ -1,0 +1,43 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/linkedin.go",
+  "rules": [
+    {
+      "id": "linkedin-client-id",
+      "description": "Found a LinkedIn Client ID, risking unauthorized access to LinkedIn integrations and professional data exposure.",
+      "confidence": "medium",
+      "regex": "(?i)(?:linked[_-]?in)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{14})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "linkedin",
+        "linked_in",
+        "linked-in"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    },
+    {
+      "id": "linkedin-client-secret",
+      "description": "Discovered a LinkedIn Client secret, potentially compromising LinkedIn application integrations and user data.",
+      "confidence": "medium",
+      "regex": "(?i)(?:linked[_-]?in)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{16})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "linkedin",
+        "linked_in",
+        "linked-in"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": false
+        },
+        "tokenRatio": 2.5
+      }
+    }
+  ]
+}

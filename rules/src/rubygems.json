@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/rubygems.go",
+  "rules": [
+    {
+      "id": "rubygems-api-token",
+      "description": "Identified a Rubygem API token, potentially compromising Ruby library distribution and package management.",
+      "confidence": "high",
+      "regex": "\\b(rubygems_[a-f0-9]{48})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "rubygems_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/openrouter.go",
+  "rules": [
+    {
+      "id": "openrouter-api-key",
+      "description": "Detected an OpenRouter API Key, which may expose access to multiple AI models through the OpenRouter gateway.",
+      "confidence": "high",
+      "regex": "(?i)\\b(sk-or-v1-[0-9a-f]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sk-or-v1-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

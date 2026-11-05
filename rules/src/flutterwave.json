@@ -1,0 +1,52 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/flutterwave.go",
+  "rules": [
+    {
+      "id": "flutterwave-encryption-key",
+      "description": "Uncovered a Flutterwave Encryption Key, which may compromise payment processing and sensitive financial information.",
+      "confidence": "high",
+      "regex": "FLWSECK_TEST-(?i)[a-h0-9]{12}",
+      "keywords": [
+        "flwseck_test"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "flutterwave-public-key",
+      "description": "Detected a Flutterwave Public Key, potentially exposing public cryptographic operations and integrations.",
+      "confidence": "high",
+      "regex": "FLWPUBK_TEST-(?i)[a-h0-9]{32}-X",
+      "keywords": [
+        "flwpubk_test"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    },
+    {
+      "id": "flutterwave-secret-key",
+      "description": "Identified a Flutterwave Secret Key, risking unauthorized financial transactions and data breaches.",
+      "confidence": "high",
+      "regex": "FLWSECK_TEST-(?i)[a-h0-9]{32}-X",
+      "keywords": [
+        "flwseck_test"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

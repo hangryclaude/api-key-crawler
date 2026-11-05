@@ -1,0 +1,37 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/docker.go",
+  "rules": [
+    {
+      "id": "docker-swarm-join-token",
+      "description": "Docker Swarm join token.",
+      "confidence": "high",
+      "regex": "\\b(SWMTKN-1-[a-z0-9]{50,60}-[a-z0-9]{24,30})",
+      "keywords": [
+        "swmtkn-1-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    },
+    {
+      "id": "docker-swarm-unlock-key",
+      "description": "Docker Swarm unlock key.",
+      "confidence": "high",
+      "regex": "\\b(SWMKEY-1-[A-Za-z0-9+/]{40,50})",
+      "keywords": [
+        "swmkey-1-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": false
+        }
+      }
+    }
+  ]
+}

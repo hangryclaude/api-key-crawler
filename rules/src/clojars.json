@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/clojars.go",
+  "rules": [
+    {
+      "id": "clojars-api-token",
+      "description": "Uncovered a possible Clojars API token, risking unauthorized access to Clojure libraries and potential code manipulation.",
+      "confidence": "high",
+      "regex": "(?i)CLOJARS_[a-z0-9]{60}",
+      "keywords": [
+        "clojars_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 2,
+          "strict": true
+        }
+      }
+    }
+  ]
+}

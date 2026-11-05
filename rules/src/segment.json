@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/segment.go",
+  "rules": [
+    {
+      "id": "segment-public-api-token.1",
+      "description": "Segment workspace bearer token for the Public API.",
+      "confidence": "high",
+      "regex": "\\b(sgp_[A-Za-z0-9]{64})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "sgp_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.3,
+          "strict": false
+        }
+      },
+      "validates": true
+    }
+  ]
+}

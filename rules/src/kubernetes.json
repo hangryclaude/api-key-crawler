@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/kubernetes.go",
+  "rules": [
+    {
+      "id": "kubernetes-secret-yaml",
+      "description": "Possible Kubernetes Secret detected, posing a risk of leaking credentials/tokens from your deployments",
+      "confidence": "high",
+      "regex": "(?i)(?:\\bkind:[ \\t]*[\"']?\\bsecret\\b[\"']?(?s:.){0,1000}?\\bdata:(?s:.){0,100}?\\s+([\\w.-]+:(?:[ \\t]*(?:\\||>[-+]?)\\s+)?[ \\t]*(?:[\"']?[a-z0-9+/]{10,}={0,3}[\"']?|\\{\\{[ \\t\\w\"|$:=,.-]+}}|\"\"|''))|\\bdata:(?s:.){0,100}?\\s+([\\w.-]+:(?:[ \\t]*(?:\\||>[-+]?)\\s+)?[ \\t]*(?:[\"']?[a-z0-9+/]{10,}={0,3}[\"']?|\\{\\{[ \\t\\w\"|$:=,.-]+}}|\"\"|''))(?s:.){0,1000}?\\bkind:[ \\t]*[\"']?\\bsecret\\b[\"']?)",
+      "path": "(?i)\\.ya?ml$",
+      "keywords": [
+        "secret"
+      ],
+      "filter": {
+        "dropRegex": [
+          "[\\w.-]+:(?:[ \\t]*(?:\\||>[-+]?)\\s+)?[ \\t]*(?:\\{\\{[ \\t\\w\"|$:=,.-]+}}|\"\"|'')"
+        ],
+        "residual": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/groq.go",
+  "rules": [
+    {
+      "id": "groq-api-key",
+      "description": "Identified a Groq API Key, which may expose high-speed AI inference services to unauthorized access.",
+      "confidence": "high",
+      "regex": "(?i)\\b(gsk_[A-Z0-9]{52})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "gsk_"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3.5,
+          "strict": true
+        }
+      },
+      "validates": true
+    }
+  ]
+}

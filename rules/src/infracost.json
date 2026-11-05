@@ -1,0 +1,22 @@
+{
+  "lineage": "betterleaks",
+  "licence": "MIT",
+  "source": "cmd/generate/config/rules/infracost.go",
+  "rules": [
+    {
+      "id": "infracost-api-token",
+      "description": "Detected an Infracost API Token, risking unauthorized access to cloud cost estimation tools and financial data.",
+      "confidence": "high",
+      "regex": "\\b(ico-[a-zA-Z0-9]{32})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "keywords": [
+        "ico-"
+      ],
+      "filter": {
+        "entropy": {
+          "min": 3,
+          "strict": true
+        }
+      }
+    }
+  ]
+}
