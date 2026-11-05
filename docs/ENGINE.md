@@ -284,7 +284,7 @@ Every rule tied with `generic-api-key`, so a GitHub token was reported twice.
 | fuzz the scan | `go test ./internal/pattern -run '^$' -fuzz FuzzScan -fuzztime 60s` | 796,976 runs, no failure |
 | fuzz windows against the whole buffer | `... -fuzz FuzzWindowsEqualTheWholeBuffer` | 1,351,705 runs, no failure |
 | fuzz the prefilter against a naive search | `... -fuzz FuzzAutomaton` | 1,649,600 runs, no failure |
-| races | `go test -race ./internal/pattern/...` | clean, 570 s for the scanner package |
+| races | `go test -race ./internal/pattern/...` | clean; the whole scanner package took 609 s, and its unit tests (without the corpus differentials) were run again at the last commit, 297 s |
 | no secret-shaped literal | `go test ./internal/testkit` | passes with the new code |
 
 The first automaton run did fail, on `"\xcfuser"`: the test's own oracle lower-cased with `strings.ToLower`,
