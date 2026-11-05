@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"sync"
@@ -281,7 +282,10 @@ func head(l []triple, n int) []string {
 // corpusA is the bench's planted corpus for a seed: the work tree at HEAD, and a tree that holds every blob
 // the history ever had at the path it was first seen under, so that the placements that exist only in
 // history are scanned too.
-var corpusCache sync.Map
+var (
+	corpusCache sync.Map // seed -> the two directories
+	corpusDirs  sync.Map // the temp directories to remove at the end
+)
 
 func corpusA(t *testing.T, seed uint64) (worktree, blobs string) {
 	t.Helper()
@@ -297,6 +301,7 @@ func corpusA(t *testing.T, seed uint64) (worktree, blobs string) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	corpusDirs.Store(base, true)
 	c, err := bench.Generate(filepath.Join(base, "corpus"), bench.Options{Seed: seed})
 	if err != nil {
 		t.Fatal(err)
@@ -372,7 +377,8 @@ func TestDifferentialOnBenchCorpusA(t *testing.T) {
 
 // The perf corpus: 278 MB of public code, left in the cache by the research run and by scripts/perf. It is
 // not in the repository, so the test skips without it.
-func TestDifferentialOnThePerfCorpus(t *testing.T) {
+func perfDir(t *testing.T) string {
+	t.Helper()
 	home, _ := os.UserHomeDir()
 	dir := os.Getenv("KEYGUARD_PERF_CORPUS")
 	if dir == "" {
@@ -381,13 +387,26 @@ func TestDifferentialOnThePerfCorpus(t *testing.T) {
 	if fi, err := os.Stat(dir); err != nil || !fi.IsDir() {
 		t.Skip("no perf corpus (scripts/perf/corpus.py builds one)")
 	}
+	return dir
+}
+
+func TestDifferentialOnThePerfCorpus(t *testing.T) {
+	dir := perfDir(t)
 	bl := betterleaks(t, dir, "--max-decode-depth", "0", "--max-archive-depth", "0")
 	nat, st := native(t, dir, pattern.PathsUpstream)
 	report(t, "perf", compare(bl, nat), dir, st)
 }
 
-// Some tests run betterleaks, so the run ends by checking that none of them changed an engine.
-func TestMain(m *testing.M) { testkit.Main(m) }
+// Some tests run betterleaks, so the run ends by checking that none of them changed an engine. It also
+// removes the bench corpora the tests generated, which are tens of megabytes each.
+func TestMain(m *testing.M) {
+	code := testkit.Run(m)
+	corpusDirs.Range(func(k, _ any) bool {
+		os.RemoveAll(k.(string))
+		return true
+	})
+	os.Exit(code)
+}
 
 // The same, against betterleaks as keyguard runs it: decoding to depth 5 and archives to depth 8. What
 // native does not report then is what the views of a later milestone are for. The test names it: a finding
@@ -438,4 +457,48 @@ func hasPrefixTag(tags []string, prefix string) bool {
 		}
 	}
 	return false
+}
+
+// The path policy is the one place native means to differ from the reference on what it is shown. Under
+// it the upstream list of paths to skip (dependency trees, lock files, minified libraries) is applied to
+// the generic rules only. This holds the difference to that and gives it a size: everything the
+// upstream policy finds, the native policy finds, and what it adds is a finding of a rule that is not
+// generic, in a path the upstream list skips.
+func TestPathPolicyOnlyAddsWhatItSays(t *testing.T) {
+	_, blobs := corpusA(t, 1)
+	corpora := []struct{ name, dir string }{{"A1-all-blobs", blobs}}
+	if home, err := os.UserHomeDir(); err == nil {
+		p := filepath.Join(home, ".cache", "keyguard-dev", "perf", "corpus")
+		if fi, err := os.Stat(p); err == nil && fi.IsDir() {
+			corpora = append(corpora, struct{ name, dir string }{"perf", p})
+		}
+	}
+	skipped := regexp.MustCompile("(?:" + strings.Join(rules.Global.DropPath, ")|(?:") + ")")
+	for _, c := range corpora {
+		up, _ := native(t, c.dir, pattern.PathsUpstream)
+		nat, st := native(t, c.dir, pattern.PathsNative)
+		for k := range up {
+			if !nat[k] {
+				t.Errorf("%s: found under the upstream policy and lost under the native one: %v", c.name, k)
+			}
+		}
+		byClass := map[string][]triple{}
+		for k := range nat {
+			if up[k] {
+				continue
+			}
+			cl := "unexplained"
+			if skipped.MatchString(k.path) && byID[k.rule].Provider != "generic" {
+				cl = "a rule that is not generic, in a path the upstream list skips"
+			}
+			byClass[cl] = append(byClass[cl], k)
+		}
+		t.Logf("%s: upstream policy %d findings, native policy %d (%d files read)", c.name, len(up), len(nat), st.Files)
+		for cl, l := range byClass {
+			t.Logf("%s: native policy adds %d: %s [%s]", c.name, len(l), cl, byRule(l))
+		}
+		if l := byClass["unexplained"]; len(l) > 0 {
+			t.Errorf("%s: %d findings the policy does not explain: %v", c.name, len(l), head(l, 12))
+		}
+	}
 }

@@ -6,6 +6,7 @@ import (
 	"slices"
 	"sort"
 	"strings"
+	"sync"
 	"testing"
 
 	"keyguard/internal/pattern/rules"
@@ -235,38 +236,159 @@ func TestScanDirStopsOnCancel(t *testing.T) {
 	}
 }
 
+// seamFile is a text a little over one tile long with a token that straddles the seam between the first
+// tile and the second, and the line the token is on.
+func seamFile(t testing.TB, seed uint64) (data []byte, token string, line int) {
+	t.Helper()
+	token = newFakes(seed).githubPAT()
+	// Lines of 28 bytes up to a short last one, so that the token starts a few bytes before the seam
+	// and ends a few after it.
+	const fill = "filler filler filler filler\n"
+	head := tileSize - 4 - len(token)/2
+	var b strings.Builder
+	for b.Len()+len(fill) <= head {
+		b.WriteString(fill)
+	}
+	if rest := head - b.Len(); rest > 1 {
+		b.WriteString(strings.Repeat("x", rest-1) + "\n")
+	}
+	line = strings.Count(b.String(), "\n") + 1
+	b.WriteString("t = " + token + "\n")
+	for b.Len() < tileSize+3*tileOverlap {
+		b.WriteString(fill)
+	}
+	data = []byte(b.String())
+	if start := bytes.Index(data, []byte(token)); start >= tileSize || start+len(token) <= tileSize {
+		t.Fatalf("the token at %d..%d is not on the seam at %d", start, start+len(token), tileSize)
+	}
+	return data, token, line
+}
+
 // Tiles: a big input is scanned in pieces that overlap, and a secret on a seam is found once, with the
 // right line.
 func TestTilesFindASecretOnTheSeamOnce(t *testing.T) {
 	if testing.Short() {
 		t.Skip("allocates 17 MB")
 	}
-	pat := newFakes(10).githubPAT()
-	// Lines of 28 bytes up to a short last one, so that the token starts a few bytes before the seam
-	// and ends a few after it.
-	const line = "filler filler filler filler\n"
-	head := tileSize - 4 - len(pat)/2
-	var b strings.Builder
-	for b.Len()+len(line) <= head {
-		b.WriteString(line)
-	}
-	if rest := head - b.Len(); rest > 1 {
-		b.WriteString(strings.Repeat("x", rest-1) + "\n")
-	}
-	lines := strings.Count(b.String(), "\n")
-	b.WriteString("t = " + pat + "\n")
-	for b.Len() < tileSize+3*tileOverlap {
-		b.WriteString(line)
-	}
-	data := []byte(b.String())
-	if start := bytes.Index(data, []byte(pat)); start >= tileSize || start+len(pat) <= tileSize {
-		t.Fatalf("the token at %d..%d is not on the seam at %d", start, start+len(pat), tileSize)
-	}
+	data, pat, line := seamFile(t, 10)
 	got := Default().ScanBytes("big.txt", data)
 	if len(got) != 1 {
 		t.Fatalf("%d findings: %v", len(got), ids(got))
 	}
-	if got[0].Line != lines+1 || string(got[0].Secret(data)) != pat {
-		t.Errorf("line %d (want %d), secret ok: %v", got[0].Line, lines+1, string(got[0].Secret(data)) == pat)
+	if got[0].Line != line || string(got[0].Secret(data)) != pat {
+		t.Errorf("line %d (want %d), secret ok: %v", got[0].Line, line, string(got[0].Secret(data)) == pat)
+	}
+}
+
+// The same file on disk, which ScanDir reads in tiles of its own: the finding comes back once, with the
+// buffer it indexes and where that buffer starts in the file.
+func TestScanDirReadsABigFileInTiles(t *testing.T) {
+	if testing.Short() {
+		t.Skip("writes 17 MB")
+	}
+	data, pat, line := seamFile(t, 11)
+	dir := writeTree(t, map[string]string{"big/log.txt": string(data)})
+	var got []Finding
+	var secrets []string
+	st, err := Default().ScanDir(context.Background(), dir, func(f Finding, buf []byte) {
+		got = append(got, f)
+		secrets = append(secrets, string(f.Secret(buf)))
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(got) != 1 || secrets[0] != pat {
+		t.Fatalf("%d findings (%v)", len(got), ids(got))
+	}
+	if got[0].Line != line || got[0].Base == 0 && got[0].Start > tileSize {
+		t.Errorf("line %d (want %d), base %d, start %d", got[0].Line, line, got[0].Base, got[0].Start)
+	}
+	if st.Tiled != 1 {
+		t.Errorf("tiled %d files", st.Tiled)
+	}
+	if n := st.Notes(); len(n) == 0 || !strings.Contains(strings.Join(n, " "), "tiles") {
+		t.Errorf("notes %v", n)
+	}
+}
+
+// The scan runs a rule that is a part of another only as that part. That is exact only if every part is a
+// rule that reports nothing alone; otherwise a finding that is also somebody's component would have to be
+// dropped from the report, as the reference does. The table has none of those, and this keeps it so.
+func TestEveryComponentReportsNothingAlone(t *testing.T) {
+	composites := 0
+	for _, r := range rules.All {
+		if len(r.Needs) > 0 {
+			composites++
+		}
+		for _, n := range r.Needs {
+			c := ruleByID(t, n.ID)
+			if !c.ComponentOnly {
+				t.Errorf("%s needs %s, which also reports on its own", r.ID, n.ID)
+			}
+			if c.Re == "" {
+				t.Errorf("%s needs %s, a rule about a path", r.ID, n.ID)
+			}
+			if w := parseWithin(n.Within); !w.none && !w.box && !n.Optional {
+				t.Errorf("%s needs %s within columns only, which no reference rule does", r.ID, n.ID)
+			}
+		}
+	}
+	if composites != 36 {
+		t.Errorf("%d composite rules, the doc says 36", composites)
+	}
+}
+
+// One scanner serves many goroutines: its pooled state is per scan and its lazily built parts are built once.
+// Run under -race, this is the test of that; run without it, it checks that concurrency changes no result.
+func TestConcurrentScansShareOneScanner(t *testing.T) {
+	s := New(rules.All, rules.Global, Options{})
+	var inputs [][]byte
+	var want [][]string
+	f := newFakes(40)
+	for i := 0; i < 24; i++ {
+		var b strings.Builder
+		for j := 0; j < 30; j++ {
+			switch (i + j) % 5 {
+			case 0:
+				b.WriteString("token = \"" + f.githubPAT() + "\"\n")
+			case 1:
+				b.WriteString("api_key = \"" + f.run(alnum, 28) + "\"\n")
+			case 2:
+				b.WriteString("AWS_ACCESS_KEY_ID=" + f.awsKeyID() + "\nAWS_SECRET_ACCESS_KEY=" + f.awsSecret() + "\n")
+			default:
+				b.WriteString("nothing to see here, just a line of text\n")
+			}
+		}
+		inputs = append(inputs, []byte(b.String()))
+		var ks []string
+		for _, fd := range New(rules.All, rules.Global, Options{}).ScanBytes("a.txt", inputs[i]) {
+			ks = append(ks, key(fd))
+		}
+		want = append(want, ks)
+	}
+	var wg sync.WaitGroup
+	errs := make(chan string, 64)
+	for g := 0; g < 8; g++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for round := 0; round < 5; round++ {
+				for i, in := range inputs {
+					var ks []string
+					for _, fd := range s.ScanBytes("a.txt", in) {
+						ks = append(ks, key(fd))
+					}
+					if !slices.Equal(ks, want[i]) {
+						errs <- "a concurrent scan disagreed with a serial one"
+						return
+					}
+				}
+			}
+		}()
+	}
+	wg.Wait()
+	close(errs)
+	for e := range errs {
+		t.Error(e)
 	}
 }
