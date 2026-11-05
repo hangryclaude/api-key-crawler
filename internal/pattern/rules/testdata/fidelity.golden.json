@@ -1,0 +1,2315 @@
+{
+ "source": "betterleaks@81aff7a638638aae3a659845d089043e1d8fe9ac",
+ "examples": 8398,
+ "rules": {
+  "1password-secret-key": {
+   "positives": 54,
+   "negatives": 2,
+   "digest": "c0cf9b1dd97fa04f"
+  },
+  "1password-service-account-token": {
+   "positives": 4,
+   "negatives": 3,
+   "digest": "9075bde483f4d680"
+  },
+  "abuseipdb-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "c0a250626b610163"
+  },
+  "adafruit-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "a1273bcedb4dea6f"
+  },
+  "adobe-client-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "155256cfd797c692"
+  },
+  "adobe-client-secret": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "d86e4e7a2c543acc"
+  },
+  "age-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "0dd80be84f95ea11"
+  },
+  "aikido-ci-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "a51f5bf88b9b1b52"
+  },
+  "aikido-client-id": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "e3b79025bfb70ef1"
+  },
+  "aikido-client-secret": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "68ff753cb76e44bf"
+  },
+  "airtable-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "a4651430fb00f021"
+  },
+  "airtable-oauth-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "4d903e6f00cb89cd"
+  },
+  "airtable-personnal-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "f650457ed63544b7"
+  },
+  "aiven-auth-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "420226e078adac3e"
+  },
+  "algolia-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "36541e0dda91bdff"
+  },
+  "algolia-application-id": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "b03876e16498d0fa"
+  },
+  "alibaba-access-key-id": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "87f1e8f20c2dc5aa"
+  },
+  "alibaba-secret-key": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "3463f57e5124b1f6"
+  },
+  "alibaba-sts-access-key-id": {
+   "positives": 2,
+   "negatives": 1,
+   "digest": "496d92e25dd4d81c"
+  },
+  "alibaba-sts-access-key-secret": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "f52f7d73d5fe1261"
+  },
+  "alibaba-sts-security-token": {
+   "positives": 2,
+   "negatives": 1,
+   "digest": "eb4267ca792efb03"
+  },
+  "amplitude-secret-key": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "a5a344ad9a20bf9d"
+  },
+  "anthropic-admin-api-key": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "17420e375484f39c"
+  },
+  "anthropic-api-key": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "6e2b900bf0841d33"
+  },
+  "apify-api-token": {
+   "positives": 3,
+   "negatives": 4,
+   "digest": "bd17b00e93dcb0b6"
+  },
+  "apollo-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "42ae479c111bc5f0"
+  },
+  "artifactory-api-key": {
+   "positives": 1,
+   "negatives": 4,
+   "digest": "ec6dbefd0e406a97"
+  },
+  "artifactory-jfrog-url": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "288478111a8a814d"
+  },
+  "artifactory-reference-token": {
+   "positives": 1,
+   "negatives": 4,
+   "digest": "8269cacb92d81def"
+  },
+  "asaas-api-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "b51579580b632b73"
+  },
+  "asana-client-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "17fe2d62f72275a8"
+  },
+  "asana-client-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "e2db807dc373a08c"
+  },
+  "assemblyai-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "dcd1a513f3292771"
+  },
+  "atlassian-api-token": {
+   "positives": 2,
+   "negatives": 5,
+   "digest": "547fda4a7f167b6b"
+  },
+  "auth0-client-id.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "57e39648652dc183"
+  },
+  "auth0-client-secret.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "3330b137ff50793e"
+  },
+  "auth0-domain.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "e204c4fa89623c02"
+  },
+  "authress-service-client-access-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "ff3d0c96cc2cc990"
+  },
+  "aws-access-token": {
+   "positives": 130,
+   "negatives": 5,
+   "digest": "add46df6900e99f1"
+  },
+  "aws-amazon-bedrock-api-key-long-lived": {
+   "positives": 3,
+   "negatives": 3,
+   "digest": "b50547e558ff01f0"
+  },
+  "aws-amazon-bedrock-api-key-short-lived": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "625f108b9b96b665"
+  },
+  "aws-secret-access-key": {
+   "positives": 52,
+   "negatives": 0,
+   "digest": "d72e9648591cc1fc"
+  },
+  "azure-ad-client-secret": {
+   "positives": 17,
+   "negatives": 3,
+   "digest": "f6689e2cee076c38"
+  },
+  "azure-app-configuration-connection-string": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "991e78045e9af670"
+  },
+  "azure-client-id": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "e42999edee7a0427"
+  },
+  "azure-servicebus-connection-string": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "e636e3d3f0625cd9"
+  },
+  "azure-storage-account-key": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "7272ddc5242fdc0d"
+  },
+  "azure-storage-account-name": {
+   "positives": 3,
+   "negatives": 0,
+   "digest": "4ee00d78bf27bd49"
+  },
+  "azure-tenant-id": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "d1734792046639e4"
+  },
+  "beamer-api-token": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "4d1d4f4d33eff4b4"
+  },
+  "bitbucket-client-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "752dee1f99cfb643"
+  },
+  "bitbucket-client-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "2ed4bfee5351df4c"
+  },
+  "bitbucket-data-center-token": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "77df56050d36d38f"
+  },
+  "bitly-access-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "11b655fe9a8073ea"
+  },
+  "bitrise-access-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "0ee92694cf8b523d"
+  },
+  "bittrex-access-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "2bb447adef3f06ef"
+  },
+  "bittrex-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "e53df530275e572f"
+  },
+  "box-api-access-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "23815b4a8f08f77d"
+  },
+  "brave-search-api-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "237ced07d6e5983e"
+  },
+  "browserstack-access-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "abb3e0bfc8c26098"
+  },
+  "browserstack-username.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "6a05f99936f633f5"
+  },
+  "buildkite-service-token": {
+   "positives": 8,
+   "negatives": 2,
+   "digest": "08bdd9fb307989af"
+  },
+  "buildkite-user-access-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "0ae86394a6271483"
+  },
+  "canadian-digital-service-notify-api-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "27788beacd6540ff"
+  },
+  "canva-client-id": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "15a2aeb37aeea14e"
+  },
+  "canva-client-secret": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "0877b14c4d6d24bf"
+  },
+  "cartesia-api-key.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "a2a72b5e4f79232d"
+  },
+  "cerebras-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "b8ab87cfb8f0a9ea"
+  },
+  "checkout-secret-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "3a4808d0318ff4de"
+  },
+  "circleci-personal-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "ca9bba3610412a3a"
+  },
+  "circleci-project-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "0b6816100aed5032"
+  },
+  "cisco-meraki-api-key": {
+   "positives": 26,
+   "negatives": 5,
+   "digest": "f05c135ccf1dfa2b"
+  },
+  "civo-api-key": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "f50b7b2d32d4cb3d"
+  },
+  "clerk-secret-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "ed5c10777e593c53"
+  },
+  "clickhouse-cloud-api-secret-key": {
+   "positives": 52,
+   "negatives": 2,
+   "digest": "1dbccb0c9adb3f39"
+  },
+  "clickhouse-cloud-key-id": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "6b1d2281f184ba4d"
+  },
+  "clickup-personal-api-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "3ca05dd5ede2415b"
+  },
+  "clojars-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "391a15cf9df85d7c"
+  },
+  "cloudflare-api-key": {
+   "positives": 29,
+   "negatives": 5,
+   "digest": "cf2aa62c41466dd0"
+  },
+  "cloudflare-global-api-key": {
+   "positives": 29,
+   "negatives": 5,
+   "digest": "a7f0d93c23ad3915"
+  },
+  "cloudflare-origin-ca-key": {
+   "positives": 28,
+   "negatives": 6,
+   "digest": "a60a8bd47cea223d"
+  },
+  "cloudinary-api-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "cdbbc3d0f5878d4c"
+  },
+  "cloudinary-api-secret": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "49300e998c37f431"
+  },
+  "cloudinary-cloud-name": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "c9e9af8cc275e16d"
+  },
+  "cloudsmith-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "b725779affde6685"
+  },
+  "cockroachlabs-cloud-api-key": {
+   "positives": 3,
+   "negatives": 1,
+   "digest": "5894f0e505cbe630"
+  },
+  "codecov-access-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "bd6ae49048f48c67"
+  },
+  "cohere-api-token": {
+   "positives": 2,
+   "negatives": 1,
+   "digest": "a706d65680850688"
+  },
+  "coinbase-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "2dfe59bbf4e45aa5"
+  },
+  "configcat-sdk-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "10ea79a58061d463"
+  },
+  "configcat-sdk-key-extended": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "ead0bd8adda25b0d"
+  },
+  "confluent-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "21cd20816047eef6"
+  },
+  "confluent-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "2c781c4b53b59056"
+  },
+  "contentful-delivery-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "5cfbbe23343f89d9"
+  },
+  "couchbase-capella-api-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "bc6412d2b0a1200c"
+  },
+  "coveralls-personal-api-token": {
+   "positives": 3,
+   "negatives": 0,
+   "digest": "e42c15adcf385596"
+  },
+  "crates-io-api-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "517956e84a865281"
+  },
+  "curl-auth-header": {
+   "positives": 18,
+   "negatives": 9,
+   "digest": "a61ae37281b7ba27"
+  },
+  "curl-auth-user": {
+   "positives": 11,
+   "negatives": 24,
+   "digest": "b9301829b1832c15"
+  },
+  "cursor-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "092a7fe805cf67a6"
+  },
+  "databento-api-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "a0a221cfe0ca309d"
+  },
+  "databricks-api-token": {
+   "positives": 27,
+   "negatives": 1,
+   "digest": "fe5e20bc283c9674"
+  },
+  "datadog-api-key": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "6245a401f4d6e9d6"
+  },
+  "datadog-application-key": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "14f4cfd21e861f6b"
+  },
+  "datagov-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "1f26bdc6ee6718d3"
+  },
+  "datastax-astra-application-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "298802e42fe6d94b"
+  },
+  "deepgram-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "25f29421667b2470"
+  },
+  "deepseek-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "5771a9f094569cb6"
+  },
+  "defined-networking-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "85fb3d5d802a5d06"
+  },
+  "deno-account-token": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "7646517b6e1afb74"
+  },
+  "devcycle-client-sdk-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "106a853423d59ad2"
+  },
+  "devcycle-mobile-sdk-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "96866b1cd8967690"
+  },
+  "devcycle-server-sdk-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "3d3720a7059aa58b"
+  },
+  "devin-personal-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "60bd8b06948bc5d8"
+  },
+  "devin-service-api-key": {
+   "positives": 2,
+   "negatives": 1,
+   "digest": "c3a097c4a722ee21"
+  },
+  "devin-service-user-token": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "adcc36b75b3feb80"
+  },
+  "digitalocean-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "18ed5bc93a15bf78"
+  },
+  "digitalocean-pat": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "ceae3dd545460c9d"
+  },
+  "digitalocean-refresh-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "f02fcfbc5edeedcb"
+  },
+  "discord-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "049504fa8621c3dc"
+  },
+  "discord-client-id": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "aa4c1439b557b405"
+  },
+  "discord-client-secret": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "bbcd97aac746381b"
+  },
+  "disqus-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "236b30f04fdcec40"
+  },
+  "docker-swarm-join-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "8d1f49a62823078b"
+  },
+  "docker-swarm-unlock-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "1324dbf2eac25ce8"
+  },
+  "dockerhub-organization-access-token": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "6f0ea7fc03868d20"
+  },
+  "dockerhub-personal-access-token": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "889139dbafad6fb2"
+  },
+  "doppler-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "288cd5a1a9537fe2"
+  },
+  "droneci-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "31b0e8ba1a04b744"
+  },
+  "dropbox-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "794be40c734175ab"
+  },
+  "duffel-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "678a0c204942031f"
+  },
+  "dynatrace-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "65c87d49fdada541"
+  },
+  "easypost-api-token": {
+   "positives": 28,
+   "negatives": 1,
+   "digest": "bd904d0e198739b9"
+  },
+  "easypost-test-api-token": {
+   "positives": 29,
+   "negatives": 1,
+   "digest": "bd79129f4451dddb"
+  },
+  "ebay-client-id": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "fc2de51a1a4fd3af"
+  },
+  "ebay-client-secret": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "dc1c5d6b0378faa4"
+  },
+  "elastic-cloud-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "9f3c7296b4ad2892"
+  },
+  "elevenlabs-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "9115ceb0f713cbbf"
+  },
+  "endorlabs-api-key": {
+   "positives": 3,
+   "negatives": 1,
+   "digest": "65ac6bd0f29524e8"
+  },
+  "endorlabs-api-secret": {
+   "positives": 3,
+   "negatives": 1,
+   "digest": "b63778a7efeb807a"
+  },
+  "etsy-open-api-key": {
+   "positives": 2,
+   "negatives": 1,
+   "digest": "5a328908bbf273ec"
+  },
+  "exoscale-api-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "e4102e586212cdfc"
+  },
+  "exoscale-api-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "aff567e92adb421b"
+  },
+  "facebook-access-token": {
+   "positives": 3,
+   "negatives": 0,
+   "digest": "d62e09b2a41aa75b"
+  },
+  "facebook-page-access-token": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "958765f4fb7de712"
+  },
+  "facebook-secret": {
+   "positives": 28,
+   "negatives": 0,
+   "digest": "e8d5af12bcbcc715"
+  },
+  "fal-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "ba9a0ea2ae1242f9"
+  },
+  "fastly-api-token": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "bec88a211819cfcd"
+  },
+  "figma-personal-access-header-token": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "5e00d5330e22c2fc"
+  },
+  "figma-personal-access-token": {
+   "positives": 28,
+   "negatives": 0,
+   "digest": "a5852c5d2c165198"
+  },
+  "finicity-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "13acd690feaa73e7"
+  },
+  "finicity-client-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "d93747be57962479"
+  },
+  "finnhub-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "242dbb4ad416622e"
+  },
+  "flickr-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "163706abad160e17"
+  },
+  "flutterwave-encryption-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "4ed7948df857f001"
+  },
+  "flutterwave-public-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "571d05e0806b0992"
+  },
+  "flutterwave-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "5fb13a44b851692c"
+  },
+  "flyio-access-token": {
+   "positives": 30,
+   "negatives": 1,
+   "digest": "0b52af662815f79b"
+  },
+  "frameio-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "8a790abdb336aa41"
+  },
+  "freemius-secret-key": {
+   "positives": 1,
+   "negatives": 4,
+   "digest": "b26796f1c6599cdd"
+  },
+  "freshbooks-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "3ed5729676448f65"
+  },
+  "fullstory-api-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "d4d4ad6b25d017b1"
+  },
+  "gcp-api-key": {
+   "positives": 27,
+   "negatives": 20,
+   "digest": "3e9ee8c5144813d8"
+  },
+  "gcp-application-default-credentials": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "bc9cc940645905e1"
+  },
+  "gcp-gemini-api": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "4cd99b5576125c8b"
+  },
+  "gcp-service-account": {
+   "positives": 2,
+   "negatives": 1,
+   "digest": "4d9ef15c3502e13e"
+  },
+  "generic-api-key": {
+   "positives": 57,
+   "negatives": 70,
+   "digest": "cf82c373f4550908"
+  },
+  "generic-credential-uri": {
+   "positives": 17,
+   "negatives": 20,
+   "digest": "cc438f7c9ea242db"
+  },
+  "generic-password": {
+   "positives": 29,
+   "negatives": 29,
+   "digest": "780f548ba1c8fbfa"
+  },
+  "generic-username": {
+   "positives": 4,
+   "negatives": 3,
+   "digest": "9b23e96923964c2c"
+  },
+  "gitea-access-token": {
+   "positives": 26,
+   "negatives": 4,
+   "digest": "9e8c594cac744a25"
+  },
+  "github-app-token": {
+   "positives": 52,
+   "negatives": 2,
+   "digest": "bbdf606c0662c8da"
+  },
+  "github-fine-grained-pat": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "62271958dd57d505"
+  },
+  "github-oauth": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "8df55c78cfab02c2"
+  },
+  "github-pat": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "b3950f3e8c41d312"
+  },
+  "github-refresh-token": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "c26a384244642d16"
+  },
+  "gitlab-cicd-job-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "a4e6ff23fa6cc9a6"
+  },
+  "gitlab-deploy-token": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "3fc872912d852b3d"
+  },
+  "gitlab-feature-flag-client-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "a303afb7a91fc493"
+  },
+  "gitlab-feed-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "bdcdcc4ee31d3e2e"
+  },
+  "gitlab-incoming-mail-address-token": {
+   "positives": 4,
+   "negatives": 0,
+   "digest": "c1e7960961565fa9"
+  },
+  "gitlab-incoming-mail-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "0ea5d87379f752f3"
+  },
+  "gitlab-kubernetes-agent-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "57a9418c994bed41"
+  },
+  "gitlab-oauth-app-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "0fe51775ee9d9dfc"
+  },
+  "gitlab-pat": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "d5529f9ede9f6002"
+  },
+  "gitlab-pat-routable": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "7b0fab23264570f9"
+  },
+  "gitlab-ptt": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "2729ccc834bd639e"
+  },
+  "gitlab-rrt": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "ea1c689174422e01"
+  },
+  "gitlab-runner-authentication-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "6b4a5cd9911dc5aa"
+  },
+  "gitlab-runner-authentication-token-routable": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "046165f82e1a1859"
+  },
+  "gitlab-scim-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "8b0ccdd039b2e598"
+  },
+  "gitlab-session-cookie": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "7ac179a5f78fb800"
+  },
+  "gitter-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "4f3ccbd047886131"
+  },
+  "gocardless-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "796d5d964ae6d914"
+  },
+  "grafana-api-key": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "18169ce4d35095b9"
+  },
+  "grafana-cloud-api-token": {
+   "positives": 28,
+   "negatives": 4,
+   "digest": "4d19f818688118eb"
+  },
+  "grafana-service-account-token": {
+   "positives": 27,
+   "negatives": 1,
+   "digest": "87e1e8124b35a8f3"
+  },
+  "greptile-api-key": {
+   "positives": 4,
+   "negatives": 2,
+   "digest": "69a254250608c40c"
+  },
+  "groq-api-key": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "1c8013361b1da211"
+  },
+  "gumroad-access-token": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "c0859d982aebeba6"
+  },
+  "harness-api-key": {
+   "positives": 53,
+   "negatives": 0,
+   "digest": "eb433efea4620356"
+  },
+  "hashicorp-tf-api-token": {
+   "positives": 27,
+   "negatives": 1,
+   "digest": "cf3906cb995a1a9c"
+  },
+  "hashicorp-tf-password": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "e09467f1ec2125e1"
+  },
+  "heroku-api-key": {
+   "positives": 28,
+   "negatives": 0,
+   "digest": "ca36e4a819c26096"
+  },
+  "heroku-api-key-v2": {
+   "positives": 28,
+   "negatives": 0,
+   "digest": "d02c495ec5d6f44f"
+  },
+  "highnote-secret-live-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "8d8e244fa0435a6a"
+  },
+  "honeycomb-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "611ab0fb8c43ba37"
+  },
+  "hubspot-api-key": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "4bc48d5af4fff6ea"
+  },
+  "huggingface-access-token": {
+   "positives": 41,
+   "negatives": 10,
+   "digest": "f00f7a25b219b936"
+  },
+  "huggingface-organization-api-token": {
+   "positives": 34,
+   "negatives": 7,
+   "digest": "7ee6a7f30ff745e8"
+  },
+  "hunter-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "694ccafe7be25148"
+  },
+  "ibm-cloud-user-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "0280cb54da49e0ac"
+  },
+  "influxdb-api-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "605d1596274fbdab"
+  },
+  "infomaniak-api-token": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "c0dbe86b0c6d2557"
+  },
+  "infracost-api-token": {
+   "positives": 27,
+   "negatives": 4,
+   "digest": "a2875de7a2eb5846"
+  },
+  "instantly-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "395af464daf483ce"
+  },
+  "intercom-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "7e36790809403ded"
+  },
+  "intra42-client-secret": {
+   "positives": 4,
+   "negatives": 0,
+   "digest": "1a63d09b4dbdf0ae"
+  },
+  "ionic-personal-access-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "8a3afc616415e3d1"
+  },
+  "jumpcloud-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "a891a03eeab0285e"
+  },
+  "jwt": {
+   "positives": 57,
+   "negatives": 0,
+   "digest": "3f297c1b6b069b37"
+  },
+  "jwt-base64": {
+   "positives": 0,
+   "negatives": 1,
+   "digest": "033e8d09aa978183"
+  },
+  "kagi-api-key": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "e5b7f20422eea200"
+  },
+  "kimi-api-key": {
+   "positives": 52,
+   "negatives": 3,
+   "digest": "2c4f27ccd570a418"
+  },
+  "klaviyo-api-key": {
+   "positives": 2,
+   "negatives": 0,
+   "digest": "1b006f8392f323b3"
+  },
+  "kraken-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "07504f65221d5f26"
+  },
+  "kubernetes-secret-yaml": {
+   "positives": 17,
+   "negatives": 17,
+   "digest": "7002d357303e881b"
+  },
+  "kucoin-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "d0c7817e0897495d"
+  },
+  "kucoin-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "1811069fdd040319"
+  },
+  "langchain-langsmith-personal-access-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "5b93454b8f664110"
+  },
+  "langchain-langsmith-service-key": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "1e5bd3662b9d50cd"
+  },
+  "langfuse-public-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "1e150512b554c889"
+  },
+  "langfuse-secret-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "029bfadb406c300b"
+  },
+  "lark-app-id": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "272f8353d93b2582"
+  },
+  "lark-app-secret": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "f07d2fd642fe31d8"
+  },
+  "launchdarkly-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "2d5ef57ff3fb0410"
+  },
+  "lichess-personal-access-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "a830aa6d3c4dac6f"
+  },
+  "lighton-paradigm-api-key": {
+   "positives": 52,
+   "negatives": 1,
+   "digest": "b2ff14c3064d1117"
+  },
+  "linear-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "af7af35bd2a14bc4"
+  },
+  "linear-client-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "025e36a45ee33a94"
+  },
+  "linkedin-client-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "f756be5cf2096604"
+  },
+  "linkedin-client-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "98cfb0fd6f855862"
+  },
+  "llama-cloud-api-key.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "cf9963fae13ef6c2"
+  },
+  "lob-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "797d80322de838a5"
+  },
+  "lob-pub-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "18ca6d433facb25c"
+  },
+  "looker-client-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "3fdbf16191dc0256"
+  },
+  "looker-client-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "3fd83acdecc03bec"
+  },
+  "mailchimp-api-key": {
+   "positives": 28,
+   "negatives": 1,
+   "digest": "2a67431f142038c9"
+  },
+  "mailersend-api-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "fd80dfadc560735e"
+  },
+  "mailgun-private-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "260f97b6ef914348"
+  },
+  "mailgun-pub-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "763b1d54a15602f7"
+  },
+  "mailgun-signing-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "f11accf82cae3380"
+  },
+  "mapbox-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "66d85e43d68ecff3"
+  },
+  "mattermost-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "6d0e2962849343d8"
+  },
+  "maxmind-license-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "da5c9d1051630d61"
+  },
+  "mem0-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "fc4286b25e9fa31f"
+  },
+  "mercury-production-api-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "89131863ce7c3594"
+  },
+  "mergify-application-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "0a5e3ac6fe38b151"
+  },
+  "messagebird-api-token": {
+   "positives": 78,
+   "negatives": 0,
+   "digest": "d7a26fa7e5e921c4"
+  },
+  "messagebird-client-id": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "228f7441ce030682"
+  },
+  "microsoft-teams-webhook": {
+   "positives": 1,
+   "negatives": 0,
+   "digest": "2a058af1b00d5eeb"
+  },
+  "midtrans-production-server-client-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "ed5974486170c7b0"
+  },
+  "minimax-api-key": {
+   "positives": 26,
+   "negatives": 3,
+   "digest": "d0e3b2fe6346caa7"
+  },
+  "miro-access-token": {
+   "positives": 27,
+   "negatives": 2,
+   "digest": "ef76a7072626d0cc"
+  },
+  "miro-client-id": {
+   "positives": 27,
+   "negatives": 3,
+   "digest": "962e2a766f3f3209"
+  },
+  "miro-client-secret": {
+   "positives": 27,
+   "negatives": 2,
+   "digest": "7c25d2d4ff7a420e"
+  },
+  "mistral-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "cb9ca06524eff27a"
+  },
+  "monday-api-token.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "1a39e091bc7d97cb"
+  },
+  "mongodb-atlas-service-account-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "e5534e6e8ac32693"
+  },
+  "mongodb-atlas-service-account-secret": {
+   "positives": 29,
+   "negatives": 3,
+   "digest": "1d339ade3bd90f72"
+  },
+  "mongodb-connection-string": {
+   "positives": 5,
+   "negatives": 5,
+   "digest": "519230cac5c56599"
+  },
+  "mux-access-token-id.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "73817a14fe10fa67"
+  },
+  "mux-access-token-secret.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "26107dde6344b17a"
+  },
+  "neon-api-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "fb587d0c96f31f86"
+  },
+  "netlify-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "459e4ad030b89822"
+  },
+  "new-relic-browser-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "924c65e683dc7a9d"
+  },
+  "new-relic-insert-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "b399642c5b45570e"
+  },
+  "new-relic-user-api-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "9be40c0d97ad09f6"
+  },
+  "new-relic-user-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "c32bff54ef750eb5"
+  },
+  "ngrok-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "a56bab5c53403637"
+  },
+  "notion-api-token": {
+   "positives": 3,
+   "negatives": 3,
+   "digest": "938bb07ab388dfd0"
+  },
+  "npm-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "d576cfa624a12058"
+  },
+  "nuget-config-password": {
+   "positives": 6,
+   "negatives": 6,
+   "digest": "f7bf14f2de7de35a"
+  },
+  "nvidia-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "e36c94a037b7d22b"
+  },
+  "nylas-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "5fcc21cca2d5f227"
+  },
+  "nytimes-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "616107c7d1f7bc66"
+  },
+  "octopus-deploy-api-key": {
+   "positives": 2,
+   "negatives": 4,
+   "digest": "8bf4b6f35c88af9a"
+  },
+  "okta-access-token": {
+   "positives": 28,
+   "negatives": 2,
+   "digest": "279301eb0a840511"
+  },
+  "ollama-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "6543244ae64e40d4"
+  },
+  "onesignal-rich-authentication-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "f97959d83b3ebfdd"
+  },
+  "onfido-live-api-token-ca": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "c21bbb255f329a22"
+  },
+  "onfido-live-api-token-eu": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "6a8d4ba453e06081"
+  },
+  "onfido-live-api-token-us": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "eb22ecae17693c35"
+  },
+  "openai-api-key": {
+   "positives": 36,
+   "negatives": 0,
+   "digest": "90c71e0af6fec712"
+  },
+  "openrouter-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "198e77e27005a5b7"
+  },
+  "openshift-user-token": {
+   "positives": 29,
+   "negatives": 2,
+   "digest": "609c72f8c174a0f1"
+  },
+  "openweather-api-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "10f335ed2404e32d"
+  },
+  "opsgenie-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "b76550fca8580be2"
+  },
+  "ovh-application-key": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "75204bc82b27e5a2"
+  },
+  "ovh-application-secret": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "630043671b10799c"
+  },
+  "ovh-consumer-key": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "55cdd96500a09f23"
+  },
+  "paddle-live-api-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "8392550728e25dca"
+  },
+  "pagerduty-authorization-token.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "466a5b2667419674"
+  },
+  "paypal-client-id.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "75362ed59c2c0b0f"
+  },
+  "paypal-client-secret.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "41b2040f70b94574"
+  },
+  "perplexity-api-key": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "aa2d50b3c87a81a4"
+  },
+  "persona-production-api-key": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "865df5e89158d177"
+  },
+  "pinecone-api-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "fc181e221a45c23b"
+  },
+  "pinecone-api-key.2": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "88ac9dc47bbcf51b"
+  },
+  "pinterest-access-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "208398fd63d61113"
+  },
+  "pkcs12-file": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "39c7f1dcba7291f7"
+  },
+  "plaid-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "781dcc20a31a77d6"
+  },
+  "plaid-client-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "4f59c5a0838cdcb9"
+  },
+  "plaid-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "5d956549df5f9b8e"
+  },
+  "planetscale-api-token": {
+   "positives": 78,
+   "negatives": 0,
+   "digest": "f662e14f00037743"
+  },
+  "planetscale-id": {
+   "positives": 3,
+   "negatives": 0,
+   "digest": "ee98b242b514081b"
+  },
+  "planetscale-oauth-token": {
+   "positives": 78,
+   "negatives": 0,
+   "digest": "91d607feb38c507b"
+  },
+  "planetscale-password": {
+   "positives": 78,
+   "negatives": 0,
+   "digest": "e76a5a8936df5828"
+  },
+  "plivo-auth-id": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "5f419b81ea9fb64c"
+  },
+  "plivo-auth-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "22fa0063e3505e04"
+  },
+  "polar-oauth-access-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "a4a078f843b31e50"
+  },
+  "polar-organization-access-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "8a646c915b9a3ad1"
+  },
+  "polar-personal-access-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "ee78b2ce1c456e69"
+  },
+  "polymarket-address": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "eca57db328a2f9f1"
+  },
+  "polymarket-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "de5cb377281ab5ea"
+  },
+  "polymarket-api-secret": {
+   "positives": 52,
+   "negatives": 0,
+   "digest": "1e2fdb7f02041c14"
+  },
+  "polymarket-passphrase": {
+   "positives": 52,
+   "negatives": 0,
+   "digest": "dc9ff81c5691bc46"
+  },
+  "polymarket-private-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "cc976649274564e6"
+  },
+  "posthog-personal-api-key": {
+   "positives": 30,
+   "negatives": 3,
+   "digest": "3b7263adf1eae3e1"
+  },
+  "posthog-project-api-key": {
+   "positives": 28,
+   "negatives": 3,
+   "digest": "a694742b08d922cf"
+  },
+  "postman-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "e2a84c238c69648d"
+  },
+  "postmark-api-token.1": {
+   "positives": 3,
+   "negatives": 3,
+   "digest": "f3f4f468046e91bb"
+  },
+  "prefect-api-token": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "ee804a1d89f69a48"
+  },
+  "private-key": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "be94c4114897c0ef"
+  },
+  "privateai-api-token": {
+   "positives": 1,
+   "negatives": 1,
+   "digest": "4c6c762cb534e1f4"
+  },
+  "proof-full-access-api-key": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "9e54e984f2eee8d8"
+  },
+  "pulumi-api-token": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "6b9c2ef6d1c31455"
+  },
+  "pypi-upload-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "8b2c1ffd68c3bbfa"
+  },
+  "rainforest-pay-production-api-key": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "10a5280d3c4d1cd0"
+  },
+  "ramp-client-id": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "a95b52f064b7f81d"
+  },
+  "ramp-client-secret": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "3fab333139743c70"
+  },
+  "rapidapi-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "3eda801c071d9ed3"
+  },
+  "razorpay-key-id.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "798576ef446596f0"
+  },
+  "razorpay-key-secret.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "4fbf39b508ea239c"
+  },
+  "readme-api-token": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "42a7ebc8931ef241"
+  },
+  "redirect-pizza-api-token.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "563580fe237d5864"
+  },
+  "render-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "b5a5aed4c4fc57c1"
+  },
+  "replicate-api-token": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "7ddb9b5679af7480"
+  },
+  "resend-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "30dcffc447d14463"
+  },
+  "retell-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "63b42fd588e7a303"
+  },
+  "rootly-api-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "c428730a88238162"
+  },
+  "rubygems-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "63623628e54867af"
+  },
+  "runpod-api-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "fa44cc1605ed52cf"
+  },
+  "salesforce-access-token.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "ebe8a153703d2211"
+  },
+  "salesforce-instance-url.1": {
+   "positives": 3,
+   "negatives": 3,
+   "digest": "a9986bfc8d26e131"
+  },
+  "samsara-api-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "989e5037ca9f29be"
+  },
+  "scaleway-secret-key": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "dd241e657bdfa554"
+  },
+  "scalingo-api-token": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "c7df24845fd70be6"
+  },
+  "scalr-api-access-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "0898f4cf956d560f"
+  },
+  "segment-public-api-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "38575f978c3ab72b"
+  },
+  "sendbird-access-id": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "3da0522d585c6083"
+  },
+  "sendbird-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "bf289a1ebe8a75e0"
+  },
+  "sendgrid-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "e792423c1c607155"
+  },
+  "sendinblue-api-token": {
+   "positives": 3,
+   "negatives": 2,
+   "digest": "0f44a9505533bde0"
+  },
+  "sentry-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "706931f9c5a7ed67"
+  },
+  "sentry-org-token": {
+   "positives": 53,
+   "negatives": 1,
+   "digest": "b8fd3a676fa20d9e"
+  },
+  "sentry-user-token": {
+   "positives": 26,
+   "negatives": 3,
+   "digest": "b270416482e78a41"
+  },
+  "settlemint-application-access-token": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "458208374331c020"
+  },
+  "settlemint-personal-access-token": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "784ed18a2d3d6d88"
+  },
+  "settlemint-service-access-token": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "03d6c0816b3076d5"
+  },
+  "shippo-api-token": {
+   "positives": 52,
+   "negatives": 0,
+   "digest": "a6ea699d71e2d1b0"
+  },
+  "shopify-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "2f9d0b49d1b9aec7"
+  },
+  "shopify-custom-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "41ae15dec6a6f2d2"
+  },
+  "shopify-private-app-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "8b3f351c51c5c16a"
+  },
+  "shopify-shared-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "77a7a467b5cc598d"
+  },
+  "sidekiq-secret": {
+   "positives": 60,
+   "negatives": 0,
+   "digest": "480ae48bc31aa97a"
+  },
+  "sidekiq-sensitive-url": {
+   "positives": 12,
+   "negatives": 0,
+   "digest": "b2acccd62fef32d1"
+  },
+  "slack-app-token": {
+   "positives": 29,
+   "negatives": 0,
+   "digest": "cafb9f192d9bd037"
+  },
+  "slack-bot-token": {
+   "positives": 30,
+   "negatives": 4,
+   "digest": "bc6817dba3d5d5d2"
+  },
+  "slack-config-access-token": {
+   "positives": 29,
+   "negatives": 3,
+   "digest": "232b9086189695a7"
+  },
+  "slack-config-refresh-token": {
+   "positives": 29,
+   "negatives": 2,
+   "digest": "33f82a1eb342d83d"
+  },
+  "slack-legacy-bot-token": {
+   "positives": 37,
+   "negatives": 3,
+   "digest": "d23840127048993f"
+  },
+  "slack-legacy-token": {
+   "positives": 32,
+   "negatives": 2,
+   "digest": "590e5fe7d37120d5"
+  },
+  "slack-legacy-workspace-token": {
+   "positives": 31,
+   "negatives": 1,
+   "digest": "dd7c2706b40acd9d"
+  },
+  "slack-user-token": {
+   "positives": 32,
+   "negatives": 5,
+   "digest": "fc05bc98cecf9c32"
+  },
+  "slack-webhook-url": {
+   "positives": 11,
+   "negatives": 0,
+   "digest": "ea903985685e5eb9"
+  },
+  "snowflake-account-host.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "a4a930994a687dbc"
+  },
+  "snowflake-programmatic-access-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "f4ca0b6163e58288"
+  },
+  "snyk-api-token": {
+   "positives": 35,
+   "negatives": 0,
+   "digest": "24bf2da2733a83e5"
+  },
+  "sonar-api-token": {
+   "positives": 34,
+   "negatives": 0,
+   "digest": "de54a305245aff00"
+  },
+  "sourcegraph-access-token": {
+   "positives": 4,
+   "negatives": 4,
+   "digest": "0c19341151497ed1"
+  },
+  "square-access-token": {
+   "positives": 28,
+   "negatives": 1,
+   "digest": "884bc859dbae6e21"
+  },
+  "squarespace-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "68e5f4fdd6dae431"
+  },
+  "sslmate-api-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "ff9cb43ef059b5bf"
+  },
+  "stability-ai-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "c063cbaeba9534ea"
+  },
+  "stripe-access-token": {
+   "positives": 54,
+   "negatives": 2,
+   "digest": "8566e45cbc398cb7"
+  },
+  "sumologic-access-id": {
+   "positives": 30,
+   "negatives": 11,
+   "digest": "07286d850ec92262"
+  },
+  "sumologic-access-token": {
+   "positives": 30,
+   "negatives": 7,
+   "digest": "5205eb302255315b"
+  },
+  "supabase-management-token": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "5e4ecbd37c403d0a"
+  },
+  "supabase-project-api-key": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "5bf9f8a47b791dc9"
+  },
+  "supabase-project-url": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "20de4b5c70ea8d52"
+  },
+  "tableau-personal-access-token-name.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "11604e935e9bb300"
+  },
+  "tableau-personal-access-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "637d8ef299f993bf"
+  },
+  "tableau-server-host.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "86f7865bcced2c58"
+  },
+  "tailscale-api-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "ccf277610f270bca"
+  },
+  "telegram-bot-api-token": {
+   "positives": 80,
+   "negatives": 11,
+   "digest": "adf5fea9d4b09db9"
+  },
+  "telnyx-api-v2-key.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "23573dd0f0fe86e1"
+  },
+  "temporal-cloud-api-key.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "6b68d5b82f6e2053"
+  },
+  "thunderstore-api-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "b2ef22e3451ac9dd"
+  },
+  "togetherai-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "7d300c78816cf2bf"
+  },
+  "travisci-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "9b14d0c832db9112"
+  },
+  "twilio-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "9111d9940be6ea75"
+  },
+  "twitch-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "17b48cc24770325a"
+  },
+  "twitter-access-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "c49db60328f8a54f"
+  },
+  "twitter-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "3a568bfb25f37e67"
+  },
+  "twitter-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "29c69a3f01f38eb7"
+  },
+  "twitter-api-secret": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "c4a690fa80a2cd1c"
+  },
+  "twitter-bearer-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "b1447bb7634b5dec"
+  },
+  "typeform-api-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "21b30e2b885c9ecf"
+  },
+  "unkey-root-key.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "daf57d6d87ac810b"
+  },
+  "upcloud-api-token": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "74013dd79e3d1b6a"
+  },
+  "upstage-api-key": {
+   "positives": 26,
+   "negatives": 1,
+   "digest": "34b2e72b1a10350c"
+  },
+  "upstash-redis-rest-token.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "a5e28d433ed1c15b"
+  },
+  "upstash-redis-rest-url.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "de6f1d5f544bbb4d"
+  },
+  "val-town-api-token.1": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "631011905da7e6bd"
+  },
+  "vault-batch-token": {
+   "positives": 27,
+   "negatives": 0,
+   "digest": "be0b4b57758e706b"
+  },
+  "vault-service-token": {
+   "positives": 4,
+   "negatives": 8,
+   "digest": "89670ad4c6b8f05f"
+  },
+  "vercel-ai-gateway-key": {
+   "positives": 27,
+   "negatives": 2,
+   "digest": "d666cc60491f6407"
+  },
+  "vercel-api-token": {
+   "positives": 30,
+   "negatives": 2,
+   "digest": "3fa50cb9cc4c6300"
+  },
+  "vercel-app-access-token": {
+   "positives": 27,
+   "negatives": 2,
+   "digest": "a84102b78902e143"
+  },
+  "vercel-app-refresh-token": {
+   "positives": 27,
+   "negatives": 2,
+   "digest": "4a15658cfe0d993a"
+  },
+  "vercel-integration-token": {
+   "positives": 27,
+   "negatives": 2,
+   "digest": "00c22a00f5bf435d"
+  },
+  "vercel-personal-access-token": {
+   "positives": 28,
+   "negatives": 2,
+   "digest": "d693527619627e52"
+  },
+  "virustotal-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "13e22b3c79411d92"
+  },
+  "voyageai-api-key": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "7170e6221a6b2905"
+  },
+  "vultr-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "bd4b976f1d02de99"
+  },
+  "wakatime-api-key.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "fbe695a9d4557324"
+  },
+  "wakatime-api-key.2": {
+   "positives": 1,
+   "negatives": 2,
+   "digest": "3801b5c355583024"
+  },
+  "weatherstack-api-key.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "75d2b2a14ee594d2"
+  },
+  "weights-and-biases-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "5635f7259ecd23aa"
+  },
+  "weights-and-biases-api-key-v1": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "fe50a3325190faba"
+  },
+  "wiz-client-id.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "1cb1de811c689879"
+  },
+  "wiz-client-secret.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "e9d394c1623abe1d"
+  },
+  "woocommerce-consumer-secret.1": {
+   "positives": 28,
+   "negatives": 4,
+   "digest": "af12e84381e3c964"
+  },
+  "workato-developer-api-token.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "38fb78b427b97d07"
+  },
+  "workos-production-api-key.1": {
+   "positives": 1,
+   "negatives": 3,
+   "digest": "fb1485a55b04d074"
+  },
+  "xai-api-key": {
+   "positives": 26,
+   "negatives": 2,
+   "digest": "d2e6e53cb5ccef65"
+  },
+  "xendit-production-api-key.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "9a64cd0bccc55866"
+  },
+  "yandex-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "d32464355ece37a5"
+  },
+  "yandex-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "ad2fe0421288ecd1"
+  },
+  "yandex-aws-access-token": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "9ec8f882b9648753"
+  },
+  "zai-api-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "dcee147f6af415f0"
+  },
+  "zendesk-secret-key": {
+   "positives": 26,
+   "negatives": 0,
+   "digest": "95985cc46214c427"
+  },
+  "zoho-client-id.1": {
+   "positives": 3,
+   "negatives": 4,
+   "digest": "693fbfc94200d776"
+  },
+  "zoho-client-secret.1": {
+   "positives": 2,
+   "negatives": 3,
+   "digest": "61033966d0710d03"
+  },
+  "zoho-oauth-token.1": {
+   "positives": 28,
+   "negatives": 4,
+   "digest": "9fb4dec0ada783df"
+  },
+  "zoho-zapi-key.1": {
+   "positives": 3,
+   "negatives": 4,
+   "digest": "633e68a6a7cfac15"
+  },
+  "zuplo-consumer-api-key.1": {
+   "positives": 2,
+   "negatives": 2,
+   "digest": "e30130ab9d7a79c3"
+  }
+ },
+ "withoutExamples": [
+  "dropbox-long-lived-api-token",
+  "dropbox-short-lived-api-token",
+  "gitlab-pat-routable-versioned",
+  "kg-anthropic-oauth-token",
+  "kg-aws-access-key-id",
+  "kg-calcom-api-key",
+  "kg-discord-bot-token",
+  "kg-discord-webhook-url",
+  "kg-elevenlabs-key",
+  "kg-fal-key",
+  "kg-stripe-webhook-secret",
+  "kg-supabase-secret-key",
+  "kg-telegram-bot-token",
+  "kg-twilio-auth-token",
+  "kg-zerobounce-api-key",
+  "slack-session-cookie",
+  "slack-session-token"
+ ]
+}
