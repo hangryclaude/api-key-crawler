@@ -8,6 +8,7 @@
       "description": "Scalr API access token.",
       "confidence": "high",
       "regex": "(?i:(?:scalr(?:[_. -]*(?:api|access))?[_. -]*(?:secret|key|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(eyJhbGciOiJI(?:)UzI1NiIsInR5(?:)cCI6IkpXVCJ9\\.eyJpc3MiOiJ1(?:)c2VyIiwianRp(?:)IjoiYXQt[A-Za-z0-9_-]{20,40}\\.[A-Za-z0-9_-]{43})(?:\\\\?['\"\\x60]|[\\s;]|\\\\[nr]|$)",
+      "split": true,
       "keywords": [
         "scalr"
       ],

@@ -68,6 +68,7 @@
       "description": "Google (GCP) Service-account",
       "confidence": "high",
       "regex": "\\{[^{]+(?:(?:\"private_key\"\\s*:\\s*\"-----BEGIN (?:RSA )?PRIVATE KEY-----[^}]+auth_provid(?:)er_x509_cert(?:)_url)|(?:auth_provide(?:)r_x509_cert_(?:)url[^}]+\"private_key\"\\s*:\\s*\"-----BEGIN (?:RSA )?PRIVATE KEY-----))[^}]+\\}",
+      "split": true,
       "keywords": [
         "provider_x509"
       ],

@@ -219,6 +219,7 @@ function shape(r) {
   put("description", r.description);
   put("confidence", r.confidence);
   put("regex", r.regex && splitLiterals(r.regex));
+  put("split", r.regex && splitLiterals(r.regex) !== r.regex); // the regex differs from upstream's by empty groups only
   put("path", r.path);
   put("keywords", r.keywords);
   put("secretGroup", r.secretGroup);

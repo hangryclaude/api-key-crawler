@@ -52,6 +52,7 @@
       "description": "Identified a pattern that may indicate short-lived Amazon Bedrock API keys, risking unauthorized Amazon Bedrock usage",
       "confidence": "high",
       "regex": "bedrock-api-(?:)key-YmVkcm9j(?:)ay5hbWF6b25h(?:)d3MuY29t",
+      "split": true,
       "keywords": [
         "bedrock-api-key-"
       ],
