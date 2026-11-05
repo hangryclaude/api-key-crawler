@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="API KEY CRAWLER. Your keys never reach GitHub.">
+<defs>
+<linearGradient id="strip" x1="0" x2="1"><stop offset="0" stop-color="#8a3dff"/><stop offset=".5" stop-color="#ff2bd6"/><stop offset="1" stop-color="#8a3dff"/></linearGradient>
+<linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ff2bd6" stop-opacity="0"/><stop offset=".5" stop-color="#ff2bd6" stop-opacity=".9"/><stop offset="1" stop-color="#ff2bd6" stop-opacity="0"/></linearGradient>
+<filter id="glow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1280" height="640" fill="#000000"/>
+<text x="18" y="26" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="828" lengthAdjust="spacingAndGlyphs" opacity=".55">// config/clients.js: created once at boot    export const slack = { token: &#39;xoxb-••••7Hq2&#39;, channel: &#39;#deploys&#39; };</text>
+<text x="40" y="60" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="892.8" lengthAdjust="spacingAndGlyphs" opacity=".55">export const stripe = { secret: &#39;sk_live_••••a1B2&#39;, retries: RETRIES };    export const google = { apiKey: &#39;AIza••••xR0s&#39; };</text>
+<text x="62" y="94" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="878.4" lengthAdjust="spacingAndGlyphs" opacity=".55">export const aws = { accessKeyId: &#39;AKIA••••Q7XZ&#39;, region: &#39;us-east-1&#39; };    9752a3e  add billing config        2 hours ago</text>
+<text x="18" y="128" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="698.4" lengthAdjust="spacingAndGlyphs" opacity=".55">export const github = { token: &#39;ghp_••••9F3K&#39; };    c58e610  move secrets to vault     3 days ago</text>
+<text x="40" y="162" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="842.4" lengthAdjust="spacingAndGlyphs" opacity=".55">export const slack = { token: &#39;xoxb-••••7Hq2&#39;, channel: &#39;#deploys&#39; };    a8b5e43  bump deps                 last week</text>
+<text x="62" y="196" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="684" lengthAdjust="spacingAndGlyphs" opacity=".55">export const google = { apiKey: &#39;AIza••••xR0s&#39; };    // config/clients.js: created once at boot</text>
+<text x="18" y="230" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="871.2" lengthAdjust="spacingAndGlyphs" opacity=".55">9752a3e  add billing config        2 hours ago    export const stripe = { secret: &#39;sk_live_••••a1B2&#39;, retries: RETRIES };</text>
+<text x="40" y="264" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="871.2" lengthAdjust="spacingAndGlyphs" opacity=".55">c58e610  move secrets to vault     3 days ago    export const aws = { accessKeyId: &#39;AKIA••••Q7XZ&#39;, region: &#39;us-east-1&#39; };</text>
+<text x="62" y="298" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="691.2" lengthAdjust="spacingAndGlyphs" opacity=".55">a8b5e43  bump deps                 last week    export const github = { token: &#39;ghp_••••9F3K&#39; };</text>
+<text x="18" y="332" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="828" lengthAdjust="spacingAndGlyphs" opacity=".55">// config/clients.js: created once at boot    export const slack = { token: &#39;xoxb-••••7Hq2&#39;, channel: &#39;#deploys&#39; };</text>
+<text x="40" y="366" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="892.8" lengthAdjust="spacingAndGlyphs" opacity=".55">export const stripe = { secret: &#39;sk_live_••••a1B2&#39;, retries: RETRIES };    export const google = { apiKey: &#39;AIza••••xR0s&#39; };</text>
+<text x="62" y="400" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="878.4" lengthAdjust="spacingAndGlyphs" opacity=".55">export const aws = { accessKeyId: &#39;AKIA••••Q7XZ&#39;, region: &#39;us-east-1&#39; };    9752a3e  add billing config        2 hours ago</text>
+<text x="18" y="434" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="698.4" lengthAdjust="spacingAndGlyphs" opacity=".55">export const github = { token: &#39;ghp_••••9F3K&#39; };    c58e610  move secrets to vault     3 days ago</text>
+<text x="40" y="468" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="842.4" lengthAdjust="spacingAndGlyphs" opacity=".55">export const slack = { token: &#39;xoxb-••••7Hq2&#39;, channel: &#39;#deploys&#39; };    a8b5e43  bump deps                 last week</text>
+<text x="62" y="502" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="684" lengthAdjust="spacingAndGlyphs" opacity=".55">export const google = { apiKey: &#39;AIza••••xR0s&#39; };    // config/clients.js: created once at boot</text>
+<text x="18" y="536" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="871.2" lengthAdjust="spacingAndGlyphs" opacity=".55">9752a3e  add billing config        2 hours ago    export const stripe = { secret: &#39;sk_live_••••a1B2&#39;, retries: RETRIES };</text>
+<text x="40" y="570" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="871.2" lengthAdjust="spacingAndGlyphs" opacity=".55">c58e610  move secrets to vault     3 days ago    export const aws = { accessKeyId: &#39;AKIA••••Q7XZ&#39;, region: &#39;us-east-1&#39; };</text>
+<text x="62" y="604" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="691.2" lengthAdjust="spacingAndGlyphs" opacity=".55">a8b5e43  bump deps                 last week    export const github = { token: &#39;ghp_••••9F3K&#39; };</text>
+<text x="18" y="638" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="12" fill="#3b4680" textLength="828" lengthAdjust="spacingAndGlyphs" opacity=".55">// config/clients.js: created once at boot    export const slack = { token: &#39;xoxb-••••7Hq2&#39;, channel: &#39;#deploys&#39; };</text>
+<g transform="translate(460.8,0)"><rect x="-128" y="-320" width="115.2" height="1280" fill="url(#beam)" transform="rotate(-28 -128 320)" filter="url(#glow)"/></g>
+<line x1="228.8" y1="259.2" x2="162.6" y2="144.43" stroke="#9fb3ff" stroke-width="1" opacity=".35"/>
+<g>
+<line x1="228.8" y1="259.2" x2="162.6" y2="144.43" stroke="#ff2bd6" stroke-width="1.4" filter="url(#glow)"/>
+<rect x="57.6" y="108.8" width="210" height="35.62" rx="4" fill="#000000" stroke="#ff2bd6" stroke-width="2" filter="url(#glow)"/>
+<text x="72.6" y="133.03" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="18.75" fill="#e8f0ff" textLength="180" lengthAdjust="spacingAndGlyphs">sk_live_••••a1B2</text>
+</g>
+<line x1="1051.2" y1="259.2" x2="645.7" y2="80.43" stroke="#9fb3ff" stroke-width="1" opacity=".35"/>
+<g>
+<line x1="1051.2" y1="259.2" x2="645.7" y2="80.43" stroke="#3dffa0" stroke-width="1.4" filter="url(#glow)"/>
+<rect x="563.2" y="44.8" width="165" height="35.62" rx="4" fill="#000000" stroke="#3dffa0" stroke-width="2" filter="url(#glow)"/>
+<text x="578.2" y="69.03" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="18.75" fill="#e8f0ff" textLength="135" lengthAdjust="spacingAndGlyphs">AIza••••xR0s</text>
+</g>
+<line x1="1171.2" y1="268.8" x2="1170.5" y2="131.62" stroke="#9fb3ff" stroke-width="1" opacity=".35"/>
+<g>
+<line x1="1171.2" y1="268.8" x2="1170.5" y2="131.62" stroke="#ffc23d" stroke-width="1.4" filter="url(#glow)"/>
+<rect x="1088" y="96" width="165" height="35.62" rx="4" fill="#000000" stroke="#ffc23d" stroke-width="2" filter="url(#glow)"/>
+<text x="1103" y="120.22" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="18.75" fill="#e8f0ff" textLength="135" lengthAdjust="spacingAndGlyphs">ghp_••••9F3K</text>
+</g>
+<line x1="1155.2" y1="393.6" x2="1150.52" y2="480" stroke="#9fb3ff" stroke-width="1" opacity=".35"/>
+<g>
+<line x1="1155.2" y1="393.6" x2="1150.52" y2="480" stroke="#5fb4ff" stroke-width="1.4" filter="url(#glow)"/>
+<rect x="1062.4" y="480" width="176.25" height="35.62" rx="4" fill="#000000" stroke="#5fb4ff" stroke-width="2" filter="url(#glow)"/>
+<text x="1077.4" y="504.23" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="18.75" fill="#e8f0ff" textLength="146.25" lengthAdjust="spacingAndGlyphs">xoxb-••••7Hq2</text>
+</g>
+<line x1="124.8" y1="393.6" x2="152.9" y2="480" stroke="#9fb3ff" stroke-width="1" opacity=".35"/>
+<g>
+<line x1="124.8" y1="393.6" x2="152.9" y2="480" stroke="#3d7bff" stroke-width="1.4" filter="url(#glow)"/>
+<rect x="70.4" y="480" width="165" height="35.62" rx="4" fill="#000000" stroke="#3d7bff" stroke-width="2" filter="url(#glow)"/>
+<text x="85.4" y="504.23" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="18.75" fill="#e8f0ff" textLength="135" lengthAdjust="spacingAndGlyphs">AKIA••••Q7XZ</text>
+</g>
+<g>
+<line x1="172.8" y1="320" x2="108.8" y2="268.8" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="172.8" y1="320" x2="228.8" y2="259.2" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="172.8" y1="320" x2="272" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="172.8" y1="320" x2="217.6" y2="408" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="172.8" y1="320" x2="124.8" y2="393.6" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="172.8" y1="320" x2="76.8" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="172.8" y1="320" x2="169.6" y2="368" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="108.8" y1="268.8" x2="228.8" y2="259.2" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="228.8" y1="259.2" x2="272" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="272" y1="336" x2="217.6" y2="408" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="217.6" y1="408" x2="124.8" y2="393.6" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="124.8" y1="393.6" x2="76.8" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="76.8" y1="336" x2="108.8" y2="268.8" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="169.6" y1="368" x2="217.6" y2="408" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="169.6" y1="368" x2="124.8" y2="393.6" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<circle cx="172.8" cy="320" r="6.72" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="108.8" cy="268.8" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="228.8" cy="259.2" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="272" cy="336" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="217.6" cy="408" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="124.8" cy="393.6" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="76.8" cy="336" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="169.6" cy="368" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+</g>
+<g>
+<line x1="1107.2" y1="320" x2="1171.2" y2="268.8" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1107.2" y1="320" x2="1051.2" y2="259.2" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1107.2" y1="320" x2="1008" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1107.2" y1="320" x2="1062.4" y2="408" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1107.2" y1="320" x2="1155.2" y2="393.6" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1107.2" y1="320" x2="1203.2" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1107.2" y1="320" x2="1110.4" y2="368" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1171.2" y1="268.8" x2="1051.2" y2="259.2" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1051.2" y1="259.2" x2="1008" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1008" y1="336" x2="1062.4" y2="408" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1062.4" y1="408" x2="1155.2" y2="393.6" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1155.2" y1="393.6" x2="1203.2" y2="336" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1203.2" y1="336" x2="1171.2" y2="268.8" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1110.4" y1="368" x2="1062.4" y2="408" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<line x1="1110.4" y1="368" x2="1155.2" y2="393.6" stroke="#9fb3ff" stroke-width="1" opacity=".7"/>
+<circle cx="1107.2" cy="320" r="6.72" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1171.2" cy="268.8" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1051.2" cy="259.2" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1008" cy="336" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1062.4" cy="408" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1155.2" cy="393.6" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1203.2" cy="336" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+<circle cx="1110.4" cy="368" r="4.16" fill="#e8f0ff" filter="url(#glow)"/>
+</g>
+<g opacity=".6" transform="translate(-2,0)"><text x="640" y="353.33" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="111.11" fill="#ff2bd6" textLength="1000" lengthAdjust="spacingAndGlyphs" text-anchor="middle" font-weight="800">API KEY CRAWLER</text></g>
+<g opacity=".6" transform="translate(2,0)"><text x="640" y="353.33" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="111.11" fill="#5fb4ff" textLength="1000" lengthAdjust="spacingAndGlyphs" text-anchor="middle" font-weight="800">API KEY CRAWLER</text></g>
+<g filter="url(#glow)"><text x="640" y="353.33" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="111.11" fill="#ffffff" textLength="1000" lengthAdjust="spacingAndGlyphs" text-anchor="middle" font-weight="800">API KEY CRAWLER</text></g>
+<text x="640" y="422.22" font-family='ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace' font-size="32.22" fill="#e8f0ff" textLength="560.67" lengthAdjust="spacingAndGlyphs" text-anchor="middle">Your keys never reach GitHub.</text>
+<rect x="0" y="0" width="1280" height="6" fill="url(#strip)" filter="url(#glow)"/>
+<rect x="0" y="634" width="1280" height="6" fill="url(#strip)" filter="url(#glow)"/>
+</svg>

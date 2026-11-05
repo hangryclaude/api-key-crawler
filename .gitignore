@@ -1,0 +1,11 @@
+/bin/
+# `go build ./cmd/keyguard` without -o drops the binary here
+/keyguard
+*.test
+# `go test -c` and profiling leave these beside the package
+*.out
+*.prof
+# the research scripts run under python3 -I, but a stray run elsewhere leaves bytecode
+__pycache__/
+*.pyc
+.DS_Store

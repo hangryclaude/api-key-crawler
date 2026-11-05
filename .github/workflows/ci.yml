@@ -1,0 +1,84 @@
+name: ci
+
+# Private repo: macOS minutes bill at 10x, so the full suite runs on pull requests, main and by
+# hand, not on every branch push.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build + vet (linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: test -z "$(gofmt -l . | tee /dev/stderr)"
+      - run: go vet ./...
+      - run: go build ./...
+
+  test:
+    name: test (macOS, real engines)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+
+      # Config-based hooks (hook.<name>.command) need git 2.54+; the image's Apple git is older.
+      - name: git 2.54+
+        run: |
+          brew install git >/dev/null 2>&1 || brew upgrade git >/dev/null 2>&1 || true
+          echo "$(brew --prefix)/bin" >> "$GITHUB_PATH"
+          v=$("$(brew --prefix)/bin/git" --version | awk '{print $3}')
+          echo "git $v"
+          printf '%s\n%s\n' 2.54.0 "$v" | sort -V -C
+
+      # The same official release binaries keyguard pins, checked against the sha256 each project
+      # publishes in its checksums file. Nothing is installed unless every hash matches.
+      - name: engines (pinned)
+        run: |
+          set -euo pipefail
+          T="$RUNNER_TEMP/engines"; mkdir -p "$T"; cd "$T"
+          dl() { curl -fsSL -o "$3" "$1"; echo "$2  $3" | shasum -a 256 -c -; }
+          dl https://github.com/betterleaks/betterleaks/releases/download/v1.9.0/betterleaks_1.9.0_darwin_arm64.tar.gz 83dd7eaab13d44a1e8e347a17064cdef153a1478db473276d41b38d55613d3f2 bl.tgz
+          dl https://github.com/trufflesecurity/trufflehog/releases/download/v3.99.8/trufflehog_3.99.8_darwin_arm64.tar.gz 85724f221bc390f6e0bdf65df245468c8426350de85aa9290ea5491c6d4ec35a th.tgz
+          dl https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_darwin_arm64.tar.gz b40ab0ae55c505963e365f271a8d3846efbc170aa17f2607f13df610a9aeb6a5 gl.tgz
+          dl https://github.com/praetorian-inc/titus/releases/download/v1.2.10/titus-darwin-arm64 1501333f62becae4d4f9cbbe6edeaade4e77e4a7c74a1b6616c9fe6ae5b419ec titus
+          for f in bl th gl; do mkdir "$f"; tar -xzf "$f.tgz" -C "$f"; done
+          # keyguard and its tests (internal/testkit) look for engines on PATH first, and the
+          # brew bin is on PATH on these runners. Real copies, not symlinks: testkit hashes them
+          # before and after each package's tests, and a test that wrote through a link would
+          # break the engine for every later test.
+          install -m 755 bl/betterleaks th/trufflehog gl/gitleaks titus "$(brew --prefix)/bin/"
+          betterleaks version
+          trufflehog --no-update --version
+          titus version 2>&1 | tail -n 1
+          gitleaks version
+
+      # A missing engine fails its test here instead of skipping it, so a runner that lost one
+      # cannot pass without running it (internal/testkit).
+      - name: go test
+        env:
+          KEYGUARD_TEST_REQUIRE_ENGINES: "1"
+        run: go test ./... -count=1 -timeout 25m
+
+      - name: selftest
+        run: |
+          go build -o bin/keyguard ./cmd/keyguard
+          KEYGUARD_HOME="$RUNNER_TEMP/kg-home" bin/keyguard selftest

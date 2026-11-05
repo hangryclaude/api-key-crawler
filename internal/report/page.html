@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>{{.Title}}</title>
+<style>{{.CSS}}</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero k-{{.Hero.Kind}}">
+  <p class="eyebrow">keyguard</p>
+  <h1>{{.Hero.Headline}}</h1>
+  <p class="sub">{{.Hero.Sub}}</p>
+  {{if .Hero.Fresh}}<p class="fresh">{{.Hero.Fresh}}</p>{{end}}
+</header>
+
+<main>
+{{range .Strips}}
+<p class="strip">{{.Text}} <a href="{{.Href}}">{{.Link}}</a></p>
+{{end}}
+
+<ul class="tiles" aria-label="Open findings by level">
+{{range .Levels}}
+  <li class="tile{{if .Zero}} zero{{end}}"><span class="lvl lvl-{{.Class}}">{{.Name}}</span><strong>{{.N}}</strong><span class="small">{{.Meaning}}</span></li>
+{{end}}
+</ul>
+
+<nav aria-label="Sections">
+  <a href="#rotate">Rotate now</a>
+  <a href="#layers">Layers</a>
+  <a href="#coverage">Coverage</a>
+  <a href="#engines">Engines</a>
+  <a href="#lower">Lower severity</a>
+  <a href="#ignored">Ignored</a>
+</nav>
+
+<section id="rotate" aria-labelledby="h-rotate">
+  <h2 id="h-rotate">Rotate now <span class="count">{{.RotateN}}</span></h2>
+  {{if .Rotate}}
+    {{range .Rotate}}
+    <h3>{{.Heading}}</h3>
+    <p class="note">{{.Note}}</p>
+    <table class="stack">
+      <caption class="sr">{{.Heading}}</caption>
+      <thead><tr>
+        <th scope="col">Type</th><th scope="col">Secret</th><th scope="col">Where</th>
+        <th scope="col" class="num">Places</th><th scope="col" class="num">First seen</th>
+        <th scope="col">Verified</th><th scope="col">Rotate</th>
+      </tr></thead>
+      <tbody>
+      {{range .Rows}}
+        <tr>
+          <td data-label="Type"><div class="cell"><strong class="type">{{.Type}}</strong></div></td>
+          <td data-label="Secret">{{template "secret" .}}</td>
+          <td data-label="Where">{{template "wherecell" .}}</td>
+          <td data-label="Places" class="num"><div class="cell"><strong>{{.Places}}</strong></div></td>
+          <td data-label="First seen" class="num">{{template "first" .}}</td>
+          <td data-label="Verified"><div class="cell"><span class="chip {{.VerifiedClass}}">{{.Verified}}</span>{{if .VerifiedOn}}<span class="small">{{.VerifiedOn}}</span>{{end}}</div></td>
+          <td data-label="Rotate"><div class="cell">{{if .Rotate.URL}}<a class="btn" href="{{.Rotate.URL}}" target="_blank" rel="noopener noreferrer">Rotate at {{.Rotate.Name}}</a>{{end}}{{if .Rotate.Hint}}<span class="hint{{if not .Rotate.URL}} how{{end}}">{{.Rotate.Hint}}</span>{{end}}</div></td>
+        </tr>
+      {{end}}
+      </tbody>
+    </table>
+    {{end}}
+  {{else}}
+    <p class="empty k-{{.Empty.Kind}}">{{.Empty.Text}}</p>
+  {{end}}
+</section>
+
+<section id="layers" aria-labelledby="h-layers">
+  <h2 id="h-layers">Layers</h2>
+  <p class="lead k-{{.Layers.Class}}">{{.Layers.Summary}}</p>
+  {{if .Layers.Rows}}
+  <table class="stack">
+    <caption class="sr">Protection layers</caption>
+    <thead><tr><th scope="col">Layer</th><th scope="col">State</th><th scope="col">Detail</th><th scope="col">Checked</th></tr></thead>
+    <tbody>
+    {{range .Layers.Rows}}
+      <tr{{if eq .Class "alert"}} class="down"{{end}}>
+        <td data-label="Layer"><div class="cell"><strong>{{.Name}}</strong></div></td>
+        <td data-label="State"><div class="cell"><span class="chip state-{{.Class}}">{{.State}}</span></div></td>
+        <td data-label="Detail"><div class="cell">{{.Detail}}{{if .Fix}}<span class="small">Fix: <code class="cmd">{{.Fix}}</code></span>{{end}}</div></td>
+        <td data-label="Checked"><div class="cell"><span class="small">{{.Checked}}</span></div></td>
+      </tr>
+    {{end}}
+    </tbody>
+  </table>
+  {{end}}
+  <p class="manual"><strong>Switch on by hand:</strong> GitHub push protection for yourself. GitHub has no API for it. <a href="https://github.com/settings/security_analysis" target="_blank" rel="noopener noreferrer">Open the setting</a></p>
+</section>
+
+<section id="coverage" aria-labelledby="h-coverage">
+  <h2 id="h-coverage">Coverage</h2>
+  <table class="stack narrow">
+    <caption class="sr">What the last run looked at</caption>
+    <thead><tr><th scope="col">What</th><th scope="col" class="num">Number</th><th scope="col">Note</th></tr></thead>
+    <tbody>
+    {{range .Coverage.Rows}}
+      <tr{{if .Missing}} class="zero"{{end}}><th scope="row">{{.Label}}</th><td data-label="Number" class="num"><div class="cell">{{if .Warn}}<strong class="warn-num">{{.Value}}</strong>{{else if .Missing}}{{.Value}}{{else}}<strong>{{.Value}}</strong>{{end}}</div></td>{{if .Note}}<td data-label="Note"><div class="cell"><span class="small">{{.Note}}</span></div></td>{{else}}<td class="blank"></td>{{end}}</tr>
+    {{end}}
+    </tbody>
+  </table>
+  {{if .Coverage.Notes}}
+    <h3>Not covered <span class="count">{{.Coverage.NotesN}}</span></h3>
+    <ul class="notes">{{range .Coverage.Notes}}<li>{{.}}</li>{{end}}</ul>
+  {{else}}
+    <p class="note">The last run reports nothing skipped, capped or dropped.</p>
+  {{end}}
+</section>
+
+<section id="engines" aria-labelledby="h-engines">
+  <h2 id="h-engines">Engines</h2>
+  {{if .Engines.Empty}}
+    <p class="note">No engine timing was recorded for the last run.</p>
+  {{else}}
+  <table class="stack narrow">
+    <caption class="sr">Scan engines</caption>
+    <thead><tr><th scope="col">Engine</th><th scope="col" class="num">Time</th><th scope="col" class="num">Hits</th><th scope="col" class="num">Errors</th></tr></thead>
+    <tbody>
+    {{range .Engines.Rows}}
+      <tr><th scope="row">{{.Name}}</th><td data-label="Time" class="num"><div class="cell">{{.Time}}</div></td><td data-label="Hits" class="num"><div class="cell"><strong>{{.Hits}}</strong></div></td><td data-label="Errors" class="num"><div class="cell">{{if .Warn}}<strong class="warn-num">{{.Errors}}</strong>{{else}}{{.Errors}}{{end}}</div></td></tr>
+    {{end}}
+    </tbody>
+  </table>
+  {{end}}
+</section>
+
+<section id="lower" aria-label="Lower severity">
+  {{if .Lower.Empty}}
+    <p class="fold">{{.Lower.Summary}}</p>
+  {{else}}
+  <details class="fold">
+    <summary>{{.Lower.Summary}}</summary>
+    <table class="stack">
+      <caption class="sr">Lower severity findings</caption>
+      <thead><tr>
+        <th scope="col">Level</th><th scope="col">Type</th><th scope="col">Secret</th>
+        <th scope="col">Where</th><th scope="col">Verified</th><th scope="col">Why</th>
+      </tr></thead>
+      <tbody>
+      {{range .Lower.Rows}}
+        <tr>
+          <td data-label="Level"><div class="cell"><span class="lvl lvl-{{.LevelClass}}">{{.Level}}</span></div></td>
+          <td data-label="Type"><div class="cell"><strong class="type">{{.Type}}</strong></div></td>
+          <td data-label="Secret">{{template "secret" .}}</td>
+          <td data-label="Where">{{template "wherecell" .}}</td>
+          <td data-label="Verified"><div class="cell"><span class="chip {{.VerifiedClass}}">{{.Verified}}</span></div></td>
+          <td data-label="Why"><div class="cell">{{.Why}}</div></td>
+        </tr>
+      {{end}}
+      </tbody>
+    </table>
+    {{if .Lower.Capped}}<p class="cap">{{.Lower.Capped}}</p>{{end}}
+  </details>
+  {{end}}
+</section>
+
+<section id="ignored" aria-label="Ignored">
+  {{if .Ignored.Empty}}
+    <p class="fold">{{.Ignored.Summary}}</p>
+  {{else}}
+  <details class="fold">
+    <summary>{{.Ignored.Summary}}</summary>
+    <table class="stack">
+      <caption class="sr">Ignored findings</caption>
+      <thead><tr><th scope="col">Type</th><th scope="col">Secret</th><th scope="col">Why</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+      {{range .Ignored.Rows}}
+        <tr>
+          <td data-label="Type"><div class="cell"><strong class="type">{{.Type}}</strong></div></td>
+          <td data-label="Secret"><div class="cell"><code class="shape">{{.Shape}}</code><span class="small">{{.ID}}</span></div></td>
+          <td data-label="Why"><div class="cell">{{.Why}}</div></td>
+          <td data-label="Status"><div class="cell">{{.Status}}</div></td>
+        </tr>
+      {{end}}
+      </tbody>
+    </table>
+    {{if .Ignored.Capped}}<p class="cap">{{.Ignored.Capped}}</p>{{end}}
+  </details>
+  {{end}}
+</section>
+</main>
+
+<footer>
+  Written {{.Written}}. keyguard never stores a key. Every secret here is a shape (its start, then the last four characters) and a short id.
+</footer>
+
+</div>
+</body>
+</html>
+{{define "secret"}}<div class="cell"><code class="shape">{{.Shape}}</code><span class="small">{{if .Len}}{{.Len}} · {{end}}{{.ID}}</span>{{if .Known}}<span class="small">Your {{.Known}}</span>{{end}}{{if .Allow}}<span class="small">Not a key? <code class="cmd">{{.Allow}}</code></span>{{end}}</div>{{end}}
+{{define "where"}}<div class="where"><span class="vis {{.Class}}">{{.Badge}}</span> {{if .Href}}<a class="src" href="{{.Href}}" target="_blank" rel="noopener noreferrer">{{.Name}}</a>{{else}}<span class="src">{{.Name}}</span>{{end}}{{if .Place}}<code class="path">{{.Place}}</code>{{end}}{{if .Meta}}<span class="small">{{.Meta}}</span>{{end}}</div>{{end}}
+{{define "wherecell"}}<div class="cell">{{template "where" .Where}}{{if .MoreN}}<details class="more"><summary>{{.MoreN}}</summary>{{range .More}}{{template "where" .}}{{end}}{{if $.MoreHidden}}<span class="small">{{$.MoreHidden}}</span>{{end}}</details>{{end}}</div>{{end}}
+{{define "first"}}<div class="cell">{{if .FirstN}}<strong>{{.FirstN}}</strong>{{if .FirstWord}} {{.FirstWord}}{{end}}<span class="small">{{.FirstDay}}</span>{{else if .FirstDay}}{{.FirstDay}}{{else}}—{{end}}</div>{{end}}

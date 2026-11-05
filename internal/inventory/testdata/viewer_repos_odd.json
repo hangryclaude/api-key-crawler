@@ -1,0 +1,24 @@
+{
+  "data": {
+    "viewer": {
+      "login": "hangryclaude",
+      "repos": {
+        "totalCount": 6,
+        "pageInfo": {"hasNextPage": false, "endCursor": "Y3Vyc29yOnYyOnRlc3Q="},
+        "nodes": [
+          {"name": "ghost-type", "owner": {"login": "hangryclaude"}, "visibility": "PUBLIC", "isFork": false, "isArchived": false,
+           "pushedAt": "2026-10-29T02:54:08Z", "hasWikiEnabled": false, "diskUsage": 128445, "defaultBranchRef": {"name": "main"}},
+          null,
+          {"name": "internal-tool", "owner": {"login": "hangryclaude"}, "visibility": "INTERNAL", "isFork": false, "isArchived": false,
+           "pushedAt": "2026-10-28T00:00:00Z", "hasWikiEnabled": false, "diskUsage": 10, "defaultBranchRef": {"name": "trunk"}},
+          {"name": "empty-repo", "owner": {"login": "hangryclaude"}, "visibility": "PRIVATE", "isFork": false, "isArchived": false,
+           "pushedAt": null, "hasWikiEnabled": true, "diskUsage": 0, "defaultBranchRef": null},
+          {"name": "../escape", "owner": {"login": "hangryclaude"}, "visibility": "PRIVATE", "isFork": false, "isArchived": false,
+           "pushedAt": "2026-10-27T00:00:00Z", "hasWikiEnabled": false, "diskUsage": 1, "defaultBranchRef": {"name": "main"}},
+          {"name": "mystery", "owner": {"login": "hangryclaude"}, "visibility": "SOMETHING_NEW", "isFork": true, "isArchived": true,
+           "pushedAt": "2026-10-26T00:00:00Z", "hasWikiEnabled": false, "diskUsage": 2, "defaultBranchRef": {"name": "main"}}
+        ]
+      }
+    }
+  }
+}

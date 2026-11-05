@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-04",
+  "machine": "Apple M5 Max, 18 cores, macOS 27.0.1, git 2.55.0",
+  "engines": {
+    "betterleaks": "1.9.0 (MIT)",
+    "titus": "1.2.10 (Apache-2.0; off by default)",
+    "trufflehog": "3.99.8 (AGPL-3.0; run as a separate binary)",
+    "gitleaks": "8.30.1 (MIT; in the default tiers when installed)"
+  },
+  "hooks": {
+    "source": "internal/hooks TestPerfBudgets, run 3 times: 3 warm-ups + 20 timed runs each, temp repo, one small commit, through git's real hook wrapper; load 25.4 on 18 cores (an unrelated scan job was running)",
+    "pre_commit_p50_ms": 35.5,
+    "pre_commit_p95_ms": 37.2,
+    "pre_commit_budget_ms": 150,
+    "pre_commit_engine_off_p50_ms": 14.4,
+    "commit_msg_p50_ms": 5,
+    "reference_transaction_p50_ms": 12.1,
+    "reference_transaction_p95_ms": 12.9,
+    "reference_transaction_budget_ms": 40,
+    "git_commit_with_hooks_ms": "104-107",
+    "git_commit_without_hooks_ms": 20,
+    "reference_transaction_calls_per_commit": 7,
+    "calls_source": "counted with GIT_TRACE on 2026-11-04, git 2.55.0: 7 calls per commit, only the prepared call does work",
+    "why_commit_cost": "git runs the reference-transaction hook 7 times per commit; only one call does work"
+  },
+  "known_matcher": {
+    "source": "internal/known BenchmarkMatch, 1,000 registered forms (about 110 keys with all their encodings), 64 MB buffer, one core, 20 iterations x 3 runs, load 26.3",
+    "throughput_mb_per_s": 1788,
+    "recall": "2000 of 2000 registered values and encodings (raw, base64, base64url, url-encoded)",
+    "false_positives": "0 by design: it only matches keys learned from this Mac"
+  },
+  "bench": {
+    "source": "keyguard bench, seeds 1 and 2, real engines: synthetic git repo, 922 commits, 52 refs, 83 provider formats",
+    "provider_formats": 83,
+    "positive_plants": 714,
+    "detectable_by_design": 549,
+    "negatives": 227,
+    "accuracy_source": "keyguard bench, run 2026-11-04 on the hardened tree, macOS 27.0.1",
+    "seconds_source": "2026-11-04, load 25.6 to 27.5",
+    "rows": [
+      {
+        "name": "betterleaks",
+        "recall_detectable_pct": 99.8,
+        "recall_all_plants_pct": 79.7,
+        "precision_pct": 97.3,
+        "seconds": 0.51
+      },
+      {
+        "name": "gitleaks",
+        "recall_detectable_pct": 88.7,
+        "recall_all_plants_pct": 73.7,
+        "precision_pct": 96.4,
+        "seconds": 0.51
+      },
+      {
+        "name": "trufflehog",
+        "recall_detectable_pct": 70.7,
+        "recall_all_plants_pct": 60.5,
+        "precision_pct": 89.2,
+        "seconds": 0.84
+      },
+      {
+        "name": "all three engines",
+        "recall_detectable_pct": 100,
+        "recall_all_plants_pct": 88,
+        "precision_pct": 91.1
+      },
+      {
+        "name": "API Key Crawler pipeline (engines + known-key matcher + rule triage)",
+        "recall_detectable_pct": 100,
+        "recall_all_plants_pct": 98.7,
+        "precision_pct": 97.4
+      }
+    ]
+  },
+  "research_set": {
+    "source": "scripts/research under python3 -I, 4 runs of 834 plants each, 2026-11-04",
+    "plants": 834,
+    "betterleaks_default_recall_pct": 67.7,
+    "with_keyguard_extra_rules_pct": 83.9,
+    "false_hits_of_extra_rules": "0 on 286 MB of Rust and 150 MB of Go; not measured clean on JavaScript"
+  },
+  "scans": {
+    "source": "internal/sweep/sweepbench, 2026-11-04: betterleaks + the learned-key pass over the 13 public repos' mirrors, cold, 8 workers. The 469-repo figure is the betterleaks probe of 2026-11-03",
+    "public_repos": 13,
+    "public_full_history_seconds": 1.7,
+    "public_workers": 8,
+    "all_repos_and_gists": 469,
+    "all_repos_seconds": 196,
+    "all_repos_workers": 6
+  },
+  "tests": {
+    "count_before_integration": 2549,
+    "failing": 0,
+    "note": "go test ./... on the hardened tree, 2026-11-04",
+    "integration_run": {
+      "date": "2026-11-04",
+      "source": "go test ./... -v on the hardened tree (harden prove stage)",
+      "packages": 22,
+      "tests": 1104,
+      "subtests": 1445,
+      "failed": 0,
+      "skipped": 0,
+      "check": "2549 --- PASS lines, 1104 of them top-level"
+    }
+  },
+  "watcher": {
+    "source": "internal/install/launchd.go PollSeconds",
+    "poll_seconds": 60
+  }
+}
