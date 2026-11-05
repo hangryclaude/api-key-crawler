@@ -73,16 +73,19 @@ type Src struct {
 
 // Rule is one row of the table.
 type Rule struct {
-	ID          string
-	Provider    string // the first word of the id, a heuristic that groups rules by service
-	Desc        string
-	Kind        Kind
-	Keywords    []string // lower case; a window is looked at only where one occurs (none: every window)
-	Re          string   // RE2; empty for a rule that only matches a path
-	Group       int      // the capture group that is the secret; 0 is the first non-empty one, else the whole match
-	Path        string   // RE2: the rule applies only to paths this matches; with no Re, the path is the finding
-	Confidence  string   // low, medium or high, as upstream labels it
-	Specificity int      // a more specific rule suppresses a less specific one at the same place
+	ID         string
+	Provider   string // the first word of the id, a heuristic that groups rules by service
+	Desc       string
+	Kind       Kind
+	Keywords   []string // lower case; a window is looked at only where one occurs (none: every window)
+	Re         string   // RE2; empty for a rule that only matches a path
+	Group      int      // the capture group that is the secret; 0 is the first non-empty one, else the whole match
+	Path       string   // RE2: the rule applies only to paths this matches; with no Re, the path is the finding
+	Confidence string   // low, medium or high, as upstream labels it
+	// Specificity is the effective one: betterleaks's 100 for a rule that sets none. A finding of a
+	// rule with a higher value silences a finding of a lower one on the same line when its secret
+	// contains the other's.
+	Specificity int
 	Filter      Filter
 	// ComponentOnly rules fire only as a component of another (betterleaks's skipReport).
 	ComponentOnly bool

@@ -18,6 +18,7 @@
         "secret",
         "token"
       ],
+      "specificity": 0,
       "filter": {
         "entropy": {
           "min": 3.5,

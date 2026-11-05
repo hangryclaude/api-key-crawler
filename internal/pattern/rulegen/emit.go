@@ -131,9 +131,7 @@ func emit(table []rules.Rule, global rules.Filter, commits map[string]string) ([
 		if r.Confidence != "" {
 			field("Confidence", quote(r.Confidence))
 		}
-		if r.Specificity != 0 {
-			field("Specificity", strconv.Itoa(r.Specificity))
-		}
+		field("Specificity", strconv.Itoa(r.Specificity)) // always: 0 is a value, not an absence
 		if fl := filterLit(r.Filter); fl != "Filter{}" {
 			field("Filter", fl)
 		}

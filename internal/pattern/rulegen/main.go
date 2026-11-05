@@ -137,6 +137,11 @@ type srcFile struct {
 	Rules   []srcRule `json:"rules"`
 }
 
+// defaultSpecificity is what betterleaks gives a rule that sets none (config.DefaultRuleSpecificity).
+// It is data, not a detail: the generic rules set a lower value on purpose, so that they give way to
+// any rule that found the same thing on the same line.
+const defaultSpecificity = 100
+
 type srcRule struct {
 	ID          string     `json:"id"`
 	Description string     `json:"description"`
@@ -146,7 +151,7 @@ type srcRule struct {
 	Path        string     `json:"path"`
 	Keywords    []string   `json:"keywords"`
 	SecretGroup int        `json:"secretGroup"`
-	Specificity int        `json:"specificity"`
+	Specificity *int       `json:"specificity"` // absent means betterleaks's default; 0 is a value
 	SkipReport  bool       `json:"skipReport"`
 	Components  []srcNeed  `json:"components"`
 	Filter      *srcFilter `json:"filter"`
@@ -275,10 +280,14 @@ func generate(root string) (*output, error) {
 			if r.Split {
 				rw = "split"
 			}
+			spec := defaultSpecificity
+			if r.Specificity != nil {
+				spec = *r.Specificity
+			}
 			rule := rules.Rule{
 				ID: r.ID, Provider: providerOf(r.ID), Desc: r.Description, Kind: rules.Regex,
 				Keywords: lowerUnique(r.Keywords), Re: r.Regex, Group: r.SecretGroup, Path: r.Path,
-				Confidence: r.Confidence, Specificity: r.Specificity, Filter: r.Filter.toRules(),
+				Confidence: r.Confidence, Specificity: spec, Filter: r.Filter.toRules(),
 				ComponentOnly: r.SkipReport, Validates: r.Validates,
 				Src: rules.Src{Lineage: sf.Lineage, UpstreamID: r.ID, Commit: pin.Commit, Licence: pin.Licence, Rewrite: rw},
 			}
@@ -312,7 +321,8 @@ func generate(root string) (*output, error) {
 		table = append(table, rules.Rule{
 			ID: id, Provider: providerOf(id), Desc: str(t["description"]), Kind: rules.Regex,
 			Keywords: lowerUnique(kws), Re: str(t["regex"]), Confidence: str(t["confidence"]), Filter: filter,
-			Src: rules.Src{Lineage: ownPin.Lineage, Licence: ownPin.Licence},
+			Specificity: defaultSpecificity,
+			Src:         rules.Src{Lineage: ownPin.Lineage, Licence: ownPin.Licence},
 		})
 	}
 

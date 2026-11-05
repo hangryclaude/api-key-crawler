@@ -257,7 +257,9 @@ function shape(r) {
   put("path", r.path);
   put("keywords", r.keywords);
   put("secretGroup", r.secretGroup);
-  put("specificity", r.specificity);
+  // A rule that sets no specificity has betterleaks's default (100), so an explicit 0 is data too:
+  // generic-api-key sets it, to lose to every other rule on the same line.
+  if (typeof r.specificity === "number") o.specificity = r.specificity;
   put("skipReport", r.skipReport);
   put("components", (r.components ?? []).map((c) => {
     const k = { id: c.id };

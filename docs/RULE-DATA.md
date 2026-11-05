@@ -33,7 +33,9 @@ go test ./internal/pattern/... ./internal/testkit     # the checks below, and th
 ## What a rule carries
 
 `ID`, `Provider` (the first word of the id), `Desc`, `Keywords` (lower case), `Re` (RE2), `Group` (the secret group),
-`Path`, `Confidence`, `Specificity`, `ComponentOnly`, `Needs` (composite rules), `Validates`, a `Filter`, and `Src`:
+`Path`, `Confidence`, `Specificity` (the effective one: betterleaks gives a rule that sets none 100, and
+only five set one, `generic-api-key` to 0, so the table says 100 for the rest and an explicit 0 is a value),
+`ComponentOnly`, `Needs` (composite rules), `Validates`, a `Filter`, and `Src`:
 lineage, upstream id, commit, licence and how the regex differs from upstream's (`none`, or `split`).
 
 The `Filter` is what betterleaks discards after the regex matched. `extract.mjs` reads the forms the rules use
