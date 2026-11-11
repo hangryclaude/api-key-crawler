@@ -154,6 +154,8 @@ func (p *Prog) findAll(b []byte, dst []int, fuel int) ([]int, bool) {
 func (p *Prog) walk(m *machine, dst []int) ([]int, bool) {
 	b := m.b
 	from, cur := 0, 0
+	// A walk that fails puts back every group and counter it set, so only a match leaves them dirty.
+	m.reset()
 	for cur < len(b) {
 		i := p.scan.next(b, cur)
 		if i < 0 {
@@ -164,12 +166,12 @@ func (p *Prog) walk(m *machine, dst []int) ([]int, bool) {
 			cur = i + 1
 			continue
 		}
-		m.reset()
 		if m.run(p.entry, i) {
 			m.caps[0] = i
 			dst = append(dst, m.caps...)
 			from = m.caps[1]
 			cur = from
+			m.reset()
 			continue
 		}
 		if m.out {
@@ -442,22 +444,28 @@ func (m *machine) iterate(n *node, p int) bool {
 		if c >= n.min && m.can(n.next, p) && m.run(n.next, p) {
 			return true
 		}
-		if c >= n.max {
-			return false
-		}
-		m.cnt[n.id] = c + 1
-		if m.can(n.body, p) && m.run(n.body, p) {
-			return true
-		}
-		m.cnt[n.id] = c
-		return false
+		return (n.max < 0 || c < n.max) && m.more(n, p, c)
 	}
-	if c < n.max {
-		m.cnt[n.id] = c + 1
-		if m.can(n.body, p) && m.run(n.body, p) {
-			return true
-		}
-		m.cnt[n.id] = c
+	if (n.max < 0 || c < n.max) && m.more(n, p, c) {
+		return true
 	}
 	return c >= n.min && m.can(n.next, p) && m.run(n.next, p)
+}
+
+// more runs one iteration of the group more than the c done, and the rest of the pattern after it. An
+// iteration is a call nested in the last one, so a group repeated without a bound is capped in depth:
+// past maxDepth the walk gives up and the regexp answers.
+func (m *machine) more(n *node, p, c int) bool {
+	if m.depth >= maxDepth {
+		m.out = true
+		return false
+	}
+	m.depth++
+	m.cnt[n.id] = c + 1
+	ok := m.can(n.body, p) && m.run(n.body, p)
+	m.depth--
+	if !ok {
+		m.cnt[n.id] = c
+	}
+	return ok
 }
